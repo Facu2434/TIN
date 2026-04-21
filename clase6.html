@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Introducción: Dar formato al texto</title>
+    <title>Devolución: Ordenar textos</title>
     <style>
         /* === PALETA CÁLIDA Y NATURAL === */
         :root {
-            --bg-color: #f7f3e8; /* Beige cálido y suave */
-            --text-main: #3e3a35; /* Gris muy oscuro/marrón */
-            --text-light: #6b665e; /* Gris cálido */
-            --primary: #d97757; /* Naranja terracota suave */
+            --bg-color: #f7f3e8; 
+            --text-main: #3e3a35; 
+            --text-light: #6b665e; 
+            --primary: #d97757; 
             --primary-hover: #c46445;
-            --accent-green: #8eb39b; /* Verde salvia */
-            --highlight: #fef08a; /* Amarillo suave para resaltar */
+            --accent-green: #8eb39b; 
+            --highlight: #fef08a;
             --font-main: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         }
 
@@ -25,7 +25,6 @@
 
         body {
             font-family: var(--font-main);
-            /* Fondo cálido con textura de papel (funciona offline cayendo al color base) */
             background-color: var(--bg-color);
             background-image: url("https://www.transparenttextures.com/patterns/paper-fibers.png");
             color: var(--text-main);
@@ -55,7 +54,6 @@
             padding: 20px 0 40px 0;
             animation: fadeIn 0.4s ease-out;
             justify-content: center;
-            align-items: center;
         }
 
         .screen.active {
@@ -68,12 +66,20 @@
         }
 
         /* === TIPOGRAFÍA === */
+        .title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 25px;
+            color: var(--text-main);
+            line-height: 1.2;
+            text-align: center;
+        }
+
         .text-body {
             font-size: 2rem;
             margin-bottom: 25px;
             color: var(--text-main);
             text-align: center;
-            line-height: 1.4;
         }
 
         .text-highlight {
@@ -84,22 +90,22 @@
             margin-bottom: 30px;
         }
 
-        /* === DOCUMENTO SIMULADO (Hoja simple) === */
+        /* === DOCUMENTO SIMULADO (Hoja de Trabajo Práctico) === */
         .doc-mockup-wrapper {
             display: flex;
             justify-content: center;
             align-items: center;
             margin: 10px 0 30px 0;
-            width: 100%;
         }
 
         .doc-paper {
             width: 100%;
             max-width: 500px;
-            height: 480px;
+            height: 550px;
             background-color: #ffffff;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05), 0 1px 3px rgba(0,0,0,0.03);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06), 0 2px 4px rgba(0,0,0,0.04);
             border-radius: 2px;
+            position: relative; 
             padding: 50px 45px;
             font-family: "Arial", sans-serif;
             color: #222;
@@ -110,7 +116,7 @@
         /* Estilos del texto crudo (Mal hecho) */
         .doc-raw-text {
             font-size: 1.1rem;
-            line-height: 1.2;
+            line-height: 1.3;
             text-align: left;
             color: #333;
         }
@@ -118,9 +124,9 @@
         /* Estilos del documento mejorado */
         .doc-title {
             text-align: center;
-            font-size: 1.6rem;
+            font-size: 1.8rem;
             font-weight: bold;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
             color: #000;
         }
 
@@ -143,6 +149,11 @@
             margin-bottom: 8px;
         }
 
+        .doc-color-word {
+            color: #2563eb; /* Azul clásico para simular color de texto */
+            font-weight: bold;
+        }
+
         /* Resaltados temporales para mostrar cambios */
         .highlight-change {
             background-color: var(--highlight);
@@ -151,6 +162,66 @@
             transition: background-color 1s;
         }
 
+        /* === HOTSPOTS === */
+        .hotspot-btn {
+            position: absolute;
+            width: 32px;
+            height: 32px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            border: 3px solid white;
+            z-index: 10;
+            transition: transform 0.2s, background-color 0.2s;
+            /* Posicionado en el borde derecho */
+            right: -16px; 
+        }
+
+        .hotspot-btn:hover, .hotspot-btn.active {
+            transform: scale(1.15);
+            background-color: var(--primary-hover);
+        }
+
+        .hotspot-tooltip {
+            position: absolute;
+            background-color: var(--text-main);
+            color: white;
+            padding: 14px 18px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            width: 240px;
+            z-index: 20;
+            display: none;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            line-height: 1.4;
+            pointer-events: none;
+            text-align: left;
+            right: 30px; /* Aparece a la izquierda del botón para no salir de la pantalla */
+        }
+
+        .hotspot-tooltip.visible {
+            display: block;
+            animation: fadeInTooltip 0.2s ease-out forwards;
+        }
+
+        @keyframes fadeInTooltip {
+            from { opacity: 0; transform: translateX(10px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* Posiciones de los Hotspots */
+        #btn-hs-1, #tooltip-1 { top: 9%; }
+        #btn-hs-2, #tooltip-2 { top: 32%; }
+        #btn-hs-3, #tooltip-3 { top: 58%; }
+        #btn-hs-4, #tooltip-4 { top: 82%; }
+
         /* === NAVEGACIÓN === */
         .nav-bar {
             display: flex;
@@ -158,7 +229,6 @@
             align-items: center;
             margin-top: auto;
             padding-top: 40px;
-            width: 100%;
         }
 
         .btn {
@@ -196,18 +266,25 @@
             transform: translateY(-2px);
         }
 
-        /* Centrado extra para las pantallas de texto puro */
+        /* Centrado */
         .center-content {
             text-align: center;
             align-items: center;
         }
 
         @media (max-width: 600px) {
-            .text-body { font-size: 1.6rem; }
+            .text-body { font-size: 1.5rem; }
             .text-highlight { font-size: 1.4rem; }
             .btn { font-size: 1.1rem; padding: 12px 20px; }
-            .doc-paper { padding: 35px 25px; height: 450px;}
+            .doc-paper { padding: 35px 25px; height: 500px;}
             .doc-raw-text, .doc-p, .doc-list { font-size: 1rem; }
+            
+            /* Ajuste de tooltips para móviles */
+            .hotspot-tooltip {
+                right: 25px; 
+                width: 200px;
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
@@ -217,80 +294,187 @@
         
         <!-- PANTALLA 1: INICIO -->
         <div class="screen active center-content" id="screen-1">
-            <p class="text-body">
-                Hoy vamos a trabajar con un texto ya escrito.
+            <p class="text-body" style="font-weight: bold;">
+                La semana pasada hicieron esta actividad en Google Docs.
             </p>
-            <p class="text-body" style="font-weight: bold; margin-top: 20px;">
-                No vas a inventar contenido.<br>
-                Vas a aprender a darle formato.
+            <p class="text-body">
+                Vamos a ver qué pasó en varios trabajos.
             </p>
         </div>
 
-        <!-- PANTALLA 2: TEXTO PLANO -->
+        <!-- PANTALLA 2: ANTES (MAL HECHO) -->
         <div class="screen" id="screen-2">
             <p class="text-highlight">
-                Así suele quedar cuando solo copiamos y pegamos.
+                Esto es bastante parecido a lo que se entregó.
             </p>
             
             <div class="doc-mockup-wrapper">
                 <div class="doc-paper">
                     <div class="doc-raw-text">
-                        la comunicacion en internet hoy en dia pasamos mucho tiempo conectados a internet usamos el celular para hablar con amigos leer noticias y ver videos las herramientas mas usadas son whatsapp instagram y youtube lo bueno es que podemos hablar con cualquier persona al instante lo malo es que a veces pasamos demasiadas horas frente a la pantalla.
+                        mi fin de semana el fin de semana pasado fue muy tranquilo me quede en casa descansando porque llovio mucho el sabado a la tarde mire unas series y tome mates con mi familia el domingo aproveche para hacer varias cosas limpiar la casa hacer las compras para la semana y cocinar algo rico para la noche la verdad que me sirvio para recargar energias y arrancar el lunes con todo.
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- PANTALLA 3: TÍTULO -->
+        <!-- PANTALLA 3: CAMBIO 1 (TÍTULO) -->
         <div class="screen" id="screen-3">
             <p class="text-highlight">
-                Con algunos cambios, el texto mejora.
+                Primero: agregamos el título.
             </p>
             
             <div class="doc-mockup-wrapper">
                 <div class="doc-paper">
-                    <div class="doc-title highlight-change">La comunicación en internet</div>
+                    <div class="doc-title highlight-change">Mi fin de semana</div>
                     
                     <div class="doc-raw-text">
-                        hoy en dia pasamos mucho tiempo conectados a internet usamos el celular para hablar con amigos leer noticias y ver videos las herramientas mas usadas son whatsapp instagram y youtube lo bueno es que podemos hablar con cualquier persona al instante lo malo es que a veces pasamos demasiadas horas frente a la pantalla.
+                        el fin de semana pasado fue muy tranquilo me quede en casa descansando porque llovio mucho el sabado a la tarde mire unas series y tome mates con mi familia el domingo aproveche para hacer varias cosas limpiar la casa hacer las compras para la semana y cocinar algo rico para la noche la verdad que me sirvio para recargar energias y arrancar el lunes con todo.
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- PANTALLA 4: PÁRRAFOS Y LISTA -->
+        <!-- PANTALLA 4: CAMBIO 2 (PÁRRAFOS Y JUSTIFICADO) -->
         <div class="screen" id="screen-4">
             <p class="text-highlight">
-                Ordenar el contenido ayuda a entenderlo mejor.
+                Después: separamos el texto.
             </p>
             
             <div class="doc-mockup-wrapper">
                 <div class="doc-paper">
-                    <div class="doc-title">La comunicación en internet</div>
+                    <div class="doc-title">Mi fin de semana</div>
                     
-                    <p class="doc-p highlight-change">Hoy en día pasamos mucho tiempo conectados a internet. Usamos el celular para hablar con amigos, leer noticias y ver videos.</p>
+                    <p class="doc-p highlight-change">El fin de semana pasado fue muy tranquilo. Me quedé en casa descansando porque llovió mucho. El sábado a la tarde miré unas series y tomé mates con mi familia.</p>
                     
-                    <p class="doc-p highlight-change" style="margin-bottom: 10px;">Las herramientas más usadas son:</p>
-                    
-                    <ul class="doc-list highlight-change">
-                        <li>WhatsApp</li>
-                        <li>Instagram</li>
-                        <li>YouTube</li>
-                    </ul>
-                    
-                    <p class="doc-p highlight-change">Lo bueno es que podemos hablar con cualquier persona al instante. Lo malo es que a veces pasamos demasiadas horas frente a la pantalla.</p>
+                    <p class="doc-p highlight-change">El domingo aproveché para hacer varias cosas limpiar la casa hacer las compras para la semana y cocinar algo rico para la noche la verdad que me sirvió para recargar energías y arrancar el lunes con todo.</p>
                 </div>
             </div>
         </div>
 
-        <!-- PANTALLA 5: CIERRE -->
-        <div class="screen center-content" id="screen-5">
-            <p class="text-body" style="font-size: 2.2rem; font-weight: bold; color: var(--primary);">
-                En la clase de hoy vas a hacer esto con tu propio documento.
+        <!-- PANTALLA 5: CAMBIO 3 (LISTA) -->
+        <div class="screen" id="screen-5">
+            <p class="text-highlight">
+                También agregamos una lista.
             </p>
             
-            <div style="margin-top: 50px;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--accent-green)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            <div class="doc-mockup-wrapper">
+                <div class="doc-paper">
+                    <div class="doc-title">Mi fin de semana</div>
+                    
+                    <p class="doc-p">El fin de semana pasado fue muy tranquilo. Me quedé en casa descansando porque llovió mucho. El sábado a la tarde miré unas series y tomé mates con mi familia.</p>
+                    
+                    <p class="doc-p">El domingo aproveché para hacer varias cosas:</p>
+                    
+                    <ul class="doc-list highlight-change">
+                        <li>Limpiar la casa</li>
+                        <li>Hacer las compras para la semana</li>
+                        <li>Cocinar algo rico para la noche</li>
+                    </ul>
+                    
+                    <p class="doc-p">La verdad que me sirvió para recargar energías y arrancar el lunes con todo.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- PANTALLA 6: CAMBIO 4 (COLOR) -->
+        <div class="screen" id="screen-6">
+            <p class="text-highlight">
+                Y usamos color para destacar algo.
+            </p>
+            
+            <div class="doc-mockup-wrapper">
+                <div class="doc-paper">
+                    <div class="doc-title">Mi fin de semana</div>
+                    
+                    <p class="doc-p">El fin de semana pasado fue muy tranquilo. Me quedé en casa descansando porque llovió mucho. El sábado a la tarde miré unas series y tomé mates con mi familia.</p>
+                    
+                    <p class="doc-p">El domingo aproveché para hacer varias cosas:</p>
+                    
+                    <ul class="doc-list">
+                        <li>Limpiar la casa</li>
+                        <li>Hacer las compras para la semana</li>
+                        <li>Cocinar algo rico para la noche</li>
+                    </ul>
+                    
+                    <p class="doc-p">La verdad que me sirvió para <span class="doc-color-word highlight-change">recargar energías</span> y arrancar el lunes con todo.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- PANTALLA 7: FINAL -->
+        <div class="screen" id="screen-7">
+            <p class="text-highlight">
+                Ahora el texto se entiende mejor.
+            </p>
+            
+            <div class="doc-mockup-wrapper">
+                <div class="doc-paper">
+                    <div class="doc-title">Mi fin de semana</div>
+                    
+                    <p class="doc-p">El fin de semana pasado fue muy tranquilo. Me quedé en casa descansando porque llovió mucho. El sábado a la tarde miré unas series y tomé mates con mi familia.</p>
+                    
+                    <p class="doc-p">El domingo aproveché para hacer varias cosas:</p>
+                    
+                    <ul class="doc-list">
+                        <li>Limpiar la casa</li>
+                        <li>Hacer las compras para la semana</li>
+                        <li>Cocinar algo rico para la noche</li>
+                    </ul>
+                    
+                    <p class="doc-p">La verdad que me sirvió para <span class="doc-color-word">recargar energías</span> y arrancar el lunes con todo.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- PANTALLA 8: HOTSPOTS -->
+        <div class="screen" id="screen-8">
+            <p class="text-highlight">Tocá los puntos para repasar qué hicimos.</p>
+            
+            <div class="doc-mockup-wrapper">
+                <div class="doc-paper">
+                    
+                    <!-- HOTSPOTS -->
+                    <div class="hotspot-btn" id="btn-hs-1" onclick="toggleTooltip(1, event)">1</div>
+                    <div class="hotspot-tooltip" id="tooltip-1">Está centrado, en negrita y más grande</div>
+
+                    <div class="hotspot-btn" id="btn-hs-2" onclick="toggleTooltip(2, event)">2</div>
+                    <div class="hotspot-tooltip" id="tooltip-2">Separan las ideas en partes</div>
+
+                    <div class="hotspot-btn" id="btn-hs-3" onclick="toggleTooltip(3, event)">3</div>
+                    <div class="hotspot-tooltip" id="tooltip-3">Ordena la información</div>
+
+                    <div class="hotspot-btn" id="btn-hs-4" onclick="toggleTooltip(4, event)">4</div>
+                    <div class="hotspot-tooltip" id="tooltip-4">Sirve para destacar algo importante</div>
+
+                    <!-- ESTRUCTURA DEL DOCUMENTO -->
+                    <div class="doc-title">Mi fin de semana</div>
+                    
+                    <p class="doc-p">El fin de semana pasado fue muy tranquilo. Me quedé en casa descansando porque llovió mucho. El sábado a la tarde miré unas series y tomé mates con mi familia.</p>
+                    
+                    <p class="doc-p">El domingo aproveché para hacer varias cosas:</p>
+                    
+                    <ul class="doc-list">
+                        <li>Limpiar la casa</li>
+                        <li>Hacer las compras para la semana</li>
+                        <li>Cocinar algo rico para la noche</li>
+                    </ul>
+                    
+                    <p class="doc-p">La verdad que me sirvió para <span class="doc-color-word">recargar energías</span> y arrancar el lunes con todo.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- PANTALLA 9: CIERRE -->
+        <div class="screen center-content" id="screen-9">
+            <p class="text-body" style="font-weight: bold; margin-bottom: 10px;">
+                No cambiamos lo que dice el texto.
+            </p>
+            <p class="text-body" style="font-weight: bold; color: var(--primary);">
+                Cambiamos cómo está presentado.
+            </p>
+            
+            <div style="margin-top: 40px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--accent-green)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
             </div>
         </div>
 
@@ -307,9 +491,9 @@
     </div>
 
     <script>
-        // Lógica de navegación simple
+        // Navegación de pantallas
         let currentScreen = 1;
-        const totalScreens = 5;
+        const totalScreens = 9;
         
         const btnPrev = document.getElementById('btn-prev');
         const btnNext = document.getElementById('btn-next');
@@ -323,25 +507,24 @@
             // Mostrar pantalla actual
             document.getElementById(`screen-${currentScreen}`).classList.add('active');
 
-            // Manejo del botón Anterior
+            // Lógica de botones
             if (currentScreen === 1) {
                 btnPrev.style.visibility = 'hidden';
-            } else {
+                btnNext.style.visibility = 'visible';
+                btnNext.innerHTML = 'Empezar';
+            } 
+            else if (currentScreen === totalScreens) {
                 btnPrev.style.visibility = 'visible';
+                btnNext.style.visibility = 'hidden';
+            } 
+            else {
+                btnPrev.style.visibility = 'visible';
+                btnNext.style.visibility = 'visible';
+                btnNext.innerHTML = 'Siguiente';
             }
 
-            // Manejo del botón Siguiente
-            if (currentScreen === totalScreens) {
-                btnNext.style.visibility = 'hidden';
-            } else {
-                btnNext.style.visibility = 'visible';
-                // Si es la pantalla 1, que diga Empezar
-                if (currentScreen === 1) {
-                    btnNext.innerHTML = 'Empezar';
-                } else {
-                    btnNext.innerHTML = 'Siguiente';
-                }
-            }
+            // Al cambiar de pantalla, ocultar tooltips abiertos
+            hideAllTooltips();
         }
 
         function changeScreen(direction) {
@@ -353,7 +536,42 @@
             updateUI();
         }
 
-        // Inicializar interfaz
+        // Lógica de Hotspots
+        function toggleTooltip(id, event) {
+            // Previene que el clic cierre el tooltip automáticamente
+            event.stopPropagation();
+            
+            const tooltip = document.getElementById(`tooltip-${id}`);
+            const btn = document.getElementById(`btn-hs-${id}`);
+            
+            // Si ya está visible, lo cerramos
+            if (tooltip.classList.contains('visible')) {
+                tooltip.classList.remove('visible');
+                btn.classList.remove('active');
+                return;
+            }
+
+            // Ocultar todos primero
+            hideAllTooltips();
+
+            // Mostrar el clickeado
+            tooltip.classList.add('visible');
+            btn.classList.add('active');
+        }
+
+        function hideAllTooltips() {
+            document.querySelectorAll('.hotspot-tooltip').forEach(el => el.classList.remove('visible'));
+            document.querySelectorAll('.hotspot-btn').forEach(el => el.classList.remove('active'));
+        }
+
+        // Ocultar tooltips si se hace clic en cualquier otro lado de la pantalla
+        document.addEventListener('click', function(event) {
+            if (currentScreen === 8) {
+                hideAllTooltips();
+            }
+        });
+
+        // Inicializar
         updateUI();
     </script>
 </body>
