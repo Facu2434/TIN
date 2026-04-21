@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Repaso: Mejorar Documentos</title>
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-light: #475569;
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --secondary: #e2e8f0;
+            --secondary-hover: #cbd5e1;
+            --success: #059669;
+            --success-light: #d1fae5;
+            --error: #dc2626;
+            --font-main: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.5;
+        }
+
+        .app-container {
+            width: 100%;
+            max-width: 650px;
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 600px;
+        }
+
+        /* BARRA DE PROGRESO */
+        .progress-container {
+            height: 8px;
+            background-color: var(--secondary);
+            width: 100%;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: var(--primary);
+            width: 14.28%; /* Para 7 pantallas */
+            transition: width 0.4s ease;
+        }
+
+        /* PANTALLAS */
+        .screen {
+            display: none;
+            flex-direction: column;
+            flex-grow: 1;
+            padding: 40px;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .screen.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* TIPOGRAFÍA */
+        .title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: var(--text-light);
+            margin-bottom: 30px;
+        }
+
+        .text-body {
+            font-size: 1.35rem;
+            margin-bottom: 20px;
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* ELEMENTOS VISUALES */
+        .visual-example {
+            background-color: #f1f5f9;
+            border: 2px dashed #cbd5e1;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            margin-top: 10px;
+        }
+
+        .messy-text {
+            font-family: monospace;
+            color: #334155;
+            font-size: 1.1rem;
+            text-align: left;
+            line-height: 1.2;
+        }
+
+        .improved-text {
+            font-family: var(--font-main);
+            color: #334155;
+            text-align: left;
+        }
+
+        .improved-title {
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: #000;
+            margin-bottom: 15px;
+        }
+
+        .improved-paragraph {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            line-height: 1.5;
+        }
+
+        .improved-list {
+            margin-left: 25px;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            line-height: 1.5;
+        }
+
+        /* LISTAS Y ALERTAS */
+        .summary-list {
+            list-style: none;
+            margin-bottom: 30px;
+            background-color: #f8fafc;
+            padding: 25px;
+            border-radius: 12px;
+            border: 2px solid #e2e8f0;
+        }
+
+        .summary-list li {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: var(--text-main);
+        }
+
+        .summary-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        .summary-list li svg {
+            flex-shrink: 0;
+            color: var(--error);
+        }
+
+        .action-box {
+            background-color: var(--success-light);
+            padding: 25px;
+            border-radius: 12px;
+            border: 2px solid var(--success);
+            color: #064e3b;
+            font-weight: bold;
+            margin-top: auto;
+            text-align: center;
+            font-size: 1.4rem;
+        }
+
+        /* BARRA DE NAVEGACIÓN INFERIOR */
+        .nav-bar {
+            padding: 25px 40px;
+            background-color: #ffffff;
+            border-top: 2px solid #f1f5f9;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 16px 28px;
+            border-radius: 12px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.2s;
+        }
+
+        .btn-prev {
+            background-color: var(--secondary);
+            color: var(--text-main);
+        }
+
+        .btn-prev:hover {
+            background-color: var(--secondary-hover);
+        }
+
+        .btn-next {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-next:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-2px);
+        }
+
+        .center-content {
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @media (max-width: 600px) {
+            .screen { padding: 30px 20px; }
+            .nav-bar { padding: 20px; }
+            .title { font-size: 1.8rem; }
+            .subtitle { font-size: 1.3rem; }
+            .text-body { font-size: 1.2rem; }
+            .btn { font-size: 1.1rem; padding: 12px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        
+        <!-- Barra de progreso -->
+        <div class="progress-container">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+
+        <!-- PANTALLA 1: INICIO -->
+        <div class="screen active center-content" id="screen-1">
+            <h1 class="title" style="font-size: 3rem; text-align: center; justify-content: center;">
+                Vamos a mejorar <br> un documento 📄
+            </h1>
+            <p class="subtitle" style="text-align: center; margin-top: 20px;">
+                En la clase pasada trabajamos con Google Docs.
+            </p>
+            <p class="text-body" style="text-align: center;">
+                Ahora vamos a ver un ejemplo paso a paso de cómo hacer que un texto quede prolijo y fácil de leer.
+            </p>
+        </div>
+
+        <!-- PANTALLA 2: EL DOCUMENTO MALO -->
+        <div class="screen" id="screen-2">
+            <h2 class="title">Mirá este texto...</h2>
+            
+            <div class="visual-example messy-text">
+                receta para hacer chipa ingredientes medio kilo de almidon de mandioca tres huevos manteca sal queso pategras preparacion poner el almidon en un bol agregar la sal y la manteca mezclar todo poner los huevos y el queso amasar bien hacer bolitas y poner en el horno hasta que esten doraditas.
+            </div>
+
+            <p class="text-body" style="text-align: center; font-weight: bold; margin-top: 20px;">
+                ¿Te parece que esto está bien escrito para entregarlo como trabajo?
+            </p>
+        </div>
+
+        <!-- PANTALLA 3: ¿QUÉ ESTÁ MAL? -->
+        <div class="screen" id="screen-3">
+            <h2 class="title">¿Qué está mal acá?</h2>
+            <p class="text-body">
+                A simple vista, hay varias cosas que dificultan la lectura:
+            </p>
+
+            <ul class="summary-list">
+                <li>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    <strong>No tiene título.</strong> No sabemos de qué trata al primer golpe de vista.
+                </li>
+                <li>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    <strong>Está todo junto.</strong> Es un bloque pesado que cansa los ojos.
+                </li>
+                <li>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    <strong>No hay orden.</strong> Ingredientes y preparación están mezclados.
+                </li>
+            </ul>
+        </div>
+
+        <!-- PANTALLA 4: PASO 1 (TÍTULO) -->
+        <div class="screen" id="screen-4">
+            <h2 class="title">Paso 1 – Agregar título</h2>
+            <p class="text-body">
+                El título va arriba y <strong>centrado</strong> para que resalte y ordene la hoja.
+            </p>
+
+            <div class="visual-example improved-text">
+                <div class="improved-title">Receta para hacer Chipa</div>
+                <div class="messy-text" style="color: #64748b; font-size: 0.95rem;">
+                    ingredientes medio kilo de almidon de mandioca tres huevos manteca sal queso pategras preparacion poner el almidon en un bol agregar la sal y la manteca mezclar todo poner los huevos y el queso amasar bien hacer bolitas y poner en el horno hasta que esten doraditas.
+                </div>
+            </div>
+        </div>
+
+        <!-- PANTALLA 5: PASO 2 (PÁRRAFOS) -->
+        <div class="screen" id="screen-5">
+            <h2 class="title">Paso 2 – Ordenar el texto</h2>
+            <p class="text-body">
+                Usamos el <strong>punto y aparte</strong> (la tecla Enter) para separar el bloque en párrafos. Ahora ya se distinguen las partes.
+            </p>
+
+            <div class="visual-example improved-text">
+                <div class="improved-title">Receta para hacer Chipa</div>
+                
+                <p class="improved-paragraph"><strong>Ingredientes:</strong> medio kilo de almidón de mandioca, tres huevos, manteca, sal, queso pategrás.</p>
+                
+                <p class="improved-paragraph"><strong>Preparación:</strong> poner el almidón en un bol, agregar la sal y la manteca. Mezclar todo, poner los huevos y el queso. Amasar bien, hacer bolitas y poner en el horno hasta que estén doraditas.</p>
+            </div>
+        </div>
+
+        <!-- PANTALLA 6: PASO 3 (LISTA) -->
+        <div class="screen" id="screen-6">
+            <h2 class="title">Paso 3 – Usar lista</h2>
+            <p class="text-body">
+                Para los ingredientes, siempre conviene agregar una lista con <strong>viñetas</strong> (los puntitos). Así es mucho más fácil de leer.
+            </p>
+
+            <div class="visual-example improved-text">
+                <div class="improved-title">Receta para hacer Chipa</div>
+                
+                <p class="improved-paragraph"><strong>Ingredientes:</strong></p>
+                <ul class="improved-list">
+                    <li>Medio kilo de almidón de mandioca</li>
+                    <li>Tres huevos</li>
+                    <li>Manteca y sal</li>
+                    <li>Queso pategrás</li>
+                </ul>
+                
+                <p class="improved-paragraph" style="color: #64748b; font-size: 0.95rem;"><strong>Preparación:</strong> poner el almidón en un bol, agregar la sal...</p>
+            </div>
+        </div>
+
+        <!-- PANTALLA 7: CIERRE -->
+        <div class="screen center-content" id="screen-7">
+            <h2 class="title" style="margin-bottom: 20px; justify-content: center; font-size: 3rem;">
+                ¡Listo! ✨
+            </h2>
+            
+            <p class="text-body" style="margin-bottom: 40px; font-size: 1.5rem;">
+                ¿Viste la diferencia? Pasamos de un bloque desordenado a un texto claro, prolijo y fácil de leer.
+            </p>
+
+            <div class="action-box">
+                Ahora andá a Google Docs y completá la actividad que vimos en clase.
+            </div>
+        </div>
+
+        <!-- Barra de Navegación -->
+        <div class="nav-bar">
+            <button class="btn btn-prev" id="btn-prev" onclick="changeScreen(-1)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                Anterior
+            </button>
+            <button class="btn btn-next" id="btn-next" onclick="changeScreen(1)">
+                Comenzar
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </button>
+        </div>
+
+    </div>
+
+    <script>
+        let currentScreen = 1;
+        const totalScreens = 7;
+        
+        const btnPrev = document.getElementById('btn-prev');
+        const btnNext = document.getElementById('btn-next');
+        const progressBar = document.getElementById('progress-bar');
+
+        function updateUI() {
+            // Ocultar todas las pantallas
+            document.querySelectorAll('.screen').forEach(screen => {
+                screen.classList.remove('active');
+            });
+            
+            // Mostrar pantalla actual
+            document.getElementById(`screen-${currentScreen}`).classList.add('active');
+
+            // Actualizar barra de progreso
+            const progressPercentage = (currentScreen / totalScreens) * 100;
+            progressBar.style.width = `${progressPercentage}%`;
+
+            // Lógica de botones
+            if (currentScreen === 1) {
+                btnPrev.style.visibility = 'hidden';
+                btnNext.style.visibility = 'visible';
+                btnNext.innerHTML = 'Comenzar <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>';
+            } 
+            else if (currentScreen === totalScreens) {
+                btnPrev.style.visibility = 'visible';
+                btnNext.style.visibility = 'hidden'; // Ocultar "Siguiente" en la última
+            } 
+            else {
+                btnPrev.style.visibility = 'visible';
+                btnNext.style.visibility = 'visible';
+                btnNext.innerHTML = 'Siguiente <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>';
+            }
+        }
+
+        function changeScreen(direction) {
+            currentScreen += direction;
+            
+            // Límites de seguridad
+            if (currentScreen < 1) currentScreen = 1;
+            if (currentScreen > totalScreens) currentScreen = totalScreens;
+
+            updateUI();
+        }
+
+        // Inicializar interfaz
+        updateUI();
+    </script>
+</body>
+</html>
