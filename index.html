@@ -1,542 +1,135 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Evaluación: Procesadores de Texto</title>
-    <style>
-        :root {
-            --bg-color: #f1f5f9;
-            --card-bg: #ffffff;
-            --text-main: #1e293b;
-            --text-secondary: #475569;
-            --primary-color: #2563eb;
-            --primary-hover: #1d4ed8;
-            --success-color: #059669;
-            --success-bg: #d1fae5;
-            --error-color: #dc2626;
-            --error-bg: #fee2e2;
-            --border-color: #e2e8f0;
-            --font-main: system-ui, -apple-system, sans-serif;
-        }
+  <meta charset="UTF-8">
+  <title>Tecnología de la Información</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f1ea;
+      color: #2d2d2d;
+    }
 
-        body {
-            font-family: var(--font-main);
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 40px 20px;
+    }
 
-        .app-container {
-            width: 100%;
-            max-width: 800px;
-            background-color: var(--card-bg);
-            border-radius: 16px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            min-height: 500px;
-        }
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
 
-        /* Cabecera */
-        .header {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 20px 30px;
-            text-align: center;
-        }
+    p {
+      text-align: center;
+      color: #555;
+      margin-bottom: 40px;
+    }
 
-        .header h1 {
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
 
-        /* Progreso */
-        .progress-bar {
-            background-color: #e2e8f0;
-            height: 8px;
-            width: 100%;
-        }
+    .card {
+      background: white;
+      padding: 20px;
+      border-left: 5px solid #e76f51;
+      transition: 0.2s;
+    }
 
-        .progress-fill {
-            background-color: #3b82f6;
-            height: 100%;
-            width: 0%;
-            transition: width 0.3s ease;
-        }
+    .card:hover {
+      transform: translateY(-3px);
+    }
 
-        /* Área de contenido */
-        .content-area {
-            padding: 40px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
+    .card h2 {
+      margin: 0 0 10px 0;
+      font-size: 1.4rem;
+    }
 
-        .screen {
-            display: none;
-            flex-direction: column;
-            animation: fadeIn 0.3s ease;
-        }
+    .card p {
+      text-align: left;
+      margin-bottom: 15px;
+      color: #666;
+      font-size: 0.95rem;
+    }
 
-        .screen.active {
-            display: flex;
-        }
+    .btn {
+      display: inline-block;
+      padding: 10px 15px;
+      background: #2a9d8f;
+      color: white;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+    .btn:hover {
+      opacity: 0.9;
+    }
 
-        /* Pantalla de inicio y final */
-        .center-text {
-            text-align: center;
-        }
+    footer {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #777;
+    }
 
-        .title-large {
-            font-size: 2.2rem;
-            margin-bottom: 15px;
-            color: var(--text-main);
-        }
-
-        .subtitle {
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            margin-bottom: 30px;
-            line-height: 1.5;
-        }
-
-        /* Preguntas */
-        .question-number {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            font-weight: 600;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .question-text {
-            font-size: 1.6rem;
-            font-weight: 700;
-            margin-bottom: 30px;
-            line-height: 1.4;
-        }
-
-        /* Opciones */
-        .options-container {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-
-        .option-btn {
-            background-color: #f8fafc;
-            border: 2px solid var(--border-color);
-            border-radius: 12px;
-            padding: 20px;
-            font-size: 1.3rem;
-            text-align: left;
-            color: var(--text-main);
-            cursor: pointer;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-        }
-
-        .option-btn:hover:not(:disabled) {
-            background-color: #f1f5f9;
-            border-color: #cbd5e1;
-            transform: translateY(-2px);
-        }
-
-        .option-btn:disabled {
-            cursor: not-allowed;
-            opacity: 0.7;
-        }
-
-        /* Estados de respuesta */
-        .option-btn.selected-correct {
-            background-color: var(--success-bg);
-            border-color: var(--success-color);
-            color: #065f46;
-            font-weight: 600;
-            opacity: 1;
-        }
-
-        .option-btn.selected-incorrect {
-            background-color: var(--error-bg);
-            border-color: var(--error-color);
-            color: #991b1b;
-            font-weight: 600;
-            opacity: 1;
-        }
-
-        .option-btn.show-correct {
-            border-color: var(--success-color);
-            background-color: #f8fafc;
-            opacity: 1;
-        }
-
-        /* Feedback visual */
-        .feedback-box {
-            display: none;
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 30px;
-            font-size: 1.3rem;
-            font-weight: 700;
-            align-items: center;
-            gap: 15px;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .feedback-box.correct {
-            display: flex;
-            background-color: var(--success-bg);
-            color: #065f46;
-            border: 1px solid var(--success-color);
-        }
-
-        .feedback-box.incorrect {
-            display: flex;
-            background-color: var(--error-bg);
-            color: #991b1b;
-            border: 1px solid var(--error-color);
-        }
-
-        .feedback-icon {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            background-color: white;
-        }
-
-        /* Botones principales */
-        .primary-btn {
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            padding: 18px 30px;
-            font-size: 1.3rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: background-color 0.2s;
-            align-self: flex-end;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .primary-btn:hover {
-            background-color: var(--primary-hover);
-        }
-
-        .primary-btn.hidden {
-            display: none;
-        }
-        
-        .center-btn {
-            align-self: center;
-            margin-top: 20px;
-        }
-
-        /* Resultados */
-        .score-display {
-            font-size: 4rem;
-            font-weight: 800;
-            color: var(--primary-color);
-            margin: 20px 0;
-        }
-
-        @media (max-width: 600px) {
-            .content-area { padding: 25px; }
-            .question-text { font-size: 1.3rem; }
-            .option-btn { font-size: 1.1rem; padding: 15px; }
-            .primary-btn { width: 100%; justify-content: center; }
-        }
-    </style>
+    @media (min-width: 600px) {
+      .grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-    <div class="app-container">
-        <div class="header">
-            <h1>Evaluación Básica: Textos</h1>
-        </div>
-        
-        <div class="progress-bar">
-            <div class="progress-fill" id="progress"></div>
-        </div>
+  <div class="container">
 
-        <div class="content-area">
-            
-            <!-- PANTALLA DE INICIO -->
-            <div id="start-screen" class="screen active center-text">
-                <h2 class="title-large">Uso básico de Google Docs</h2>
-                <p class="subtitle">Vamos a repasar las herramientas más comunes para escribir.<br><br>Son 6 preguntas cortas. Leé con atención y elegí la respuesta correcta.</p>
-                <button class="primary-btn center-btn" onclick="startQuiz()">
-                    Comenzar Evaluación
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                </button>
-            </div>
+    <h1>Tecnología de la Información</h1>
+    <p>Material de clase – 4° año</p>
 
-            <!-- PANTALLA DE PREGUNTA -->
-            <div id="question-screen" class="screen">
-                <div class="question-number" id="question-counter">Pregunta 1 de 6</div>
-                <div class="question-text" id="question-text">¿Texto de la pregunta?</div>
-                
-                <div class="options-container" id="options-container">
-                    <!-- Los botones se inyectan acá por JS -->
-                </div>
+    <div class="grid">
 
-                <div id="feedback" class="feedback-box">
-                    <div class="feedback-icon" id="feedback-icon"></div>
-                    <span id="feedback-text">¡Correcto!</span>
-                </div>
+      <!-- REPASO -->
+      <div class="card">
+        <h2>Repaso de evaluación</h2>
+        <p>
+          Revisión de los errores más comunes y cómo mejorar la presentación de un documento.
+        </p>
+        <a href="repaso.html" class="btn">Abrir</a>
+      </div>
 
-                <button id="next-btn" class="primary-btn hidden" onclick="nextQuestion()">
-                    Siguiente
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                </button>
-            </div>
+      <!-- CLASE 6 -->
+      <div class="card">
+        <h2>Clase 6 – Formato de texto</h2>
+        <p>
+          Trabajo práctico: copiar un texto y mejorar su formato para que sea claro y ordenado.
+        </p>
+        <a href="clase6.html" class="btn">Abrir</a>
+      </div>
 
-            <!-- PANTALLA DE RESULTADOS -->
-            <div id="result-screen" class="screen center-text">
-                <h2 class="title-large">¡Evaluación terminada!</h2>
-                <p class="subtitle">Acá tenés tu resultado final:</p>
-                
-                <div class="score-display" id="score-text">0 / 6</div>
-                
-                <p class="subtitle" id="score-message" style="font-weight: bold; color: var(--text-main);"></p>
+      <!-- FUTURAS CLASES -->
+      <!--
+      <div class="card">
+        <h2>Clase 7</h2>
+        <p>Descripción breve</p>
+        <a href="#" class="btn">Abrir</a>
+      </div>
+      -->
 
-                <button class="primary-btn center-btn" onclick="resetQuiz()">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>
-                    Volver a intentar
-                </button>
-            </div>
-
-        </div>
     </div>
 
-    <script>
-        // --- BASE DE DATOS DE PREGUNTAS (Versión simplificada) ---
-        const questions = [
-            // Verdadero / Falso
-            {
-                question: "La opción «Negrita» sirve para destacar una palabra haciéndola más gruesa.",
-                options: [
-                    { text: "Verdadero", isCorrect: true },
-                    { text: "Falso", isCorrect: false }
-                ]
-            },
-            {
-                question: "El botón de «Centrar» pone el texto pegado al lado derecho de la pantalla.",
-                options: [
-                    { text: "Verdadero", isCorrect: false },
-                    { text: "Falso", isCorrect: true }
-                ]
-            },
-            {
-                question: "Para que un título sea más grande, tenés que cambiar el tamaño de letra.",
-                options: [
-                    { text: "Verdadero", isCorrect: true },
-                    { text: "Falso", isCorrect: false }
-                ]
-            },
-            // Opción Múltiple
-            {
-                question: "¿Para qué sirven las listas con viñetas (los puntitos)?",
-                options: [
-                    { text: "Para cambiar el color de las palabras.", isCorrect: false },
-                    { text: "Para hacer una lista ordenada de cosas.", isCorrect: true },
-                    { text: "Para insertar imágenes en la hoja.", isCorrect: false }
-                ]
-            },
-            {
-                question: "Para poner el texto exactamente en el medio de la hoja, tenés que usar la opción:",
-                options: [
-                    { text: "Alinear a la izquierda.", isCorrect: false },
-                    { text: "Centrar texto.", isCorrect: true },
-                    { text: "Alinear a la derecha.", isCorrect: false }
-                ]
-            },
-            {
-                question: "¿Qué hace el botón de «Subrayado»?",
-                options: [
-                    { text: "Borra el texto.", isCorrect: false },
-                    { text: "Pone la letra de costado.", isCorrect: false },
-                    { text: "Pone una línea debajo del texto.", isCorrect: true }
-                ]
-            }
-        ];
+    <footer>
+      Facundo Sueldo
+    </footer>
 
-        // --- VARIABLES DE ESTADO ---
-        let currentQuestionIndex = 0;
-        let score = 0;
-        let hasAnswered = false;
+  </div>
 
-        // Elementos del DOM
-        const startScreen = document.getElementById('start-screen');
-        const questionScreen = document.getElementById('question-screen');
-        const resultScreen = document.getElementById('result-screen');
-        
-        const questionCounter = document.getElementById('question-counter');
-        const questionText = document.getElementById('question-text');
-        const optionsContainer = document.getElementById('options-container');
-        const nextBtn = document.getElementById('next-btn');
-        const progressBar = document.getElementById('progress');
-        
-        const feedbackBox = document.getElementById('feedback');
-        const feedbackIcon = document.getElementById('feedback-icon');
-        const feedbackText = document.getElementById('feedback-text');
-
-        // Íconos SVG para feedback (sin librerías)
-        const iconCheck = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
-        const iconX = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`;
-
-        // --- FUNCIONES ---
-
-        function startQuiz() {
-            startScreen.classList.remove('active');
-            questionScreen.classList.add('active');
-            loadQuestion();
-        }
-
-        function loadQuestion() {
-            hasAnswered = false;
-            
-            // Ocultar feedback y botón siguiente
-            feedbackBox.className = 'feedback-box';
-            feedbackBox.style.display = 'none';
-            nextBtn.classList.add('hidden');
-
-            const q = questions[currentQuestionIndex];
-            
-            // Textos
-            questionCounter.innerText = `Pregunta ${currentQuestionIndex + 1} de ${questions.length}`;
-            questionText.innerText = q.question;
-            
-            // Progreso
-            const progressPercent = (currentQuestionIndex / questions.length) * 100;
-            progressBar.style.width = `${progressPercent}%`;
-
-            // Opciones
-            optionsContainer.innerHTML = '';
-            q.options.forEach((opt, index) => {
-                const btn = document.createElement('button');
-                btn.className = 'option-btn';
-                btn.innerText = opt.text;
-                btn.onclick = () => selectOption(btn, opt.isCorrect);
-                
-                // Guardamos si es correcta como atributo de datos para mostrarla después
-                if(opt.isCorrect) {
-                    btn.dataset.correct = "true";
-                }
-
-                optionsContainer.appendChild(btn);
-            });
-        }
-
-        function selectOption(selectedBtn, isCorrect) {
-            if (hasAnswered) return; // Evita doble clic
-            hasAnswered = true;
-
-            const allButtons = optionsContainer.querySelectorAll('.option-btn');
-            
-            // Deshabilitar todos los botones
-            allButtons.forEach(btn => {
-                btn.disabled = true;
-                // Resaltar la respuesta correcta si el usuario se equivocó
-                if(btn.dataset.correct === "true") {
-                    btn.classList.add('show-correct');
-                }
-            });
-
-            // Estilos del botón seleccionado
-            if (isCorrect) {
-                selectedBtn.classList.remove('show-correct');
-                selectedBtn.classList.add('selected-correct');
-                score++;
-                
-                // Feedback visual Correcto
-                feedbackBox.classList.add('correct');
-                feedbackIcon.innerHTML = iconCheck;
-                feedbackText.innerText = "¡Correcto!";
-            } else {
-                selectedBtn.classList.add('selected-incorrect');
-                
-                // Feedback visual Incorrecto
-                feedbackBox.classList.add('incorrect');
-                feedbackIcon.innerHTML = iconX;
-                feedbackText.innerText = "Incorrecto. Fijate en la respuesta marcada en verde.";
-            }
-
-            // Mostrar feedback y botón siguiente
-            feedbackBox.style.display = 'flex';
-            
-            // Si es la última pregunta, cambiar texto del botón
-            if (currentQuestionIndex === questions.length - 1) {
-                nextBtn.innerHTML = `Ver Resultados <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
-            }
-            
-            nextBtn.classList.remove('hidden');
-        }
-
-        function nextQuestion() {
-            currentQuestionIndex++;
-            
-            if (currentQuestionIndex < questions.length) {
-                loadQuestion();
-            } else {
-                showResults();
-            }
-        }
-
-        function showResults() {
-            questionScreen.classList.remove('active');
-            resultScreen.classList.add('active');
-            
-            // Llenar barra al 100%
-            progressBar.style.width = '100%';
-
-            document.getElementById('score-text').innerText = `${score} / ${questions.length}`;
-            
-            const messageEl = document.getElementById('score-message');
-            if (score === questions.length) {
-                messageEl.innerText = "¡Excelente! Entendés muy bien cómo darle formato al texto.";
-            } else if (score >= 4) {
-                messageEl.innerText = "¡Muy bien! Estás agarrándole la mano al programa.";
-            } else {
-                messageEl.innerText = "¡No te preocupes! Volvé a intentarlo para seguir practicando.";
-            }
-        }
-
-        function resetQuiz() {
-            currentQuestionIndex = 0;
-            score = 0;
-            progressBar.style.width = '0%';
-            nextBtn.innerHTML = `Siguiente <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>`;
-            
-            resultScreen.classList.remove('active');
-            startScreen.classList.add('active');
-        }
-    </script>
 </body>
 </html>
