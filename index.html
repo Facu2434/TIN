@@ -1,159 +1,438 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Tecnología de la Información</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f4f1ea;
-      color: #2d2d2d;
-    }
+<title>Tecnología de la Información</title>
 
-    .container {
-      max-width: 900px;
-      margin: auto;
-      padding: 40px 20px;
-    }
+<style>
 
-    h1 {
-      text-align: center;
-      margin-bottom: 10px;
-    }
+:root{
 
-    p {
-      text-align: center;
-      color: #555;
-      margin-bottom: 40px;
-    }
+--bg:#f5f1e8;
 
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 20px;
-    }
+--card:#ffffff;
 
-    .card {
-      background: white;
-      padding: 20px;
-      border-left: 5px solid #e76f51;
-      transition: 0.2s;
-    }
+--text:#2d2d2d;
+--muted:#666;
 
-    .card:hover {
-      transform: translateY(-3px);
-    }
+--accent:#2a9d8f;
+--accent2:#e76f51;
 
-    .card h2 {
-      margin: 0 0 10px 0;
-      font-size: 1.4rem;
-    }
+--border:#e4ddd1;
 
-    .card p {
-      text-align: left;
-      margin-bottom: 15px;
-      color: #666;
-      font-size: 0.95rem;
-    }
+}
 
-    .btn {
-      display: inline-block;
-      padding: 10px 15px;
-      background: #2a9d8f;
-      color: white;
-      text-decoration: none;
-      font-size: 0.9rem;
-    }
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
 
-    .btn:hover {
-      opacity: 0.9;
-    }
+body{
 
-    footer {
-      margin-top: 40px;
-      text-align: center;
-      font-size: 0.85rem;
-      color: #777;
-    }
+font-family:
+system-ui,
+-apple-system,
+BlinkMacSystemFont,
+"Segoe UI",
+sans-serif;
 
-    @media (min-width: 600px) {
-      .grid {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-  </style>
+background:
+linear-gradient(
+180deg,
+#f8f5ef 0%,
+#f1ece2 100%
+);
+
+color:var(--text);
+
+padding:40px 20px;
+
+}
+
+.container{
+max-width:1200px;
+margin:auto;
+}
+
+header{
+margin-bottom:50px;
+text-align:center;
+}
+
+header h1{
+
+font-size:clamp(2.2rem,5vw,4rem);
+
+margin-bottom:15px;
+
+font-weight:800;
+
+letter-spacing:-1px;
+
+}
+
+header p{
+
+font-size:1.2rem;
+
+color:var(--muted);
+
+max-width:700px;
+
+margin:auto;
+
+line-height:1.5;
+
+}
+
+.section{
+margin-bottom:50px;
+}
+
+.section-title{
+
+font-size:1.5rem;
+
+margin-bottom:25px;
+
+display:flex;
+align-items:center;
+gap:10px;
+
+font-weight:700;
+
+}
+
+.badge{
+
+background:var(--accent);
+
+color:white;
+
+font-size:0.8rem;
+
+padding:4px 10px;
+
+border-radius:999px;
+
+}
+
+.grid{
+
+display:grid;
+
+grid-template-columns:
+repeat(auto-fit,minmax(320px,1fr));
+
+gap:24px;
+
+}
+
+.card{
+
+background:var(--card);
+
+border:1px solid var(--border);
+
+border-radius:22px;
+
+padding:28px;
+
+transition:0.25s ease;
+
+cursor:pointer;
+
+position:relative;
+
+overflow:hidden;
+
+min-height:220px;
+
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+
+box-shadow:
+0 4px 12px rgba(0,0,0,0.04);
+
+}
+
+.card:hover{
+
+transform:
+translateY(-6px);
+
+box-shadow:
+0 12px 30px rgba(0,0,0,0.08);
+
+}
+
+.card::before{
+
+content:"";
+
+position:absolute;
+
+top:0;
+left:0;
+right:0;
+
+height:6px;
+
+background:
+linear-gradient(
+90deg,
+var(--accent),
+var(--accent2)
+);
+
+}
+
+.card h3{
+
+font-size:1.5rem;
+
+margin-bottom:12px;
+
+line-height:1.2;
+
+}
+
+.card p{
+
+font-size:1rem;
+
+line-height:1.5;
+
+color:var(--muted);
+
+margin-bottom:25px;
+
+}
+
+.btn{
+
+display:inline-block;
+
+padding:12px 18px;
+
+background:var(--accent);
+
+color:white;
+
+text-decoration:none;
+
+border-radius:12px;
+
+font-weight:700;
+
+font-size:1rem;
+
+transition:0.2s ease;
+
+}
+
+.btn:hover{
+opacity:0.9;
+}
+
+footer{
+
+margin-top:60px;
+
+text-align:center;
+
+font-size:0.9rem;
+
+color:#777;
+
+}
+
+@media(max-width:700px){
+
+body{
+padding:25px 15px;
+}
+
+.card{
+min-height:auto;
+}
+
+}
+
+</style>
 </head>
 
 <body>
 
-  <div class="container">
+<div class="container">
 
-    <h1>Tecnología de la Información</h1>
-    <p>Material de clase – 4° año</p>
+<header>
 
-    <div class="grid">
+<h1>
+Tecnología de la Información
+</h1>
 
-      <!-- REPASO -->
-      <div class="card">
-        <h2>Repaso de evaluación</h2>
-        <p>
-          Revisión de los errores más comunes y cómo mejorar la presentación de un documento.
-        </p>
-        <a href="repaso.html" class="btn">Abrir</a>
-      </div>
+<p>
+Materiales interactivos, ejercicios y actividades prácticas realizadas en clase.
+</p>
 
-      <!-- CLASE 6 -->
-      <div class="card">
-        <h2>Clase 6 – Formato de texto</h2>
-        <p>
-          Trabajo práctico: copiar un texto y mejorar su formato para que sea claro y ordenado.
-        </p>
-        <a href="clase6.html" class="btn">Abrir</a>
-      </div>
+</header>
 
-    
-      <div class="card">
-        <h2>Clase 7 - Tablas en Docs</h2>
-        <p>Cómo organizar y estructurar información</p>
-        <a href="clase7.html" class="btn">Abrir</a>
-      </div>
-      
+<!-- ================================================= -->
+<!-- BLOQUE PRINCIPAL -->
+<!-- ================================================= -->
+
+<section class="section">
+
+<h2 class="section-title">
+📘 Clases
+<span class="badge">
+Actualizado
+</span>
+</h2>
+
+<div class="grid">
+
+<!-- REPASO -->
+
+<div class="card">
+
+<div>
+
+<h3>
+🧠 Repaso de evaluación
+</h3>
+
+<p>
+Errores comunes y mejoras para organizar documentos.
+</p>
+
+</div>
+
+<a href="repaso.html" class="btn">
+Abrir módulo
+</a>
+
+</div>
+
+<!-- CLASE 6 -->
+
+<div class="card">
+
+<div>
+
+<h3>
+📄 Clase 6 — Formato
+</h3>
+
+<p>
+Copiar un texto y mejorar su presentación usando formato básico.
+</p>
+
+</div>
+
+<a href="clase6.html" class="btn">
+Abrir módulo
+</a>
+
+</div>
+
+<!-- CLASE 7 -->
+
+<div class="card">
+
+<div>
+
+<h3>
+📊 Clase 7 — Tablas
+</h3>
+
+<p>
+Cómo organizar información usando filas y columnas.
+</p>
+
+</div>
+
+<a href="clase7.html" class="btn">
+Abrir módulo
+</a>
+
+</div>
+
 <!-- CLASE 8 -->
-      <div class="card">
-        <h2>Clase 8 – Formato en Tablas</h2>
-        <p>
-          Mejoramos las tablas combinando celdas
-        </p>
-        <a href="clase8.html" class="btn">Abrir</a>
-      </div>
 
-<!--  CLASE 9 -->
-      
-      <div class="card">
-        <h2>Clase 9 - Tablas estilo Facturas</h2>
-        <p>Copiamos el diseño de las tablas</p>
-        <a href="clase9.html" class="btn">Abrir</a>
-      </div>
-    
-            <!-- FUTURAS CLASES -->
-      <!--
-      <div class="card">
-        <h2>Clase 7</h2>
-        <p>Descripción breve</p>
-        <a href="#" class="btn">Abrir</a>
-      </div>
-      -->
+<div class="card">
 
-    </div>
+<div>
 
-    <footer>
-      Facundo Sueldo
-    </footer>
+<h3>
+🎨 Clase 8 — Formato en tablas
+</h3>
 
-  </div>
+<p>
+Bordes, colores y combinación de celdas para mejorar tablas.
+</p>
 
-</body>
-</html>
+</div>
+
+<a href="clase8.html" class="btn">
+Abrir módulo
+</a>
+
+</div>
+
+<!-- CLASE 9 -->
+
+<div class="card">
+
+<div>
+
+<h3>
+🧾 Clase 9 — Facturas
+</h3>
+
+<p>
+Tablas más completas usando títulos, subtotales y formato visual.
+</p>
+
+</div>
+
+<a href="clase9.html" class="btn">
+Abrir módulo
+</a>
+
+</div>
+
+<!-- CLASE 10 -->
+
+<div class="card">
+
+<div>
+
+<h3>
+📅 Clase 10 — Organización personal
+</h3>
+
+<p>
+Organizadores, formularios y tablas útiles para la vida diaria.
+</p>
+
+</div>
+
+<a href="clase10.html" class="btn">
+Abrir módulo
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+<footer>
+Facundo Sueldo
+</footer>
