@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 10 - Tablas con formato</title>
+
+<style>
+
+:root {
+    --bg-body: #f1f5f9;
+    --card-bg: #ffffff;
+    --dark-bg: #0f172a;
+
+    --text-main: #334155;
+    --text-light: #64748b;
+
+    --accent-blue: #2563eb;
+    --accent-blue-light: #eff6ff;
+    --accent-hover: #1d4ed8;
+
+    --accent-green: #059669;
+    --accent-green-light: #ecfdf5;
+
+    --font-main: system-ui, -apple-system, BlinkMacSystemFont,
+                 "Segoe UI", Roboto, sans-serif;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:var(--font-main);
+    background: radial-gradient(circle at top right, #e2e8f0 0%, #f8fafc 100%);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:10px;
+    color:var(--text-main);
+}
+
+.app-container{
+    width:100%;
+    max-width:1100px;
+    height:95vh;
+    min-height:550px;
+    max-height:900px;
+    background:white;
+    border-radius:24px;
+    overflow:hidden;
+    position:relative;
+
+    box-shadow:
+    0 20px 40px -10px rgba(15,23,42,0.10),
+    0 10px 20px -5px rgba(15,23,42,0.05);
+
+    display:flex;
+    flex-direction:column;
+}
+
+.app-container::before{
+    content:'';
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    height:6px;
+    background:linear-gradient(90deg,#3b82f6,#60a5fa,#3b82f6);
+}
+
+.screen{
+    display:none;
+    flex-direction:column;
+    flex-grow:1;
+    padding:20px 40px; /* Reducido para ganar espacio vertical */
+    overflow-y:auto;
+    justify-content:center;
+    animation:fade .5s ease;
+}
+
+.screen.active{
+    display:flex;
+}
+
+@keyframes fade{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.title{
+    font-size:clamp(2rem,4vw,3.2rem);
+    font-weight:800;
+    color:var(--dark-bg);
+    line-height:1.1;
+    margin-bottom:10px;
+    letter-spacing:-1px;
+}
+
+.subtitle{
+    font-size:clamp(1.1rem,1.8vw,1.4rem);
+    color:var(--text-light);
+    margin-bottom:15px;
+}
+
+.center-screen{
+    text-align:center;
+    align-items:center;
+    justify-content:center;
+}
+
+.mockup{
+    background:white;
+    border-radius:18px;
+    border:1px solid #e2e8f0;
+    overflow:hidden;
+    box-shadow:0 8px 20px rgba(0,0,0,0.05);
+}
+
+.mockup-label{
+    padding:8px;
+    background:#f8fafc;
+    border-bottom:1px solid #e2e8f0;
+    text-align:center;
+    font-weight:700;
+    color:var(--text-light);
+    letter-spacing:1px;
+}
+
+.concept-list{
+    list-style:none;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+}
+
+.concept-list li{
+    background:#f8fafc;
+    padding:14px 18px;
+    border-radius:16px;
+    display:flex;
+    align-items:center;
+    gap:16px;
+    font-size:1.2rem;
+}
+
+.icon-box{
+    width:40px;
+    height:40px;
+    border-radius:12px;
+    background:var(--accent-blue-light);
+    color:var(--accent-blue);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-weight:700;
+    flex-shrink:0;
+}
+
+.nav-bar{
+    border-top:1px solid #e2e8f0;
+    padding:15px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.btn{
+    border:none;
+    border-radius:12px;
+    padding:12px 24px;
+    font-size:1rem;
+    font-weight:700;
+    cursor:pointer;
+}
+
+.btn-prev{
+    background:white;
+    border:2px solid #e2e8f0;
+    color:var(--text-main);
+}
+
+.btn-next{
+    background:var(--accent-blue);
+    color:white;
+}
+
+.btn-close-top{
+    position:absolute;
+    top:15px;
+    right:20px;
+    z-index:20;
+    padding: 8px 16px;
+}
+
+.step-counter{
+    background:#f1f5f9;
+    padding:8px 16px;
+    border-radius:999px;
+    font-weight:700;
+    color:#64748b;
+}
+
+/* Custom scrollbar para las screens por si de todas formas se necesita */
+.screen::-webkit-scrollbar { width: 6px; }
+.screen::-webkit-scrollbar-track { background: transparent; }
+.screen::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+
+@media(max-width:768px){
+    .screen{
+        padding:20px 20px;
+    }
+    .nav-bar{
+        padding:15px 20px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="app-container">
+
+    <button class="btn btn-prev btn-close-top" onclick="closeModule()">
+        Cerrar
+    </button>
+
+    <!-- PANTALLA 1: INTRO -->
+    <div class="screen active center-screen" id="screen-1">
+
+        <h1 class="title">
+            Organizar<br>
+            <span style="color:var(--accent-blue);">
+                información
+            </span>
+        </h1>
+
+        <p class="subtitle" style="margin-top: 10px; margin-bottom: 30px;">
+            Hoy vamos a usar tablas para ordenar información y copiar modelos reales.
+        </p>
+
+        <!-- Caja visual grande representativa -->
+        <div class="mockup" style="max-width:700px; margin:auto; width:100%; padding: 30px; background: #f8fafc;">
+            <table style="width:100%; border-collapse:collapse; font-size:1.2rem; background: white; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border-radius: 8px; overflow: hidden;">
+                <tr>
+                    <td colspan="3" style="background: var(--accent-blue); color: white; padding: 15px; text-align: center; font-weight: bold; font-size: 1.4rem;">
+                        MODELO REAL
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border: 2px solid #e2e8f0; padding: 20px; background: var(--accent-blue-light); width: 30%;">
+                        <div style="height: 12px; background: #93c5fd; border-radius: 6px; width: 80%; margin-bottom: 10px;"></div>
+                        <div style="height: 12px; background: #bfdbfe; border-radius: 6px; width: 60%;"></div>
+                    </td>
+                    <td style="border: 2px solid #e2e8f0; padding: 20px; width: 40%; text-align: center;">
+                        <span style="font-size: 2rem;">🖼️</span>
+                    </td>
+                    <td style="border: 2px solid #e2e8f0; padding: 20px; width: 30%;">
+                        <div style="height: 12px; background: #cbd5e1; border-radius: 6px; width: 90%; margin-bottom: 10px;"></div>
+                        <div style="height: 12px; background: #e2e8f0; border-radius: 6px; width: 70%;"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="border: 2px solid #e2e8f0; padding: 20px; text-align: center; font-weight: bold; color: var(--accent-green);">✓ Filas</td>
+                    <td style="border: 2px solid #e2e8f0; padding: 20px; text-align: center; font-weight: bold; color: var(--accent-blue);">✓ Columnas</td>
+                    <td style="border: 2px solid #e2e8f0; padding: 20px; text-align: center; font-weight: bold; color: var(--accent-green);">✓ Colores</td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+
+    <!-- PANTALLA 2: EJERCICIO 1 -->
+    <div class="screen center-screen" id="screen-2">
+
+        <h1 class="title">Reconstruir información</h1>
+
+        <p class="subtitle">
+            Estos datos están desordenados.<br>Tu misión es organizarlos en una tabla.
+        </p>
+
+        <div class="mockup" style="max-width:700px; margin: 10px auto; width:100%; background: #fffbe3; border: 1px dashed #fbbf24; text-align: left;">
+            <div style="padding:20px 25px; font-family: monospace; font-size: 1.15rem; color: #451a03; line-height: 1.5;">
+                Nombre: Juan Pérez | Edad: 34<br>
+                Teléfono: 11-4587-2254 | Ciudad: Avellaneda<br>
+                Trabajo: Chofer<br><br>
+                
+                Nombre: María López | Edad: 28 | Teléfono: 11-7845-2211<br>
+                Ciudad: Lanús | Trabajo: Enfermera<br><br>
+                
+                Nombre: Carlos Díaz | Edad: 42<br>
+                Teléfono: 11-5521-8874 | Ciudad: Quilmes | Trabajo: Carpintero<br><br>
+
+                Nombre: Laura Gómez | Edad: 31 | Ciudad: Morón<br>
+                Trabajo: Docente | Teléfono: 11-3322-4455<br><br>
+
+                Nombre: Diego Torres | Edad: 26 | Teléfono: 11-9988-7766<br>
+                Ciudad: Tigre | Trabajo: Vendedor
+            </div>
+        </div>
+
+        <div style="margin-top:20px; max-width:700px; width: 100%; margin-left: auto; margin-right: auto;">
+            <div style="background:var(--accent-green-light); border:2px solid var(--accent-green); padding:15px 30px; border-radius:16px;">
+                <p style="font-size:1.3rem; color:var(--accent-green); font-weight:700; line-height:1.4; margin: 0;">
+                    Organizá esta información usando filas y columnas.
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- PANTALLA 3: EJERCICIO 2 -->
+    <div class="screen center-screen" id="screen-3">
+
+        <h1 class="title" style="font-size: 2.2rem; margin-bottom: 5px;">Copiar el modelo</h1>
+
+        <p class="subtitle" style="margin-bottom: 10px;">
+            Intentá que tu tabla quede lo más parecida posible.
+        </p>
+
+        <div class="mockup" style="max-width:800px; margin:auto; width:100%; border-radius: 12px;">
+            <div style="padding:15px 25px;">
+                
+                <!-- Tabla colorida y simplificada -->
+                <table style="width:100%; border-collapse:collapse; font-size:1.1rem; text-align: left;">
+                    <tr>
+                        <td colspan="4" style="border: 3px solid #f59e0b; padding:15px; text-align:center; font-size:1.8rem; font-weight:900; background:#fef3c7; color: #d97706; letter-spacing: 1px;">
+                            🛒 FACTURA SIMPLIFICADA
+                        </td>
+                    </tr>
+                    
+                    <tr style="background: #ecfdf5; color: #047857; font-size: 1.15rem;">
+                        <td colspan="2" style="border: 2px solid #10b981; padding: 12px; font-weight: bold;">
+                            Cliente: Juan Pérez
+                        </td>
+                        <td colspan="2" style="border: 2px solid #10b981; padding: 12px; font-weight: bold; text-align: right;">
+                            Fecha: Hoy
+                        </td>
+                    </tr>
+                    
+                    <tr style="background: #eff6ff; color: #1d4ed8; font-weight: 800; text-align: center;">
+                        <td style="border: 2px solid #3b82f6; padding: 14px; width: 45%; text-align: left;">Producto</td>
+                        <td style="border: 2px solid #3b82f6; padding: 14px; width: 15%;">Cant.</td>
+                        <td style="border: 2px solid #3b82f6; padding: 14px; width: 20%;">Precio</td>
+                        <td style="border: 2px solid #3b82f6; padding: 14px; width: 20%;">Total</td>
+                    </tr>
+                    
+                    <tr style="background: #ffffff; text-align: center;">
+                        <td style="border: 2px solid #cbd5e1; padding: 12px; text-align: left; font-weight: bold;">Mochila Escolar</td>
+                        <td style="border: 2px solid #cbd5e1; padding: 12px;">1</td>
+                        <td style="border: 2px solid #cbd5e1; padding: 12px;">$ 15.000</td>
+                        <td style="border: 2px solid #cbd5e1; padding: 12px; font-weight: bold;">$ 15.000</td>
+                    </tr>
+                    
+                    <tr style="background: #ffffff; text-align: center;">
+                        <td style="border: 2px solid #cbd5e1; padding: 12px; text-align: left; font-weight: bold;">Set de Marcadores</td>
+                        <td style="border: 2px solid #cbd5e1; padding: 12px;">2</td>
+                        <td style="border: 2px solid #cbd5e1; padding: 12px;">$ 4.000</td>
+                        <td style="border: 2px solid #cbd5e1; padding: 12px; font-weight: bold;">$ 8.000</td>
+                    </tr>
+                    
+                    <tr>
+                        <td colspan="3" style="border: 3px solid #8b5cf6; padding: 16px; text-align: right; font-weight: 900; background: #ede9fe; color: #6d28d9; font-size: 1.4rem;">
+                            TOTAL A PAGAR:
+                        </td>
+                        <td style="border: 3px solid #8b5cf6; padding: 16px; text-align: center; font-weight: 900; background: #ede9fe; color: #6d28d9; font-size: 1.4rem;">
+                            $ 23.000
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- PANTALLA 4: EJERCICIO 3 -->
+    <div class="screen center-screen" id="screen-4">
+
+        <h1 class="title">Horario de colectivos</h1>
+
+        <p class="subtitle">
+            Armá una tabla con líneas de colectivo que conozcas.
+        </p>
+
+        <div class="mockup" style="max-width:650px; margin:10px auto; width:100%;">
+            <div style="padding:20px;">
+                <table style="width:100%; border-collapse:collapse; font-size:1.2rem; text-align: center;">
+                    <tr style="background: var(--dark-bg); color: white;">
+                        <th colspan="3" style="padding:15px; border:1px solid #cbd5e1; font-size: 1.4rem; letter-spacing: 2px;">
+                            MIS BONDIS
+                        </th>
+                    </tr>
+                    <tr style="background: var(--accent-blue); color: white;">
+                        <th style="padding:12px; border:1px solid #cbd5e1;">Línea</th>
+                        <th style="padding:12px; border:1px solid #cbd5e1;">Empresa</th>
+                        <th style="padding:12px; border:1px solid #cbd5e1;">Colores</th>
+                    </tr>
+                    <tr>
+                        <td style="padding:12px; border:1px solid #cbd5e1; font-weight: bold;">100</td>
+                        <td style="padding:12px; border:1px solid #cbd5e1;">Ejemplo S.A.</td>
+                        <td style="padding:12px; border:1px solid #cbd5e1;">Azul y blanco</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div style="display: flex; justify-content: center; align-items: center; gap: 15px; margin: 20px 0;">
+            <div style="background: #f1f5f9; padding: 15px; border-radius: 12px; font-weight: 700;">🔍 Buscar en Google</div>
+            <div style="font-size: 1.5rem; color: #cbd5e1;">➔</div>
+            <div style="background: #f1f5f9; padding: 15px; border-radius: 12px; font-weight: 700;">🚌 Copiar imagen</div>
+            <div style="font-size: 1.5rem; color: #cbd5e1;">➔</div>
+            <div style="background: #f1f5f9; padding: 15px; border-radius: 12px; font-weight: 700;">📄 Pegar en tabla</div>
+        </div>
+
+        <div style="max-width:700px; width: 100%; margin-left: auto; margin-right: auto;">
+            <div style="background:var(--accent-blue-light); border:2px solid #93c5fd; padding:15px 30px; border-radius:16px;">
+                <p style="font-size:1.3rem; color:#1e3a8a; font-weight:700; line-height:1.4; margin: 0;">
+                    Buscá una foto en Google y pegala dentro del documento.
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- PANTALLA 5: CONSEJOS -->
+    <div class="screen" id="screen-5">
+
+        <h1 class="title" style="text-align: center; margin-bottom: 30px;">
+            Para que la tabla quede clara
+        </h1>
+
+        <ul class="concept-list" style="max-width: 600px; margin: 0 auto; width: 100%;">
+            <li>
+                <div class="icon-box">✓</div>
+                Usar títulos combinados
+            </li>
+            <li>
+                <div class="icon-box">✓</div>
+                Usar bordes para separar los datos
+            </li>
+            <li>
+                <div class="icon-box">✓</div>
+                Centrar los encabezados
+            </li>
+            <li>
+                <div class="icon-box">✓</div>
+                Mantener un orden de colores
+            </li>
+            <li>
+                <div class="icon-box">✓</div>
+                Ajustar el tamaño al pegar imágenes
+            </li>
+        </ul>
+
+    </div>
+
+    <!-- PANTALLA 6: CIERRE -->
+    <div class="screen center-screen" id="screen-6">
+
+        <h1 class="title" style="font-size: 3.5rem;">
+            Misión de hoy
+        </h1>
+
+        <div style="margin-top:20px; max-width:800px; width:100%;">
+            <div style="background:var(--accent-green-light); border:2px solid var(--accent-green); padding:40px; border-radius:20px;">
+                
+                <p style="font-size:clamp(1.8rem, 3vw, 2.5rem); color:var(--accent-green); font-weight:800; line-height:1.2; margin-bottom: 25px;">
+                    Organizar información y copiar modelos usando tablas.
+                </p>
+
+                <div style="height: 2px; background: #a7f3d0; margin: 20px 0;"></div>
+
+                <p style="font-size:1.4rem; color:#065f46; font-weight:600; line-height:1.5;">
+                    Lo importante no es terminar rápido.<br>
+                    Lo importante es que el documento quede claro.
+                </p>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- NAV -->
+    <div class="nav-bar">
+
+        <button class="btn btn-prev"
+                id="btn-prev"
+                onclick="changeStep(-1)">
+            Anterior
+        </button>
+
+        <div class="step-counter" id="step-counter">
+            1 / 6
+        </div>
+
+        <button class="btn btn-next"
+                id="btn-next"
+                onclick="changeStep(1)">
+            Siguiente
+        </button>
+
+    </div>
+
+</div>
+
+<script>
+
+let currentStep = 1;
+const totalSteps = 6;
+
+function updateUI(){
+
+    document.querySelectorAll('.screen')
+    .forEach(screen=>{
+        screen.classList.remove('active');
+    });
+
+    document
+    .getElementById(`screen-${currentStep}`)
+    .classList.add('active');
+
+    document
+    .getElementById('step-counter')
+    .innerText = `${currentStep} / ${totalSteps}`;
+
+    document
+    .getElementById('btn-prev')
+    .style.visibility =
+        currentStep === 1 ? 'hidden' : 'visible';
+
+    document
+    .getElementById('btn-next')
+    .style.visibility =
+        currentStep === totalSteps ? 'hidden' : 'visible';
+}
+
+function changeStep(direction){
+
+    currentStep += direction;
+
+    if(currentStep < 1) currentStep = 1;
+    if(currentStep > totalSteps) currentStep = totalSteps;
+
+    updateUI();
+}
+
+document.addEventListener('keydown',function(e){
+
+    if(e.key === 'ArrowRight'){
+        changeStep(1);
+    }
+
+    if(e.key === 'ArrowLeft'){
+        changeStep(-1);
+    }
+
+});
+
+function closeModule(){
+
+    window.location.href = "index.html";
+
+    setTimeout(()=>{
+        window.close();
+    },150);
+
+}
+
+updateUI();
+
+</script>
+
+</body>
+</html>
