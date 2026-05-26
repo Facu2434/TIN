@@ -22,6 +22,8 @@
 
 --border:#e4ddd1;
 
+--current:#16a34a;
+
 }
 
 *{
@@ -50,6 +52,8 @@ color:var(--text);
 
 padding:40px 20px;
 
+min-height:100vh;
+
 }
 
 .container{
@@ -64,7 +68,7 @@ text-align:center;
 
 header h1{
 
-font-size:clamp(2.2rem,5vw,4rem);
+font-size:clamp(2.5rem,5vw,4.3rem);
 
 margin-bottom:15px;
 
@@ -84,7 +88,7 @@ max-width:700px;
 
 margin:auto;
 
-line-height:1.5;
+line-height:1.6;
 
 }
 
@@ -94,13 +98,13 @@ margin-bottom:50px;
 
 .section-title{
 
-font-size:1.5rem;
+font-size:1.7rem;
 
-margin-bottom:25px;
+margin-bottom:30px;
 
 display:flex;
 align-items:center;
-gap:10px;
+gap:12px;
 
 font-weight:700;
 
@@ -112,9 +116,9 @@ background:var(--accent);
 
 color:white;
 
-font-size:0.8rem;
+font-size:0.9rem;
 
-padding:4px 10px;
+padding:6px 12px;
 
 border-radius:999px;
 
@@ -127,7 +131,7 @@ display:grid;
 grid-template-columns:
 repeat(auto-fit,minmax(320px,1fr));
 
-gap:24px;
+gap:26px;
 
 }
 
@@ -137,9 +141,9 @@ background:var(--card);
 
 border:1px solid var(--border);
 
-border-radius:22px;
+border-radius:24px;
 
-padding:28px;
+padding:30px;
 
 transition:0.25s ease;
 
@@ -149,14 +153,14 @@ position:relative;
 
 overflow:hidden;
 
-min-height:220px;
+min-height:240px;
 
 display:flex;
 flex-direction:column;
 justify-content:space-between;
 
 box-shadow:
-0 4px 12px rgba(0,0,0,0.04);
+0 6px 14px rgba(0,0,0,0.04);
 
 }
 
@@ -166,7 +170,7 @@ transform:
 translateY(-6px);
 
 box-shadow:
-0 12px 30px rgba(0,0,0,0.08);
+0 14px 34px rgba(0,0,0,0.08);
 
 }
 
@@ -191,25 +195,85 @@ var(--accent2)
 
 }
 
+.card.current{
+
+border:3px solid var(--current);
+
+transform:scale(1.02);
+
+box-shadow:
+0 0 0 6px rgba(22,163,74,0.08),
+0 14px 34px rgba(0,0,0,0.08);
+
+}
+
+.card.current::after{
+
+content:"CLASE ACTUAL";
+
+position:absolute;
+
+top:18px;
+right:18px;
+
+background:var(--current);
+
+color:white;
+
+font-size:0.75rem;
+
+font-weight:800;
+
+padding:8px 12px;
+
+border-radius:999px;
+
+letter-spacing:0.5px;
+
+animation:pulse 1.3s infinite;
+
+}
+
+@keyframes pulse{
+
+0%{
+transform:scale(1);
+opacity:1;
+}
+
+50%{
+transform:scale(1.08);
+opacity:0.75;
+}
+
+100%{
+transform:scale(1);
+opacity:1;
+}
+
+}
+
 .card h3{
 
-font-size:1.5rem;
+font-size:1.65rem;
 
-margin-bottom:12px;
+margin-bottom:14px;
 
 line-height:1.2;
+
+padding-right:90px;
 
 }
 
 .card p{
 
-font-size:1rem;
+font-size:1.05rem;
 
-line-height:1.5;
+line-height:1.6;
 
 color:var(--muted);
 
-margin-bottom:25px;
+margin-bottom:28px;
 
 }
 
@@ -217,7 +281,7 @@ margin-bottom:25px;
 
 display:inline-block;
 
-padding:12px 18px;
+padding:14px 20px;
 
 background:var(--accent);
 
@@ -225,7 +289,7 @@ color:white;
 
 text-decoration:none;
 
-border-radius:12px;
+border-radius:14px;
 
 font-weight:700;
 
@@ -233,21 +297,25 @@ font-size:1rem;
 
 transition:0.2s ease;
 
+text-align:center;
+
 }
 
 .btn:hover{
-opacity:0.9;
+opacity:0.92;
 }
 
 footer{
 
-margin-top:60px;
+margin-top:70px;
 
 text-align:center;
 
-font-size:0.9rem;
+font-size:0.95rem;
 
 color:#777;
+
+padding-bottom:20px;
 
 }
 
@@ -259,6 +327,20 @@ padding:25px 15px;
 
 .card{
 min-height:auto;
+}
+
+.card h3{
+padding-right:0;
+}
+
+.card.current::after{
+
+position:static;
+
+display:inline-block;
+
+margin-bottom:14px;
+
 }
 
 }
@@ -283,7 +365,7 @@ Materiales interactivos, ejercicios y actividades prácticas realizadas en clase
 </header>
 
 <!-- ================================================= -->
-<!-- BLOQUE PRINCIPAL -->
+<!-- CLASES -->
 <!-- ================================================= -->
 
 <section class="section">
@@ -418,12 +500,34 @@ Abrir módulo
 </h3>
 
 <p>
-Organizadores, formularios y tablas útiles para la vida diaria.
+Reconstrucción de información, modelos visuales y tablas aplicadas a situaciones reales.
 </p>
 
 </div>
 
 <a href="clase10.html" class="btn">
+Abrir módulo
+</a>
+
+</div>
+
+<!-- CLASE 11 -->
+
+<div class="card current">
+
+<div>
+
+<h3>
+📗 Clase 11 — Google Sheets
+</h3>
+
+<p>
+Primer contacto con hojas de cálculo. Filas, columnas, celdas y exploración visual de la herramienta.
+</p>
+
+</div>
+
+<a href="clase11.html" class="btn">
 Abrir módulo
 </a>
 
@@ -436,3 +540,8 @@ Abrir módulo
 <footer>
 Facundo Sueldo
 </footer>
+
+</div>
+
+</body>
+</html>
