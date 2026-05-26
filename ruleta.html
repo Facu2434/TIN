@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Ruleta de actividades</title>
 
@@ -40,8 +40,6 @@ linear-gradient(
 #f1ece2 100%
 );
 
-color:var(--text);
-
 min-height:100vh;
 
 display:flex;
@@ -50,6 +48,8 @@ align-items:center;
 
 padding:30px;
 
+color:var(--text);
+
 }
 
 .container{
@@ -57,7 +57,7 @@ padding:30px;
 width:100%;
 max-width:1100px;
 
-background:var(--card);
+background:white;
 
 border-radius:28px;
 
@@ -72,11 +72,61 @@ text-align:center;
 
 position:relative;
 
+overflow:hidden;
+
+}
+
+.container::before{
+
+content:"";
+
+position:absolute;
+
+top:0;
+left:0;
+right:0;
+
+height:6px;
+
+background:
+linear-gradient(
+90deg,
+var(--accent),
+var(--accent2)
+);
+
+}
+
+.close-btn{
+
+position:absolute;
+
+top:20px;
+right:20px;
+
+text-decoration:none;
+
+background:#ece7dc;
+
+padding:12px 18px;
+
+border-radius:12px;
+
+font-weight:700;
+
+color:#333;
+
+transition:0.2s ease;
+
+}
+
+.close-btn:hover{
+background:#ddd4c4;
 }
 
 h1{
 
-font-size:clamp(2.2rem,5vw,4rem);
+font-size:clamp(2.4rem,5vw,4rem);
 
 margin-bottom:10px;
 
@@ -92,12 +142,25 @@ margin-bottom:35px;
 
 }
 
+.pointer{
+
+width:0;
+height:0;
+
+border-left:22px solid transparent;
+border-right:22px solid transparent;
+border-top:36px solid #333;
+
+margin:0 auto 12px;
+
+}
+
 .wheel{
 
-width:220px;
-height:220px;
+width:240px;
+height:240px;
 
-margin:0 auto 30px;
+margin:0 auto 35px;
 
 border-radius:50%;
 
@@ -109,16 +172,13 @@ conic-gradient(
 );
 
 display:flex;
-align-items:center;
 justify-content:center;
+align-items:center;
 
 position:relative;
 
-transition:
-transform 4s cubic-bezier(.17,.67,.25,1);
-
 box-shadow:
-0 10px 25px rgba(0,0,0,0.12);
+0 12px 26px rgba(0,0,0,0.14);
 
 }
 
@@ -126,8 +186,8 @@ box-shadow:
 
 content:"";
 
-width:55px;
-height:55px;
+width:60px;
+height:60px;
 
 background:white;
 
@@ -137,26 +197,17 @@ position:absolute;
 
 }
 
-.pointer{
-
-width:0;
-height:0;
-
-border-left:20px solid transparent;
-border-right:20px solid transparent;
-border-top:35px solid #333;
-
-margin:0 auto 10px;
-
-}
-
-button{
+.spin-btn{
 
 border:none;
 
 padding:16px 28px;
 
 border-radius:16px;
+
+background:var(--accent);
+
+color:white;
 
 font-size:1rem;
 
@@ -165,14 +216,6 @@ font-weight:700;
 cursor:pointer;
 
 transition:0.2s ease;
-
-}
-
-.spin-btn{
-
-background:var(--accent);
-
-color:white;
 
 margin-bottom:35px;
 
@@ -186,7 +229,7 @@ opacity:0.9;
 
 display:none;
 
-animation:fade 0.4s ease;
+animation:fade 0.35s ease;
 
 }
 
@@ -201,7 +244,7 @@ margin-bottom:20px;
 .preview{
 
 width:100%;
-max-width:700px;
+max-width:850px;
 
 border-radius:18px;
 
@@ -212,6 +255,14 @@ box-shadow:
 
 margin-bottom:25px;
 
+cursor:pointer;
+
+transition:0.2s ease;
+
+}
+
+.preview:hover{
+transform:scale(1.01);
 }
 
 .actions{
@@ -223,18 +274,36 @@ flex-wrap:wrap;
 
 }
 
-.secondary{
+.action-btn{
 
-background:#ece7dc;
-color:#333;
+border:none;
+
+padding:14px 22px;
+
+border-radius:14px;
+
+font-size:1rem;
+
+font-weight:700;
+
+cursor:pointer;
+
+transition:0.2s ease;
 
 }
 
 .primary{
-
 background:var(--accent2);
 color:white;
+}
 
+.secondary{
+background:#ece7dc;
+color:#333;
+}
+
+.action-btn:hover{
+opacity:0.92;
 }
 
 .fullscreen{
@@ -243,42 +312,47 @@ position:fixed;
 
 inset:0;
 
-background:rgba(0,0,0,0.92);
+background:rgba(0,0,0,0.95);
 
 display:none;
 
-justify-content:center;
-align-items:center;
+overflow:auto;
 
-padding:30px;
+padding:40px;
 
 z-index:999;
+
+text-align:center;
 
 }
 
 .fullscreen img{
 
-max-width:95%;
-max-height:95%;
+width:auto;
+height:auto;
 
-object-fit:contain;
+max-width:none;
+max-height:none;
 
 border-radius:14px;
 
 background:white;
 
+box-shadow:
+0 10px 30px rgba(0,0,0,0.4);
+
 }
 
 .close-full{
 
-position:absolute;
+position:fixed;
 
-top:25px;
-right:25px;
+top:20px;
+right:20px;
+
+border:none;
 
 background:white;
-
-color:black;
 
 padding:12px 18px;
 
@@ -288,26 +362,17 @@ font-weight:700;
 
 cursor:pointer;
 
+z-index:1000;
+
 }
 
-.close-index{
+.tip{
 
-position:absolute;
+margin-top:18px;
 
-top:20px;
-right:20px;
+font-size:0.95rem;
 
-background:#ece7dc;
-
-padding:12px 18px;
-
-border-radius:12px;
-
-font-weight:700;
-
-text-decoration:none;
-
-color:#333;
+color:#ccc;
 
 }
 
@@ -332,8 +397,12 @@ padding:25px;
 }
 
 .wheel{
-width:180px;
-height:180px;
+width:190px;
+height:190px;
+}
+
+.preview{
+max-width:100%;
 }
 
 }
@@ -343,11 +412,11 @@ height:180px;
 
 <body>
 
-<a href="index.html" class="close-index">
+<div class="container">
+
+<a href="index.html" class="close-btn">
 Cerrar
 </a>
-
-<div class="container">
 
 <h1>
 Ruleta de actividades
@@ -369,15 +438,25 @@ GIRAR
 
 <h2 id="title"></h2>
 
-<img id="preview" class="preview" src="" alt="preview">
+<img
+id="preview"
+class="preview"
+src=""
+alt="preview"
+onclick="openFullscreen()"
+>
 
 <div class="actions">
 
-<button class="primary" onclick="openFullscreen()">
+<button
+class="action-btn primary"
+onclick="openFullscreen()">
 Ver grande
 </button>
 
-<button class="secondary" onclick="spinAgain()">
+<button
+class="action-btn secondary"
+onclick="spinAgain()">
 Volver a girar
 </button>
 
@@ -389,11 +468,17 @@ Volver a girar
 
 <div class="fullscreen" id="fullscreen">
 
-<button class="close-full" onclick="closeFullscreen()">
+<button
+class="close-full"
+onclick="closeFullscreen()">
 Cerrar
 </button>
 
-<img id="fullImage" src="" alt="imagen completa">
+<img id="fullImage" src="" alt="imagen">
+
+<p class="tip">
+Usá el zoom del navegador si necesitás agrandar más la imagen.
+</p>
 
 </div>
 
@@ -418,16 +503,31 @@ image:"ficha.png"
 
 ];
 
-const wheel = document.getElementById("wheel");
-const result = document.getElementById("result");
-const title = document.getElementById("title");
-const preview = document.getElementById("preview");
+const wheel =
+document.getElementById("wheel");
+
+const result =
+document.getElementById("result");
+
+const title =
+document.getElementById("title");
+
+const preview =
+document.getElementById("preview");
 
 let currentImage = "";
 
 function spinWheel(){
 
 result.style.display = "none";
+
+wheel.style.transition = "none";
+wheel.style.transform = "rotate(0deg)";
+
+void wheel.offsetWidth;
+
+wheel.style.transition =
+"transform 4s cubic-bezier(.17,.67,.25,1)";
 
 const randomRotation =
 3600 + Math.floor(Math.random() * 360);
@@ -442,7 +542,8 @@ Math.floor(Math.random() * activities.length)
 
 setTimeout(() => {
 
-title.textContent = `Te tocó: ${selected.title}`;
+title.textContent =
+`Te tocó: ${selected.title}`;
 
 preview.src = selected.image;
 
@@ -450,21 +551,24 @@ currentImage = selected.image;
 
 result.style.display = "block";
 
-}, 4200);
+}, 4100);
 
 }
 
 function openFullscreen(){
 
-document.getElementById("fullscreen").style.display = "flex";
+document.getElementById("fullscreen")
+.style.display = "block";
 
-document.getElementById("fullImage").src = currentImage;
+document.getElementById("fullImage")
+.src = currentImage;
 
 }
 
 function closeFullscreen(){
 
-document.getElementById("fullscreen").style.display = "none";
+document.getElementById("fullscreen")
+.style.display = "none";
 
 }
 
