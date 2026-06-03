@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Clase 12 - Introducción a Sheets</title>
+<title>Clase 10 - Introducción a Sheets</title>
 
 <style>
 
@@ -525,6 +525,312 @@ body{
 
     </div>
 
+    <!-- PANTALLA 7: EJERCICIO 1 -->
+    <div class="screen center-screen" id="screen-7">
+
+        <h1 class="title">Ejercicio 1</h1>
+
+        <p class="subtitle" style="margin-bottom: 25px;">
+            Pintá las siguientes celdas.
+        </p>
+
+        <div style="display: flex; gap: 30px; align-items: stretch; justify-content: center; flex-wrap: wrap; width: 100%; max-width: 900px;">
+            
+            <div style="background: white; border: 2px solid #e2e8f0; padding: 25px 35px; border-radius: 16px; text-align: left; font-size: 1.4rem; font-weight: bold; line-height: 1.8; box-shadow:0 8px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column; justify-content: center;">
+                <div><span style="color: #ef4444;">A1</span> rojo</div>
+                <div><span style="color: #3b82f6;">B2</span> azul</div>
+                <div><span style="color: #10b981;">C3</span> verde</div>
+                <div><span style="color: #eab308;">D4</span> amarillo</div>
+                <div><span style="color: #f97316;">E5</span> naranja</div>
+            </div>
+
+            <div class="mockup" style="flex-grow: 1; min-width: 300px; max-width: 500px;">
+                <table class="sheet-table">
+                    <tr>
+                        <td class="sheet-header" style="width: 40px; padding: 10px;"></td>
+                        <td class="sheet-header" style="padding: 10px;">A</td>
+                        <td class="sheet-header" style="padding: 10px;">B</td>
+                        <td class="sheet-header" style="padding: 10px;">C</td>
+                        <td class="sheet-header" style="padding: 10px;">D</td>
+                        <td class="sheet-header" style="padding: 10px;">E</td>
+                    </tr>
+                    <tr>
+                        <td class="sheet-header" style="padding: 10px;">1</td>
+                        <td class="sheet-cell" style="background:#ef4444; height: 40px; padding: 0;"></td>
+                        <td class="sheet-cell" style="height: 40px; padding: 0;"></td>
+                        <td class="sheet-cell" style="height: 40px; padding: 0;"></td>
+                        <td class="sheet-cell" style="height: 40px; padding: 0;"></td>
+                        <td class="sheet-cell" style="height: 40px; padding: 0;"></td>
+                    </tr>
+                    <tr>
+                        <td class="sheet-header" style="padding: 10px;">2</td>
+                        <td class="sheet-cell" style="height: 40px; padding: 0;"></td>
+                        <td class="sheet-cell" style="background:#3b82f6; height: 40px; padding: 0;"></td>
+                        <td class="sheet-cell" style="height: 40px; padding: 0;"></td>
+                        <td class="sheet-cell" style="height: 40px; padding: 0;"></td>
+                        <td class="sheet-cell" style="height: 40px; padding: 0;"></td>
+                    </tr>
+                    <tr>
+                        <td class="sheet-header" style="padding: 10px;">3</td>
+                        <td class="sheet-cell" style="height: 40px; padding: 0;"></td>
+                        <td class="sheet-cell" style="height: 40px; padding: 0;"></td>
+                        <td class="sheet-cell" style="background:#10b981; height: 40px; padding: 0;"></td>
+                        <td class="sheet-cell" style="height: 40px; padding: 0;"></td>
+                        <td class="sheet-cell" style="height: 40px; padding: 0;"></td>
+                    </tr>
+                    <tr>
+                        <td class="sheet-header" style="padding: 10px;">4</td>
+                        <td class="sheet-cell" style="height: 40px; padding: 0;"></td>
+                        <td class="sheet-cell" style="height: 40px; padding: 0;"></td>
+                        <td class="sheet-cell" style="height: 40px; padding: 0;"></td>
+                        <td class="sheet-cell" style="background:#eab308; height: 40px; padding: 0;"></td>
+                        <td class="sheet-cell" style="height: 40px; padding: 0;"></td>
+                    </tr>
+                    <tr>
+                        <td class="sheet-header" style="padding: 10px;">5</td>
+                        <td class="sheet-cell" style="height: 40px; padding: 0;"></td>
+                        <td class="sheet-cell" style="height: 40px; padding: 0;"></td>
+                        <td class="sheet-cell" style="height: 40px; padding: 0;"></td>
+                        <td class="sheet-cell" style="height: 40px; padding: 0;"></td>
+                        <td class="sheet-cell" style="background:#f97316; height: 40px; padding: 0;"></td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+
+        <div style="margin-top:25px; max-width:900px; width:100%;">
+            <div style="background:var(--accent-blue-light); border:2px dashed var(--accent-blue); padding:15px 30px; border-radius:12px;">
+                <p style="font-size:1.4rem; color:var(--dark-bg); font-weight:800; line-height:1.4; margin:0;">
+                    Cuando termines, verificá los colores.
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- PANTALLA 8: EJERCICIO 2 -->
+    <div class="screen center-screen" id="screen-8">
+
+        <h1 class="title">Ejercicio 2</h1>
+
+        <p class="subtitle" style="margin-bottom: 30px;">
+            Escribí cada dato en la celda indicada.
+        </p>
+
+        <div style="display:flex; justify-content:center; align-items:center; gap: 40px; flex-wrap:wrap; max-width: 900px; width: 100%;">
+            
+            <!-- Ficha visual de la consigna -->
+            <div style="background: #fffbe3; border: 2px dashed #fbbf24; padding: 25px; border-radius: 16px; font-family: monospace; font-size: 1.4rem; color: #451a03; line-height: 1.8; text-align: left; min-width: 250px;">
+                <strong>A1</strong> = Nombre<br>
+                <strong>B1</strong> = Edad<br><br>
+                <strong>A2</strong> = Ana<br>
+                <strong>B2</strong> = 25<br><br>
+                <strong>A3</strong> = Juan<br>
+                <strong>B3</strong> = 31
+            </div>
+
+            <!-- Visualización -->
+            <div class="mockup" style="flex-grow:1; max-width:500px;">
+                <table class="sheet-table">
+                    <tr>
+                        <td class="sheet-header" style="width: 50px;"></td>
+                        <td class="sheet-header" style="width: 50%;">A</td>
+                        <td class="sheet-header" style="width: 50%;">B</td>
+                    </tr>
+                    <tr>
+                        <td class="sheet-header">1</td>
+                        <td class="sheet-cell" style="font-weight:bold;">Nombre</td>
+                        <td class="sheet-cell" style="font-weight:bold;">Edad</td>
+                    </tr>
+                    <tr>
+                        <td class="sheet-header">2</td>
+                        <td class="sheet-cell">Ana</td>
+                        <td class="sheet-cell">25</td>
+                    </tr>
+                    <tr>
+                        <td class="sheet-header">3</td>
+                        <td class="sheet-cell">Juan</td>
+                        <td class="sheet-cell">31</td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- PANTALLA 9: EJERCICIO 3 -->
+    <div class="screen center-screen" id="screen-9">
+
+        <h1 class="title">Ejercicio 3</h1>
+
+        <p class="subtitle" style="margin-bottom: 25px;">
+            Guardá cada dato en su ubicación.
+        </p>
+
+        <div style="display:flex; justify-content:center; align-items:center; gap: 40px; flex-wrap:wrap; max-width: 900px; width: 100%;">
+            
+            <div style="background: #f8fafc; border: 2px solid #e2e8f0; padding: 25px; border-radius: 16px; font-family: monospace; font-size: 1.4rem; color: var(--text-main); line-height: 1.8; text-align: left; min-width: 250px;">
+                <strong>C2</strong> = Perro<br>
+                <strong>C3</strong> = Gato<br>
+                <strong>C4</strong> = Loro<br><br>
+                <strong>D2</strong> = 4<br>
+                <strong>D3</strong> = 2<br>
+                <strong>D4</strong> = 1
+            </div>
+
+            <div class="mockup" style="flex-grow:1; max-width:450px;">
+                <table class="sheet-table">
+                    <tr>
+                        <td class="sheet-header" style="width: 50px;"></td>
+                        <td class="sheet-header" style="width: 50%;">C</td>
+                        <td class="sheet-header" style="width: 50%;">D</td>
+                    </tr>
+                    <tr>
+                        <td class="sheet-header">1</td>
+                        <td class="sheet-cell" style="background:#e0f2fe;"></td>
+                        <td class="sheet-cell"></td>
+                    </tr>
+                    <tr>
+                        <td class="sheet-header">2</td>
+                        <td class="sheet-cell" style="background:#e0f2fe;">Perro</td>
+                        <td class="sheet-cell">4</td>
+                    </tr>
+                    <tr>
+                        <td class="sheet-header">3</td>
+                        <td class="sheet-cell" style="background:#e0f2fe;">Gato</td>
+                        <td class="sheet-cell">2</td>
+                    </tr>
+                    <tr>
+                        <td class="sheet-header">4</td>
+                        <td class="sheet-cell" style="background:#e0f2fe;">Loro</td>
+                        <td class="sheet-cell">1</td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+
+        <div style="margin-top:25px; max-width:900px; width:100%;">
+            <div style="background:var(--accent-blue-light); border:2px dashed var(--accent-blue); padding:15px 30px; border-radius:12px;">
+                <p style="font-size:1.4rem; color:var(--dark-bg); font-weight:800; line-height:1.4; margin:0;">
+                    Cuando termines, pintá toda la columna C de color celeste.
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- PANTALLA 10: EJERCICIO 4 -->
+    <div class="screen center-screen" id="screen-10">
+
+        <h1 class="title">Ejercicio 4</h1>
+
+        <p class="subtitle" style="margin-bottom: 30px;">
+            Formá una cruz usando colores.
+        </p>
+
+        <div style="display:flex; justify-content:center; align-items:center; gap: 40px; flex-wrap:wrap; max-width: 900px; width: 100%;">
+            
+            <div style="background: white; border: 2px solid #e2e8f0; padding: 30px; border-radius: 16px; font-size: 1.6rem; font-weight: bold; line-height: 1.8; text-align: left; box-shadow:0 8px 20px rgba(0,0,0,0.05);">
+                Pintar:<br><br>
+                <span style="color:var(--text-light);">•</span> B2<br>
+                <span style="color:var(--text-light);">•</span> A2<br>
+                <span style="color:var(--text-light);">•</span> C2<br>
+                <span style="color:var(--text-light);">•</span> B1<br>
+                <span style="color:var(--text-light);">•</span> B3
+            </div>
+
+            <div class="mockup" style="flex-grow:1; max-width:400px;">
+                <table class="sheet-table">
+                    <tr>
+                        <td class="sheet-header" style="width: 50px;"></td>
+                        <td class="sheet-header">A</td>
+                        <td class="sheet-header">B</td>
+                        <td class="sheet-header">C</td>
+                    </tr>
+                    <tr>
+                        <td class="sheet-header">1</td>
+                        <td class="sheet-cell"></td>
+                        <td class="sheet-cell" style="background:var(--accent-blue);"></td>
+                        <td class="sheet-cell"></td>
+                    </tr>
+                    <tr>
+                        <td class="sheet-header">2</td>
+                        <td class="sheet-cell" style="background:var(--accent-blue);"></td>
+                        <td class="sheet-cell" style="background:var(--accent-blue);"></td>
+                        <td class="sheet-cell" style="background:var(--accent-blue);"></td>
+                    </tr>
+                    <tr>
+                        <td class="sheet-header">3</td>
+                        <td class="sheet-cell"></td>
+                        <td class="sheet-cell" style="background:var(--accent-blue);"></td>
+                        <td class="sheet-cell"></td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- PANTALLA 11: EJERCICIO 5 -->
+    <div class="screen center-screen" id="screen-11">
+
+        <h1 class="title">Ejercicio 5</h1>
+
+        <p class="subtitle" style="margin-bottom: 20px;">
+            Creá esta tabla.
+        </p>
+
+        <div class="mockup" style="max-width:600px; margin: auto; width:100%;">
+            <table class="sheet-table" style="font-size: 1.2rem;">
+                <tr>
+                    <td class="sheet-header" style="width: 50px;"></td>
+                    <td class="sheet-header" style="width: 50%;">A</td>
+                    <td class="sheet-header" style="width: 50%;">B</td>
+                </tr>
+                <tr>
+                    <td class="sheet-header">1</td>
+                    <td class="sheet-cell" style="background:var(--accent-green-light); font-weight:bold;">Producto</td>
+                    <td class="sheet-cell" style="background:var(--accent-green-light); font-weight:bold;">Precio</td>
+                </tr>
+                <tr>
+                    <td class="sheet-header">2</td>
+                    <td class="sheet-cell" style="text-align:left;">Pan</td>
+                    <td class="sheet-cell" style="text-align:center;">1500</td>
+                </tr>
+                <tr>
+                    <td class="sheet-header">3</td>
+                    <td class="sheet-cell" style="text-align:left;">Leche</td>
+                    <td class="sheet-cell" style="text-align:center;">1800</td>
+                </tr>
+                <tr>
+                    <td class="sheet-header">4</td>
+                    <td class="sheet-cell" style="text-align:left;">Azúcar</td>
+                    <td class="sheet-cell" style="text-align:center;">1200</td>
+                </tr>
+            </table>
+        </div>
+
+        <ul class="concept-list" style="margin-top: 25px; text-align:left; max-width: 600px; width:100%; margin-left: auto; margin-right: auto;">
+            <li style="padding: 10px 18px; font-size: 1.2rem;">
+                <div class="icon-box" style="width:35px; height:35px; font-size:1rem;">✓</div> 
+                Poner encabezados en negrita
+            </li>
+            <li style="padding: 10px 18px; font-size: 1.2rem;">
+                <div class="icon-box" style="width:35px; height:35px; font-size:1rem;">✓</div> 
+                Pintar encabezados de verde suave
+            </li>
+            <li style="padding: 10px 18px; font-size: 1.2rem;">
+                <div class="icon-box" style="width:35px; height:35px; font-size:1rem;">✓</div> 
+                Centrar los precios
+            </li>
+        </ul>
+
+    </div>
+
     <!-- NAV -->
     <div class="nav-bar">
 
@@ -535,7 +841,7 @@ body{
         </button>
 
         <div class="step-counter" id="step-counter">
-            1 / 6
+            1 / 11
         </div>
 
         <button class="btn btn-next"
@@ -551,7 +857,7 @@ body{
 <script>
 
 let currentStep = 1;
-const totalSteps = 6;
+const totalSteps = 11;
 
 function updateUI(){
 
