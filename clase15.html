@@ -126,7 +126,7 @@ h2 {
 }
 
 .exercise-header {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     text-align: center;
     flex-shrink: 0;
 }
@@ -159,13 +159,13 @@ h2 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     width: 100%;
     overflow: hidden;
 }
 
 /* =========================================
-   ESTILOS DE GOOGLE SHEETS
+   ESTILOS DE GOOGLE SHEETS MEJORADOS
    ========================================= */
 .gsheet {
     border-collapse: collapse;
@@ -173,12 +173,16 @@ h2 {
     font-family: Arial, sans-serif;
     box-shadow: 0 8px 25px rgba(0,0,0,0.1);
     color: #000;
+    table-layout: fixed;
 }
 
 .gsheet th, .gsheet td {
     border: 1px solid #cbd5e1;
-    padding: 16px 24px;
-    font-size: 1.4rem;
+    padding: 4px 10px;
+    font-size: 1.15rem;
+    height: 35px;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .gsheet .cell-header {
@@ -187,30 +191,37 @@ h2 {
     text-align: center;
     font-weight: bold;
     user-select: none;
-    font-size: 1.3rem;
+    font-size: 1.1rem;
+    height: auto;
 }
 
 .gsheet .col-header {
     border-bottom: 2px solid #94a3b8;
-    padding: 10px 24px;
+    padding: 4px 10px;
 }
 
 .gsheet .row-header {
     border-right: 2px solid #94a3b8;
     width: 45px;
-    padding: 16px 10px;
+    padding: 4px;
+    position: relative;
 }
 
 .gsheet .corner {
     border-bottom: 2px solid #94a3b8;
     border-right: 2px solid #94a3b8;
     background-color: #f1f5f9;
+    width: 45px;
 }
 
-/* Tamaños de hoja */
-.sheet-md { max-width: 700px; width: 100%; }
-.sheet-lg { max-width: 850px; width: 100%; }
-.sheet-mega { max-width: 1000px; width: 100%; }
+/* Celdas vacías (resto de la hoja) */
+.empty-cell {
+    background-color: #ffffff;
+}
+
+/* Tamaños de hoja base */
+.sheet-base { width: 100%; max-width: 900px; }
+.sheet-mega { width: 100%; max-width: 1000px; }
 
 /* Utilidades para celdas */
 .bg-dark-blue { background-color: #1e3a8a; color: #ffffff; font-weight: bold; }
@@ -225,33 +236,68 @@ h2 {
 .text-right { text-align: right; }
 .text-bold { font-weight: bold; }
 
-.h-tall { height: 75px; }
-.h-mega { height: 95px; }
+.h-tall { height: 50px !important; }
+.h-mega { height: 60px !important; }
 
-.w-wide { width: 60%; }
-.w-narrow { width: 40%; }
+.w-wide { width: 25%; }
+.w-normal { width: 14%; }
 
 .border-all { border: 2px solid #334155 !important; }
 
-/* Indicador de Rango Combinado */
-.merged-range-indicator {
-    margin-top: 1.5rem;
+/* Etiquetas visuales (Tags) */
+.format-tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    background: var(--accent-blue-light);
+    color: var(--accent-blue);
+    padding: 2px 5px;
+    border-radius: 4px;
+    margin-left: 5px;
+    vertical-align: middle;
+}
+.tag-row {
+    display: block;
+    margin: 2px auto 0;
+    font-size: 0.65rem;
+}
+
+/* Contenedor de Coordenadas */
+.coords-container {
+    margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
     background: #f8fafc;
-    border-left: 5px solid var(--accent-blue);
     padding: 0.8rem 1.5rem;
-    font-family: monospace;
-    font-size: 1.3rem;
-    color: var(--dark-bg);
-    border-radius: 0 8px 8px 0;
+    border-radius: 0.5rem;
+    border-left: 4px solid var(--accent-blue);
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
-/* Pantallas Divididas (Ej 5 y 9) */
+.coords-title {
+    font-weight: 700;
+    color: var(--text-main);
+    font-size: 1.1rem;
+}
+
+.coord-item {
+    font-family: monospace;
+    font-size: 1.2rem;
+    color: var(--text-light);
+}
+
+.coord-item strong {
+    color: var(--accent-blue);
+}
+
+/* Pantallas Divididas (Ej 5, 9) */
 .split-layout {
     display: flex;
     justify-content: center;
-    align-items: center;
-    gap: 3rem;
+    align-items: flex-start;
+    gap: 2rem;
     width: 100%;
 }
 
@@ -260,11 +306,12 @@ h2 {
     flex-direction: column;
     align-items: center;
     flex: 1;
+    max-width: 50%;
 }
 
 .split-col h3 {
-    margin-bottom: 1rem;
-    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 1.3rem;
     color: var(--text-main);
     text-align: center;
 }
@@ -272,33 +319,35 @@ h2 {
 .split-col h3.incorrect { color: #dc2626; }
 .split-col h3.correct { color: var(--accent-green); }
 
-/* Estilo para tabla desordenada simulando un Sheet */
-.gsheet-messy th, .gsheet-messy td {
+.scale-down {
+    transform: scale(0.85);
+    transform-origin: top center;
+}
+
+/* Estilo para tabla desordenada (Exagerada) */
+.gsheet-messy td {
     border: 1px solid #cbd5e1;
-    font-size: 1.1rem;
-    padding: 8px 12px;
 }
-.gsheet-messy .row-header, .gsheet-messy .col-header {
-    font-size: 1.1rem;
-    padding: 6px;
-}
-.gsheet-messy .cut-text {
-    max-width: 90px;
-    white-space: nowrap;
+.squished-col {
+    max-width: 40px;
     overflow: hidden;
-    text-overflow: clip;
-    display: block;
+    color: #dc2626;
+    font-size: 1rem;
 }
+.low-row { height: 22px !important; }
+.low-row td { padding: 0 4px; font-size: 0.85rem; }
+.bad-align { text-align: right; }
+.bad-font { font-family: 'Times New Roman', Times, serif; font-size: 1.3rem; }
 
 /* Cuadro de Observación */
 .observation-box {
-    margin-top: 2.5rem;
+    margin-top: 1rem;
     background: #fffbeb;
     border: 2px dashed #f59e0b;
     color: #b45309;
-    padding: 1.2rem 3rem;
+    padding: 1rem 3rem;
     border-radius: 0.75rem;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: bold;
     text-align: center;
     box-shadow: 0 4px 6px rgba(0,0,0,0.05);
@@ -400,41 +449,62 @@ h2 {
         <div class="exercise-header">
             <div class="exercise-tag">EJERCICIO 1</div>
             <h2 class="exercise-title">Cartel de aula</h2>
-            <p class="exercise-objective">Copiar el modelo exactamente igual.</p>
+            <p class="exercise-objective">Misión: Preparar este cartel informativo para la puerta del aula.</p>
         </div>
         <div class="model-container">
-            <table class="gsheet sheet-md">
+            <table class="gsheet sheet-base">
                 <tr>
                     <td class="cell-header corner"></td>
-                    <td class="cell-header col-header">A</td>
-                    <td class="cell-header col-header">B</td>
+                    <td class="cell-header col-header w-wide">A</td>
+                    <td class="cell-header col-header w-normal">B</td>
+                    <td class="cell-header col-header w-normal">C</td>
+                    <td class="cell-header col-header w-normal">D</td>
+                    <td class="cell-header col-header w-normal">E</td>
+                    <td class="cell-header col-header w-normal">F</td>
                 </tr>
-                <tr>
-                    <td class="cell-header row-header">1</td>
-                    <td colspan="2" class="bg-dark-blue text-center h-tall">TURNO NOCHE</td>
+                <tr class="h-tall">
+                    <td class="cell-header row-header">1 <span class="format-tag tag-row">↑ más alta</span></td>
+                    <td colspan="2" class="bg-dark-blue text-center">TURNO NOCHE</td>
+                    <td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td>
                 </tr>
                 <tr>
                     <td class="cell-header row-header">2</td>
-                    <td class="bg-green text-center w-wide">Aula</td>
+                    <td class="bg-green text-center">Aula</td>
                     <td class="bg-green text-center">Estado</td>
+                    <td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td>
                 </tr>
-                <tr>
-                    <td class="cell-header row-header">3</td>
-                    <td class="text-center h-tall">101</td>
-                    <td class="text-center h-tall">Libre</td>
+                <tr class="h-tall">
+                    <td class="cell-header row-header">3 <span class="format-tag tag-row">↑ más alta</span></td>
+                    <td class="text-center">101</td>
+                    <td class="text-center">Libre</td>
+                    <td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td>
                 </tr>
-                <tr>
-                    <td class="cell-header row-header">4</td>
-                    <td class="text-center h-tall">102</td>
-                    <td class="text-center h-tall">Ocupada</td>
+                <tr class="h-tall">
+                    <td class="cell-header row-header">4 <span class="format-tag tag-row">↑ más alta</span></td>
+                    <td class="text-center">102</td>
+                    <td class="text-center">Ocupada</td>
+                    <td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td>
                 </tr>
-                <tr>
-                    <td class="cell-header row-header">5</td>
-                    <td class="text-center h-tall">103</td>
-                    <td class="text-center h-tall">Libre</td>
+                <tr class="h-tall">
+                    <td class="cell-header row-header">5 <span class="format-tag tag-row">↑ más alta</span></td>
+                    <td class="text-center">103</td>
+                    <td class="text-center">Libre</td>
+                    <td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td>
                 </tr>
+                <!-- Filas vacías -->
+                <tr><td class="cell-header row-header">6</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+                <tr><td class="cell-header row-header">7</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+                <tr><td class="cell-header row-header">8</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+                <tr><td class="cell-header row-header">9</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+                <tr><td class="cell-header row-header">10</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
             </table>
-            <div class="merged-range-indicator">Rango combinado: <strong>A1:B1</strong></div>
+
+            <div class="coords-container">
+                <div class="coords-title">Coordenadas importantes:</div>
+                <div class="coord-item">Título: <strong>A1:B1</strong></div>
+                <div class="coord-item">Encabezados: <strong>A2:B2</strong></div>
+                <div class="coord-item">Datos: <strong>A3:B5</strong></div>
+            </div>
         </div>
     </div>
 
@@ -443,46 +513,66 @@ h2 {
         <div class="exercise-header">
             <div class="exercise-tag">EJERCICIO 2</div>
             <h2 class="exercise-title">Horario de atención</h2>
-            <p class="exercise-objective">Copiar el modelo exactamente igual.</p>
+            <p class="exercise-objective">Misión: Diseñar el horario de atención para imprimir y pegar en la vidriera.</p>
         </div>
         <div class="model-container">
-            <table class="gsheet sheet-md">
+            <table class="gsheet sheet-base">
                 <tr>
                     <td class="cell-header corner"></td>
-                    <td class="cell-header col-header">A</td>
-                    <td class="cell-header col-header">B</td>
+                    <td class="cell-header col-header w-wide">A <span class="format-tag">← más ancha</span></td>
+                    <td class="cell-header col-header w-wide">B</td>
+                    <td class="cell-header col-header w-normal">C</td>
+                    <td class="cell-header col-header w-normal">D</td>
+                    <td class="cell-header col-header w-normal">E</td>
+                    <td class="cell-header col-header w-normal">F</td>
                 </tr>
-                <tr>
-                    <td class="cell-header row-header">1</td>
-                    <td colspan="2" class="bg-gray text-center h-tall">HORARIO DE ATENCIÓN</td>
+                <tr class="h-tall">
+                    <td class="cell-header row-header">1 <span class="format-tag tag-row">↑ más alta</span></td>
+                    <td colspan="2" class="bg-gray text-center">HORARIO DE ATENCIÓN</td>
+                    <td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td>
                 </tr>
                 <tr>
                     <td class="cell-header row-header">2</td>
-                    <td class="w-wide text-left">Lunes</td>
+                    <td class="text-left">Lunes</td>
                     <td class="text-center">08:00 a 12:00</td>
+                    <td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td>
                 </tr>
                 <tr>
                     <td class="cell-header row-header">3</td>
-                    <td class="w-wide text-left bg-soft-blue">Martes</td>
+                    <td class="text-left bg-soft-blue">Martes</td>
                     <td class="text-center bg-soft-blue">08:00 a 12:00</td>
+                    <td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td>
                 </tr>
                 <tr>
                     <td class="cell-header row-header">4</td>
-                    <td class="w-wide text-left">Miércoles</td>
+                    <td class="text-left">Miércoles</td>
                     <td class="text-center">08:00 a 12:00</td>
+                    <td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td>
                 </tr>
                 <tr>
                     <td class="cell-header row-header">5</td>
-                    <td class="w-wide text-left bg-soft-blue">Jueves</td>
+                    <td class="text-left bg-soft-blue">Jueves</td>
                     <td class="text-center bg-soft-blue">14:00 a 18:00</td>
+                    <td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td>
                 </tr>
                 <tr>
                     <td class="cell-header row-header">6</td>
-                    <td class="w-wide text-left">Viernes</td>
+                    <td class="text-left">Viernes</td>
                     <td class="text-center">14:00 a 18:00</td>
+                    <td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td>
                 </tr>
+                <!-- Filas vacías -->
+                <tr><td class="cell-header row-header">7</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+                <tr><td class="cell-header row-header">8</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+                <tr><td class="cell-header row-header">9</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+                <tr><td class="cell-header row-header">10</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
             </table>
-            <div class="merged-range-indicator">Rango combinado: <strong>A1:B1</strong></div>
+
+            <div class="coords-container">
+                <div class="coords-title">Coordenadas importantes:</div>
+                <div class="coord-item">Título: <strong>A1:B1</strong></div>
+                <div class="coord-item">Datos: <strong>A2:B6</strong></div>
+            </div>
         </div>
     </div>
 
@@ -491,41 +581,62 @@ h2 {
         <div class="exercise-header">
             <div class="exercise-tag">EJERCICIO 3</div>
             <h2 class="exercise-title">Lista de materiales</h2>
-            <p class="exercise-objective">Copiar el modelo exactamente igual.</p>
+            <p class="exercise-objective">Misión: Organizar la lista de materiales para el inicio de clases.</p>
         </div>
         <div class="model-container">
-            <table class="gsheet sheet-md">
+            <table class="gsheet sheet-base">
                 <tr>
                     <td class="cell-header corner"></td>
-                    <td class="cell-header col-header">A</td>
-                    <td class="cell-header col-header">B</td>
+                    <td class="cell-header col-header w-wide">A <span class="format-tag">← más ancha</span></td>
+                    <td class="cell-header col-header w-normal">B</td>
+                    <td class="cell-header col-header w-normal">C</td>
+                    <td class="cell-header col-header w-normal">D</td>
+                    <td class="cell-header col-header w-normal">E</td>
+                    <td class="cell-header col-header w-normal">F</td>
                 </tr>
                 <tr>
                     <td class="cell-header row-header">1</td>
-                    <td class="bg-gray text-center w-wide border-all">Material</td>
+                    <td class="bg-gray text-center border-all">Material</td>
                     <td class="bg-gray text-center border-all">Cantidad</td>
+                    <td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td>
                 </tr>
                 <tr>
                     <td class="cell-header row-header">2</td>
                     <td class="text-left border-all">Lápices</td>
                     <td class="text-center border-all">10</td>
+                    <td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td>
                 </tr>
                 <tr>
                     <td class="cell-header row-header">3</td>
                     <td class="text-left border-all">Biromes</td>
                     <td class="text-center border-all">15</td>
+                    <td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td>
                 </tr>
                 <tr>
                     <td class="cell-header row-header">4</td>
                     <td class="text-left border-all">Cuadernos</td>
                     <td class="text-center border-all">8</td>
+                    <td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td>
                 </tr>
                 <tr>
                     <td class="cell-header row-header">5</td>
                     <td class="text-left border-all">Carpetas</td>
                     <td class="text-center border-all">6</td>
+                    <td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td>
                 </tr>
+                <!-- Filas vacías -->
+                <tr><td class="cell-header row-header">6</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+                <tr><td class="cell-header row-header">7</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+                <tr><td class="cell-header row-header">8</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+                <tr><td class="cell-header row-header">9</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+                <tr><td class="cell-header row-header">10</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
             </table>
+
+            <div class="coords-container">
+                <div class="coords-title">Coordenadas importantes:</div>
+                <div class="coord-item">Encabezados: <strong>A1:B1</strong></div>
+                <div class="coord-item">Datos: <strong>A2:B5</strong></div>
+            </div>
         </div>
     </div>
 
@@ -534,47 +645,67 @@ h2 {
         <div class="exercise-header">
             <div class="exercise-tag">EJERCICIO 4</div>
             <h2 class="exercise-title">Agenda de turnos</h2>
-            <p class="exercise-objective">Copiar el modelo exactamente igual.</p>
+            <p class="exercise-objective">Misión: Preparar la agenda diaria de turnos para el consultorio.</p>
         </div>
         <div class="model-container">
-            <table class="gsheet sheet-lg">
+            <table class="gsheet sheet-base">
                 <tr>
                     <td class="cell-header corner"></td>
-                    <td class="cell-header col-header">A</td>
-                    <td class="cell-header col-header">B</td>
-                    <td class="cell-header col-header">C</td>
+                    <td class="cell-header col-header w-wide">A <span class="format-tag">← más ancha</span></td>
+                    <td class="cell-header col-header w-normal">B</td>
+                    <td class="cell-header col-header w-normal">C</td>
+                    <td class="cell-header col-header w-normal">D</td>
+                    <td class="cell-header col-header w-normal">E</td>
+                    <td class="cell-header col-header w-normal">F</td>
                 </tr>
                 <tr>
                     <td class="cell-header row-header">1</td>
                     <td class="bg-blue text-center">Nombre</td>
                     <td class="bg-blue text-center">Fecha</td>
                     <td class="bg-blue text-center">Hora</td>
+                    <td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td>
                 </tr>
-                <tr>
-                    <td class="cell-header row-header">2</td>
-                    <td class="text-left h-tall">Ana</td>
-                    <td class="text-center h-tall">10/09</td>
-                    <td class="text-center h-tall">09:00</td>
+                <tr class="h-tall">
+                    <td class="cell-header row-header">2 <span class="format-tag tag-row">↑ más alta</span></td>
+                    <td class="text-left">Ana</td>
+                    <td class="text-center">10/09</td>
+                    <td class="text-center">09:00</td>
+                    <td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td>
                 </tr>
-                <tr>
-                    <td class="cell-header row-header">3</td>
-                    <td class="text-left h-tall bg-soft-blue">Juan</td>
-                    <td class="text-center h-tall bg-soft-blue">10/09</td>
-                    <td class="text-center h-tall bg-soft-blue">09:30</td>
+                <tr class="h-tall">
+                    <td class="cell-header row-header">3 <span class="format-tag tag-row">↑ más alta</span></td>
+                    <td class="text-left bg-soft-blue">Juan</td>
+                    <td class="text-center bg-soft-blue">10/09</td>
+                    <td class="text-center bg-soft-blue">09:30</td>
+                    <td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td>
                 </tr>
-                <tr>
-                    <td class="cell-header row-header">4</td>
-                    <td class="text-left h-tall">Pedro</td>
-                    <td class="text-center h-tall">10/09</td>
-                    <td class="text-center h-tall">10:00</td>
+                <tr class="h-tall">
+                    <td class="cell-header row-header">4 <span class="format-tag tag-row">↑ más alta</span></td>
+                    <td class="text-left">Pedro</td>
+                    <td class="text-center">10/09</td>
+                    <td class="text-center">10:00</td>
+                    <td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td>
                 </tr>
-                <tr>
-                    <td class="cell-header row-header">5</td>
-                    <td class="text-left h-tall bg-soft-blue">Laura</td>
-                    <td class="text-center h-tall bg-soft-blue">10/09</td>
-                    <td class="text-center h-tall bg-soft-blue">10:30</td>
+                <tr class="h-tall">
+                    <td class="cell-header row-header">5 <span class="format-tag tag-row">↑ más alta</span></td>
+                    <td class="text-left bg-soft-blue">Laura</td>
+                    <td class="text-center bg-soft-blue">10/09</td>
+                    <td class="text-center bg-soft-blue">10:30</td>
+                    <td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td>
                 </tr>
+                <!-- Filas vacías -->
+                <tr><td class="cell-header row-header">6</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+                <tr><td class="cell-header row-header">7</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+                <tr><td class="cell-header row-header">8</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+                <tr><td class="cell-header row-header">9</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+                <tr><td class="cell-header row-header">10</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
             </table>
+
+            <div class="coords-container">
+                <div class="coords-title">Coordenadas importantes:</div>
+                <div class="coord-item">Encabezados: <strong>A1:C1</strong></div>
+                <div class="coord-item">Datos: <strong>A2:C5</strong></div>
+            </div>
         </div>
     </div>
 
@@ -583,86 +714,114 @@ h2 {
         <div class="exercise-header">
             <div class="exercise-tag">EJERCICIO 5</div>
             <h2 class="exercise-title">Arreglar la planilla</h2>
-            <p class="exercise-objective">La planilla actual está desordenada. Hay que dejarla como el modelo esperado.</p>
+            <p class="exercise-objective">Misión: Identificar los errores de formato en la planilla desordenada.</p>
         </div>
         <div class="model-container">
             <div class="split-layout">
                 
-                <div class="split-col">
-                    <h3 class="incorrect">Planilla actual</h3>
+                <div class="split-col scale-down">
+                    <h3 class="incorrect">Planilla actual (Desordenada)</h3>
                     <table class="gsheet gsheet-messy">
                         <tr>
                             <td class="cell-header corner"></td>
                             <td class="cell-header col-header">A</td>
                             <td class="cell-header col-header">B</td>
                             <td class="cell-header col-header">C</td>
+                            <td class="cell-header col-header">D</td>
+                            <td class="cell-header col-header">E</td>
+                            <td class="cell-header col-header">F</td>
                         </tr>
-                        <tr>
+                        <tr class="low-row">
                             <td class="cell-header row-header">1</td>
-                            <td><span class="cut-text">nombre emp</span></td>
-                            <td style="text-align:right">Dpto</td>
+                            <td class="squished-col">nombre emple</td>
+                            <td class="bad-align">Dpto</td>
                             <td>Su</td>
+                            <td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td>
                         </tr>
                         <tr>
                             <td class="cell-header row-header">2</td>
-                            <td><span class="cut-text">Gomez Marti</span></td>
-                            <td>Ventas</td>
+                            <td class="squished-col">Gomez Marti</td>
+                            <td class="bad-font">Ventas</td>
                             <td>$50</td>
+                            <td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td>
                         </tr>
-                        <tr>
+                        <tr class="low-row">
                             <td class="cell-header row-header">3</td>
-                            <td style="text-align:center"><span class="cut-text">Perez A</span></td>
+                            <td class="squished-col" style="text-align:center">Perez A</td>
                             <td>Admin</td>
                             <td style="text-align:left">$55</td>
+                            <td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td>
                         </tr>
                         <tr>
                             <td class="cell-header row-header">4</td>
-                            <td>Lopez</td>
-                            <td style="text-align:right">Sist</td>
+                            <td class="squished-col">Lopez</td>
+                            <td class="bad-align bad-font">Sist</td>
                             <td>$60</td>
+                            <td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td>
                         </tr>
+                        <!-- Filas vacías -->
+                        <tr><td class="cell-header row-header">5</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+                        <tr><td class="cell-header row-header">6</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+                        <tr><td class="cell-header row-header">7</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+                        <tr><td class="cell-header row-header">8</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+                        <tr><td class="cell-header row-header">9</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+                        <tr><td class="cell-header row-header">10</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
                     </table>
                 </div>
 
-                <div class="split-col">
-                    <h3 class="correct">Resultado esperado</h3>
-                    <table class="gsheet" style="transform: scale(0.9); transform-origin: top center;">
+                <div class="split-col scale-down">
+                    <h3 class="correct">Resultado esperado (Ordenada)</h3>
+                    <table class="gsheet">
                         <tr>
                             <td class="cell-header corner"></td>
-                            <td class="cell-header col-header">A</td>
+                            <td class="cell-header col-header w-wide">A</td>
                             <td class="cell-header col-header">B</td>
                             <td class="cell-header col-header">C</td>
+                            <td class="cell-header col-header">D</td>
+                            <td class="cell-header col-header">E</td>
+                            <td class="cell-header col-header">F</td>
                         </tr>
                         <tr>
                             <td class="cell-header row-header">1</td>
-                            <td class="bg-gray text-center w-wide">Nombre Empleado</td>
-                            <td class="bg-gray text-center">Departamento</td>
-                            <td class="bg-gray text-center">Sueldo</td>
+                            <td class="bg-gray text-center border-all">Nombre Empleado</td>
+                            <td class="bg-gray text-center border-all">Departamento</td>
+                            <td class="bg-gray text-center border-all">Sueldo</td>
+                            <td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td>
                         </tr>
                         <tr>
                             <td class="cell-header row-header">2</td>
-                            <td class="text-left">Gómez, Martín</td>
-                            <td class="text-center">Ventas</td>
-                            <td class="text-center">$ 50.000</td>
+                            <td class="text-left border-all">Gómez, Martín</td>
+                            <td class="text-center border-all">Ventas</td>
+                            <td class="text-center border-all">$ 50.000</td>
+                            <td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td>
                         </tr>
                         <tr>
                             <td class="cell-header row-header">3</td>
-                            <td class="text-left bg-soft-blue">Pérez, Ana</td>
-                            <td class="text-center bg-soft-blue">Admin.</td>
-                            <td class="text-center bg-soft-blue">$ 55.000</td>
+                            <td class="text-left bg-soft-blue border-all">Pérez, Ana</td>
+                            <td class="text-center bg-soft-blue border-all">Admin.</td>
+                            <td class="text-center bg-soft-blue border-all">$ 55.000</td>
+                            <td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td>
                         </tr>
                         <tr>
                             <td class="cell-header row-header">4</td>
-                            <td class="text-left">López, Carlos</td>
-                            <td class="text-center">Sistemas</td>
-                            <td class="text-center">$ 60.000</td>
+                            <td class="text-left border-all">López, Carlos</td>
+                            <td class="text-center border-all">Sistemas</td>
+                            <td class="text-center border-all">$ 60.000</td>
+                            <td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td>
                         </tr>
+                        <!-- Filas vacías -->
+                        <tr><td class="cell-header row-header">5</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+                        <tr><td class="cell-header row-header">6</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+                        <tr><td class="cell-header row-header">7</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+                        <tr><td class="cell-header row-header">8</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+                        <tr><td class="cell-header row-header">9</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+                        <tr><td class="cell-header row-header">10</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
                     </table>
                 </div>
 
             </div>
             <div class="observation-box">
-                🔍 ¿Qué cambios observás?
+                🔍 ¿Qué cambios de formato notás entre la izquierda y la derecha?
             </div>
         </div>
     </div>
@@ -672,41 +831,62 @@ h2 {
         <div class="exercise-header">
             <div class="exercise-tag">EJERCICIO 6</div>
             <h2 class="exercise-title">Control de asistencia</h2>
-            <p class="exercise-objective">Copiar el modelo exactamente igual.</p>
+            <p class="exercise-objective">Misión: Crear una planilla clara para el control de asistencia rápida.</p>
         </div>
         <div class="model-container">
-            <table class="gsheet sheet-md">
+            <table class="gsheet sheet-base">
                 <tr>
                     <td class="cell-header corner"></td>
-                    <td class="cell-header col-header">A</td>
-                    <td class="cell-header col-header">B</td>
+                    <td class="cell-header col-header w-wide">A <span class="format-tag">← más ancha</span></td>
+                    <td class="cell-header col-header w-normal">B</td>
+                    <td class="cell-header col-header w-normal">C</td>
+                    <td class="cell-header col-header w-normal">D</td>
+                    <td class="cell-header col-header w-normal">E</td>
+                    <td class="cell-header col-header w-normal">F</td>
                 </tr>
                 <tr>
                     <td class="cell-header row-header">1</td>
-                    <td class="bg-green w-wide text-center">Alumno</td>
+                    <td class="bg-green text-center">Alumno</td>
                     <td class="bg-green text-center">Presente</td>
+                    <td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td>
                 </tr>
                 <tr>
                     <td class="cell-header row-header">2</td>
                     <td class="text-left bg-soft-blue">María</td>
                     <td class="text-center bg-soft-blue">Sí</td>
+                    <td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td>
                 </tr>
                 <tr>
                     <td class="cell-header row-header">3</td>
                     <td class="text-left">Carlos</td>
                     <td class="text-center">No</td>
+                    <td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td>
                 </tr>
                 <tr>
                     <td class="cell-header row-header">4</td>
                     <td class="text-left bg-soft-blue">Sofía</td>
                     <td class="text-center bg-soft-blue">Sí</td>
+                    <td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td>
                 </tr>
                 <tr>
                     <td class="cell-header row-header">5</td>
                     <td class="text-left">Tomás</td>
                     <td class="text-center">Sí</td>
+                    <td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td>
                 </tr>
+                <!-- Filas vacías -->
+                <tr><td class="cell-header row-header">6</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+                <tr><td class="cell-header row-header">7</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+                <tr><td class="cell-header row-header">8</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+                <tr><td class="cell-header row-header">9</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+                <tr><td class="cell-header row-header">10</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
             </table>
+
+            <div class="coords-container">
+                <div class="coords-title">Coordenadas importantes:</div>
+                <div class="coord-item">Encabezados: <strong>A1:B1</strong></div>
+                <div class="coord-item">Datos: <strong>A2:B5</strong></div>
+            </div>
         </div>
     </div>
 
@@ -715,41 +895,62 @@ h2 {
         <div class="exercise-header">
             <div class="exercise-tag">EJERCICIO 7</div>
             <h2 class="exercise-title">Planilla de gastos</h2>
-            <p class="exercise-objective">Copiar el modelo exactamente igual.</p>
+            <p class="exercise-objective">Misión: Diseñar una planilla clara para el control de gastos mensuales.</p>
         </div>
         <div class="model-container">
-            <table class="gsheet sheet-md">
+            <table class="gsheet sheet-base">
                 <tr>
                     <td class="cell-header corner"></td>
-                    <td class="cell-header col-header">A</td>
-                    <td class="cell-header col-header">B</td>
+                    <td class="cell-header col-header w-wide">A <span class="format-tag">← más ancha</span></td>
+                    <td class="cell-header col-header w-normal">B</td>
+                    <td class="cell-header col-header w-normal">C</td>
+                    <td class="cell-header col-header w-normal">D</td>
+                    <td class="cell-header col-header w-normal">E</td>
+                    <td class="cell-header col-header w-normal">F</td>
                 </tr>
                 <tr>
                     <td class="cell-header row-header">1</td>
-                    <td class="bg-gray w-wide text-center">Concepto</td>
+                    <td class="bg-gray text-center">Concepto</td>
                     <td class="bg-gray text-center">Monto</td>
+                    <td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td>
                 </tr>
                 <tr>
                     <td class="cell-header row-header">2</td>
                     <td class="text-left">Transporte</td>
                     <td class="text-center">$2500</td>
+                    <td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td>
                 </tr>
                 <tr>
                     <td class="cell-header row-header">3</td>
                     <td class="text-left">Comida</td>
                     <td class="text-center">$4200</td>
+                    <td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td>
                 </tr>
                 <tr>
                     <td class="cell-header row-header">4</td>
                     <td class="text-left">Internet</td>
                     <td class="text-center">$1800</td>
+                    <td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td>
                 </tr>
                 <tr>
                     <td class="cell-header row-header">5</td>
                     <td class="text-left">Luz</td>
                     <td class="text-center">$3200</td>
+                    <td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td>
                 </tr>
+                <!-- Filas vacías -->
+                <tr><td class="cell-header row-header">6</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+                <tr><td class="cell-header row-header">7</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+                <tr><td class="cell-header row-header">8</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+                <tr><td class="cell-header row-header">9</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+                <tr><td class="cell-header row-header">10</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
             </table>
+
+            <div class="coords-container">
+                <div class="coords-title">Coordenadas importantes:</div>
+                <div class="coord-item">Encabezados: <strong>A1:B1</strong></div>
+                <div class="coord-item">Datos: <strong>A2:B5</strong></div>
+            </div>
         </div>
     </div>
 
@@ -758,52 +959,72 @@ h2 {
         <div class="exercise-header">
             <div class="exercise-tag">EJERCICIO 8</div>
             <h2 class="exercise-title">Desafío final</h2>
-            <p class="exercise-objective">Reconstruir una planilla completa y de mayor tamaño.</p>
+            <p class="exercise-objective">Misión: Diseñar un presupuesto de viaje organizado y fácil de leer.</p>
         </div>
         <div class="model-container">
             <table class="gsheet sheet-mega">
                 <tr>
                     <td class="cell-header corner"></td>
-                    <td class="cell-header col-header">A</td>
-                    <td class="cell-header col-header">B</td>
-                    <td class="cell-header col-header">C</td>
+                    <td class="cell-header col-header w-wide">A <span class="format-tag">← más ancha</span></td>
+                    <td class="cell-header col-header w-normal">B</td>
+                    <td class="cell-header col-header w-normal">C</td>
+                    <td class="cell-header col-header w-normal">D</td>
+                    <td class="cell-header col-header w-normal">E</td>
+                    <td class="cell-header col-header w-normal">F</td>
                 </tr>
-                <tr>
-                    <td class="cell-header row-header">1</td>
-                    <td colspan="3" class="bg-dark-blue text-center h-mega border-all">CONTROL DE PRODUCTOS</td>
+                <tr class="h-mega">
+                    <td class="cell-header row-header">1 <span class="format-tag tag-row">↑ más alta</span></td>
+                    <td colspan="3" class="bg-dark-blue text-center border-all">PRESUPUESTO DE VIAJE</td>
+                    <td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td>
                 </tr>
                 <tr>
                     <td class="cell-header row-header">2</td>
-                    <td class="bg-green text-center w-wide border-all">Producto</td>
-                    <td class="bg-green text-center border-all">Precio</td>
-                    <td class="bg-green text-center border-all">Stock</td>
+                    <td class="bg-green text-center border-all">Destino</td>
+                    <td class="bg-green text-center border-all">Noches</td>
+                    <td class="bg-green text-center border-all">Costo Total</td>
+                    <td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td>
                 </tr>
                 <tr>
                     <td class="cell-header row-header">3</td>
-                    <td class="text-left border-all">Pan</td>
-                    <td class="text-center border-all">1500</td>
-                    <td class="text-center border-all">20</td>
+                    <td class="text-left border-all">Bariloche</td>
+                    <td class="text-center border-all">5</td>
+                    <td class="text-center border-all">$ 450.000</td>
+                    <td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td>
                 </tr>
                 <tr>
                     <td class="cell-header row-header">4</td>
-                    <td class="text-left bg-soft-blue border-all">Leche</td>
-                    <td class="text-center bg-soft-blue border-all">1800</td>
-                    <td class="text-center bg-soft-blue border-all">15</td>
+                    <td class="text-left bg-soft-blue border-all">Mendoza</td>
+                    <td class="text-center bg-soft-blue border-all">4</td>
+                    <td class="text-center bg-soft-blue border-all">$ 320.000</td>
+                    <td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td>
                 </tr>
                 <tr>
                     <td class="cell-header row-header">5</td>
-                    <td class="text-left border-all">Yerba</td>
-                    <td class="text-center border-all">3200</td>
-                    <td class="text-center border-all">10</td>
+                    <td class="text-left border-all">Iguazú</td>
+                    <td class="text-center border-all">4</td>
+                    <td class="text-center border-all">$ 380.000</td>
+                    <td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td>
                 </tr>
                 <tr>
                     <td class="cell-header row-header">6</td>
-                    <td class="text-left bg-soft-blue border-all">Azúcar</td>
-                    <td class="text-center bg-soft-blue border-all">1200</td>
-                    <td class="text-center bg-soft-blue border-all">25</td>
+                    <td class="text-left bg-soft-blue border-all">Salta</td>
+                    <td class="text-center bg-soft-blue border-all">6</td>
+                    <td class="text-center bg-soft-blue border-all">$ 410.000</td>
+                    <td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td>
                 </tr>
+                <!-- Filas vacías -->
+                <tr><td class="cell-header row-header">7</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+                <tr><td class="cell-header row-header">8</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+                <tr><td class="cell-header row-header">9</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+                <tr><td class="cell-header row-header">10</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
             </table>
-            <div class="merged-range-indicator">Rango combinado: <strong>A1:C1</strong></div>
+
+            <div class="coords-container">
+                <div class="coords-title">Coordenadas importantes:</div>
+                <div class="coord-item">Título: <strong>A1:C1</strong></div>
+                <div class="coord-item">Encabezados: <strong>A2:C2</strong></div>
+                <div class="coord-item">Datos: <strong>A3:C6</strong></div>
+            </div>
         </div>
     </div>
 
@@ -812,76 +1033,106 @@ h2 {
         <div class="exercise-header">
             <div class="exercise-tag">EJERCICIO 9</div>
             <h2 class="exercise-title">Encontrá las diferencias</h2>
-            <p class="exercise-objective">Compará ambas planillas y detectá al menos 5 errores en la primera.</p>
+            <p class="exercise-objective">Misión: Observar detenidamente y encontrar al menos 5 errores de formato.</p>
         </div>
         <div class="model-container">
             <div class="split-layout">
                 
-                <div class="split-col">
+                <div class="split-col scale-down">
                     <h3 class="incorrect">Planilla Incorrecta</h3>
                     <table class="gsheet gsheet-messy">
                         <tr>
                             <td class="cell-header corner"></td>
                             <td class="cell-header col-header">A</td>
                             <td class="cell-header col-header">B</td>
+                            <td class="cell-header col-header">C</td>
+                            <td class="cell-header col-header">D</td>
+                            <td class="cell-header col-header">E</td>
+                            <td class="cell-header col-header">F</td>
                         </tr>
-                        <tr>
+                        <tr class="low-row">
                             <td class="cell-header row-header">1</td>
-                            <td>Producto</td>
-                            <td>Precio</td>
+                            <td class="bad-font">Producto</td>
+                            <td class="bad-align">Precio</td>
+                            <td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td>
                         </tr>
                         <tr>
                             <td class="cell-header row-header">2</td>
-                            <td><span class="cut-text">Detergente liq</span></td>
+                            <td class="squished-col">Detergente liq</td>
                             <td class="text-left">2500</td>
+                            <td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td>
                         </tr>
-                        <tr>
+                        <tr class="low-row">
                             <td class="cell-header row-header">3</td>
                             <td>Lavandina</td>
                             <td class="text-left">1800</td>
+                            <td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td>
                         </tr>
                         <tr>
                             <td class="cell-header row-header">4</td>
-                            <td>Esponja</td>
+                            <td class="squished-col">Esponja</td>
                             <td class="text-left">600</td>
+                            <td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td>
                         </tr>
+                        <!-- Filas vacías -->
+                        <tr><td class="cell-header row-header">5</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+                        <tr><td class="cell-header row-header">6</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+                        <tr><td class="cell-header row-header">7</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+                        <tr><td class="cell-header row-header">8</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+                        <tr><td class="cell-header row-header">9</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+                        <tr><td class="cell-header row-header">10</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
                     </table>
                 </div>
 
-                <div class="split-col">
+                <div class="split-col scale-down">
                     <h3 class="correct">Planilla Correcta</h3>
                     <table class="gsheet">
                         <tr>
                             <td class="cell-header corner"></td>
-                            <td class="cell-header col-header">A</td>
+                            <td class="cell-header col-header w-wide">A</td>
                             <td class="cell-header col-header">B</td>
+                            <td class="cell-header col-header">C</td>
+                            <td class="cell-header col-header">D</td>
+                            <td class="cell-header col-header">E</td>
+                            <td class="cell-header col-header">F</td>
                         </tr>
                         <tr>
                             <td class="cell-header row-header">1</td>
-                            <td class="bg-blue text-center w-wide">Producto</td>
+                            <td class="bg-blue text-center">Producto</td>
                             <td class="bg-blue text-center">Precio</td>
+                            <td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td>
                         </tr>
                         <tr>
                             <td class="cell-header row-header">2</td>
                             <td class="text-left bg-soft-blue">Detergente líquido</td>
                             <td class="text-center bg-soft-blue">2500</td>
+                            <td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td>
                         </tr>
                         <tr>
                             <td class="cell-header row-header">3</td>
                             <td class="text-left">Lavandina</td>
                             <td class="text-center">1800</td>
+                            <td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td>
                         </tr>
                         <tr>
                             <td class="cell-header row-header">4</td>
                             <td class="text-left bg-soft-blue">Esponja</td>
                             <td class="text-center bg-soft-blue">600</td>
+                            <td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td>
                         </tr>
+                        <!-- Filas vacías -->
+                        <tr><td class="cell-header row-header">5</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+                        <tr><td class="cell-header row-header">6</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+                        <tr><td class="cell-header row-header">7</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+                        <tr><td class="cell-header row-header">8</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+                        <tr><td class="cell-header row-header">9</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+                        <tr><td class="cell-header row-header">10</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
                     </table>
                 </div>
 
             </div>
             <div class="observation-box">
-                👀 ¿Qué diferencias encontrás?
+                👀 ¿Qué errores de formato lograste identificar?
             </div>
         </div>
     </div>
@@ -891,67 +1142,139 @@ h2 {
         <div class="exercise-header">
             <div class="exercise-tag">EJERCICIO 10</div>
             <h2 class="exercise-title">Reconstrucción total</h2>
-            <p class="exercise-objective">Copiá exactamente este diseño.</p>
+            <p class="exercise-objective">Misión: Reconstruir exactamente este cronograma de evento desde cero.</p>
         </div>
         <div class="model-container">
             <table class="gsheet sheet-mega">
+                <tr>
+                    <td class="cell-header corner"></td>
+                    <td class="cell-header col-header w-normal">A</td>
+                    <td class="cell-header col-header w-wide">B <span class="format-tag">← más ancha</span></td>
+                    <td class="cell-header col-header w-normal">C</td>
+                    <td class="cell-header col-header w-normal">D</td>
+                    <td class="cell-header col-header w-normal">E</td>
+                    <td class="cell-header col-header w-normal">F</td>
+                </tr>
+                <tr class="h-tall">
+                    <td class="cell-header row-header">1 <span class="format-tag tag-row">↑ más alta</span></td>
+                    <td colspan="4" class="bg-dark-green text-center border-all">CRONOGRAMA DE EVENTO</td>
+                    <td class="empty-cell"></td><td class="empty-cell"></td>
+                </tr>
+                <tr>
+                    <td class="cell-header row-header">2</td>
+                    <td class="bg-gray text-center border-all">Hora</td>
+                    <td class="bg-gray text-center border-all">Actividad</td>
+                    <td class="bg-gray text-center border-all">Responsable</td>
+                    <td class="bg-gray text-center border-all">Lugar</td>
+                    <td class="empty-cell"></td><td class="empty-cell"></td>
+                </tr>
+                <tr>
+                    <td class="cell-header row-header">3</td>
+                    <td class="text-center border-all">09:00</td>
+                    <td class="text-left border-all">Acreditación</td>
+                    <td class="text-center border-all">Equipo RRHH</td>
+                    <td class="text-center border-all">Hall Principal</td>
+                    <td class="empty-cell"></td><td class="empty-cell"></td>
+                </tr>
+                <tr>
+                    <td class="cell-header row-header">4</td>
+                    <td class="text-center bg-soft-blue border-all">10:00</td>
+                    <td class="text-left bg-soft-blue border-all">Charla de Apertura</td>
+                    <td class="text-center bg-soft-blue border-all">Director Gral.</td>
+                    <td class="text-center bg-soft-blue border-all">Salón A</td>
+                    <td class="empty-cell"></td><td class="empty-cell"></td>
+                </tr>
+                <tr>
+                    <td class="cell-header row-header">5</td>
+                    <td class="text-center border-all">11:30</td>
+                    <td class="text-left border-all">Coffee Break</td>
+                    <td class="text-center border-all">Catering</td>
+                    <td class="text-center border-all">Patio</td>
+                    <td class="empty-cell"></td><td class="empty-cell"></td>
+                </tr>
+                <tr>
+                    <td class="cell-header row-header">6</td>
+                    <td class="text-center bg-soft-blue border-all">12:00</td>
+                    <td class="text-left bg-soft-blue border-all">Taller Práctico</td>
+                    <td class="text-center bg-soft-blue border-all">Facilitadores</td>
+                    <td class="text-center bg-soft-blue border-all">Salas 1-4</td>
+                    <td class="empty-cell"></td><td class="empty-cell"></td>
+                </tr>
+                <!-- Filas vacías -->
+                <tr><td class="cell-header row-header">7</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+                <tr><td class="cell-header row-header">8</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+                <tr><td class="cell-header row-header">9</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+                <tr><td class="cell-header row-header">10</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+            </table>
+
+            <div class="coords-container">
+                <div class="coords-title">Coordenadas importantes:</div>
+                <div class="coord-item">Título: <strong>A1:D1</strong></div>
+                <div class="coord-item">Encabezados: <strong>A2:D2</strong></div>
+                <div class="coord-item">Datos: <strong>A3:D6</strong></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pantalla 12: Nueva Pantalla - Análisis -->
+    <div class="screen" id="screen-12">
+        <div class="exercise-header">
+            <div class="exercise-tag">ANÁLISIS VISUAL</div>
+            <h2 class="exercise-title">¿Qué herramienta usarías?</h2>
+            <p class="exercise-objective">¿Qué cambiarías para mejorar esta planilla?</p>
+        </div>
+        <div class="model-container">
+            <table class="gsheet sheet-base gsheet-messy">
                 <tr>
                     <td class="cell-header corner"></td>
                     <td class="cell-header col-header">A</td>
                     <td class="cell-header col-header">B</td>
                     <td class="cell-header col-header">C</td>
                     <td class="cell-header col-header">D</td>
+                    <td class="cell-header col-header">E</td>
+                    <td class="cell-header col-header">F</td>
                 </tr>
-                <tr>
+                <tr class="h-tall">
                     <td class="cell-header row-header">1</td>
-                    <td colspan="4" class="bg-dark-green text-center h-tall border-all">PRESUPUESTO DE OBRA</td>
+                    <td colspan="2" class="bad-font text-left">presupuesto</td>
+                    <td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td>
                 </tr>
-                <tr>
+                <tr class="low-row">
                     <td class="cell-header row-header">2</td>
-                    <td class="bg-gray text-center border-all">Ítem</td>
-                    <td class="bg-gray text-center border-all w-wide">Descripción</td>
-                    <td class="bg-gray text-center border-all">Cant.</td>
-                    <td class="bg-gray text-center border-all">Subtotal</td>
+                    <td class="squished-col">Detalle item</td>
+                    <td class="bad-align">Valores</td>
+                    <td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td>
                 </tr>
                 <tr>
                     <td class="cell-header row-header">3</td>
-                    <td class="text-center border-all">01</td>
-                    <td class="text-left border-all">Cemento Portland</td>
-                    <td class="text-center border-all">10</td>
-                    <td class="text-center border-all">$ 15.000</td>
+                    <td class="squished-col">Mantenimi anual</td>
+                    <td class="text-left">45000</td>
+                    <td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td>
                 </tr>
-                <tr>
+                <tr class="low-row">
                     <td class="cell-header row-header">4</td>
-                    <td class="text-center bg-soft-blue border-all">02</td>
-                    <td class="text-left bg-soft-blue border-all">Arena Fina (m3)</td>
-                    <td class="text-center bg-soft-blue border-all">5</td>
-                    <td class="text-center bg-soft-blue border-all">$ 25.000</td>
+                    <td class="squished-col">Servicios e</td>
+                    <td class="text-left">12000</td>
+                    <td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td>
                 </tr>
                 <tr>
                     <td class="cell-header row-header">5</td>
-                    <td class="text-center border-all">03</td>
-                    <td class="text-left border-all">Ladrillos Huecos</td>
-                    <td class="text-center border-all">500</td>
-                    <td class="text-center border-all">$ 40.000</td>
+                    <td class="squished-col">Impuestos var</td>
+                    <td class="text-left">8500</td>
+                    <td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td>
                 </tr>
-                <tr>
-                    <td class="cell-header row-header">6</td>
-                    <td class="text-center bg-soft-blue border-all">04</td>
-                    <td class="text-left bg-soft-blue border-all">Hierro 8mm</td>
-                    <td class="text-center bg-soft-blue border-all">20</td>
-                    <td class="text-center bg-soft-blue border-all">$ 60.000</td>
-                </tr>
-                <tr>
-                    <td class="cell-header row-header">7</td>
-                    <td colspan="3" class="text-right text-bold border-all">TOTAL PRESUPUESTO</td>
-                    <td class="bg-green text-center border-all">$ 140.000</td>
-                </tr>
+                <!-- Filas vacías -->
+                <tr><td class="cell-header row-header">6</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+                <tr><td class="cell-header row-header">7</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+                <tr><td class="cell-header row-header">8</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+                <tr><td class="cell-header row-header">9</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
+                <tr><td class="cell-header row-header">10</td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td><td class="empty-cell"></td></tr>
             </table>
         </div>
     </div>
 
-    <!-- Pantalla 12: Cierre -->
-    <div class="screen outro-screen" id="screen-12">
+    <!-- Pantalla 13: Cierre -->
+    <div class="screen outro-screen" id="screen-13">
         <h1>Misión cumplida</h1>
         <ul class="checklist">
             <li>Organizar información</li>
@@ -967,7 +1290,7 @@ h2 {
     <!-- Navegación -->
     <div class="nav-footer">
         <button class="btn btn-prev" id="btn-prev" onclick="changeStep(-1)">Anterior</button>
-        <div class="step-counter" id="step-counter">1 / 12</div>
+        <div class="step-counter" id="step-counter">1 / 13</div>
         <button class="btn btn-next" id="btn-next" onclick="changeStep(1)">Siguiente</button>
     </div>
 
@@ -975,7 +1298,7 @@ h2 {
 
 <script>
 let currentStep = 1;
-const totalSteps = 12;
+const totalSteps = 13;
 
 function updateUI() {
     document.querySelectorAll('.screen').forEach(screen => {
