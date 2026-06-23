@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 15 - Diseño y presentación de planillas</title>
+
+<style>
+:root {
+    --bg-body: #f1f5f9;
+    --card-bg: #ffffff;
+    --dark-bg: #0f172a;
+
+    --text-main: #334155;
+    --text-light: #64748b;
+
+    --accent-blue: #2563eb;
+    --accent-blue-light: #eff6ff;
+    --accent-hover: #1d4ed8;
+
+    --accent-green: #059669;
+    --accent-green-light: #ecfdf5;
+
+    --font-main: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-main);
+    background: radial-gradient(circle at top right, #e2e8f0 0%, #f8fafc 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-main);
+    overflow: hidden;
+}
+
+.presentation-container {
+    background: var(--card-bg);
+    width: 95vw;
+    max-width: 1200px;
+    height: 88vh;
+    border-radius: 1.5rem;
+    box-shadow: 0 20px 40px -10px rgba(0,0,0,0.15);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: var(--bg-body);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: var(--text-light);
+    text-decoration: none;
+    transition: all 0.2s;
+    z-index: 100;
+}
+
+.btn-close:hover {
+    background: #e2e8f0;
+    color: var(--text-main);
+}
+
+.screen {
+    display: none;
+    flex: 1;
+    flex-direction: column;
+    padding: 2.5rem 4rem;
+    animation: fadeIn 0.4s ease-out;
+    height: 100%;
+    overflow: hidden;
+}
+
+.screen.active {
+    display: flex;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.intro-screen, .outro-screen {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+h1 {
+    font-size: 3.5rem;
+    color: var(--dark-bg);
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+h2 {
+    font-size: 2rem;
+    color: var(--accent-blue);
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+.intro-text {
+    font-size: 1.4rem;
+    color: var(--text-light);
+    max-width: 600px;
+    line-height: 1.6;
+}
+
+.exercise-header {
+    margin-bottom: 1.5rem;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.exercise-tag {
+    display: inline-block;
+    background: var(--accent-blue-light);
+    color: var(--accent-blue);
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+}
+
+.exercise-title {
+    font-size: 2.2rem;
+    color: var(--dark-bg);
+    margin-bottom: 0.5rem;
+}
+
+.exercise-objective {
+    font-size: 1.2rem;
+    color: var(--text-light);
+}
+
+.model-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    overflow: hidden;
+}
+
+/* =========================================
+   ESTILOS DE GOOGLE SHEETS
+   ========================================= */
+.gsheet {
+    border-collapse: collapse;
+    background: white;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    color: #000;
+}
+
+.gsheet th, .gsheet td {
+    border: 1px solid #cbd5e1;
+    padding: 16px 24px;
+    font-size: 1.4rem;
+}
+
+.gsheet .cell-header {
+    background-color: #f8fafc;
+    color: #475569;
+    text-align: center;
+    font-weight: bold;
+    user-select: none;
+    font-size: 1.3rem;
+}
+
+.gsheet .col-header {
+    border-bottom: 2px solid #94a3b8;
+    padding: 10px 24px;
+}
+
+.gsheet .row-header {
+    border-right: 2px solid #94a3b8;
+    width: 45px;
+    padding: 16px 10px;
+}
+
+.gsheet .corner {
+    border-bottom: 2px solid #94a3b8;
+    border-right: 2px solid #94a3b8;
+    background-color: #f1f5f9;
+}
+
+/* Tamaños de hoja */
+.sheet-md { max-width: 700px; width: 100%; }
+.sheet-lg { max-width: 850px; width: 100%; }
+.sheet-mega { max-width: 1000px; width: 100%; }
+
+/* Utilidades para celdas */
+.bg-dark-blue { background-color: #1e3a8a; color: #ffffff; font-weight: bold; }
+.bg-blue { background-color: #3b82f6; color: #ffffff; font-weight: bold; }
+.bg-green { background-color: #10b981; color: #ffffff; font-weight: bold; }
+.bg-dark-green { background-color: #065f46; color: #ffffff; font-weight: bold; }
+.bg-gray { background-color: #f1f5f9; font-weight: bold; }
+.bg-soft-blue { background-color: #f0f9ff; }
+
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+.text-bold { font-weight: bold; }
+
+.h-tall { height: 75px; }
+.h-mega { height: 95px; }
+
+.w-wide { width: 60%; }
+.w-narrow { width: 40%; }
+
+.border-all { border: 2px solid #334155 !important; }
+
+/* Indicador de Rango Combinado */
+.merged-range-indicator {
+    margin-top: 1.5rem;
+    background: #f8fafc;
+    border-left: 5px solid var(--accent-blue);
+    padding: 0.8rem 1.5rem;
+    font-family: monospace;
+    font-size: 1.3rem;
+    color: var(--dark-bg);
+    border-radius: 0 8px 8px 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+/* Pantallas Divididas (Ej 5 y 9) */
+.split-layout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    width: 100%;
+}
+
+.split-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+}
+
+.split-col h3 {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    color: var(--text-main);
+    text-align: center;
+}
+
+.split-col h3.incorrect { color: #dc2626; }
+.split-col h3.correct { color: var(--accent-green); }
+
+/* Estilo para tabla desordenada simulando un Sheet */
+.gsheet-messy th, .gsheet-messy td {
+    border: 1px solid #cbd5e1;
+    font-size: 1.1rem;
+    padding: 8px 12px;
+}
+.gsheet-messy .row-header, .gsheet-messy .col-header {
+    font-size: 1.1rem;
+    padding: 6px;
+}
+.gsheet-messy .cut-text {
+    max-width: 90px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
+    display: block;
+}
+
+/* Cuadro de Observación */
+.observation-box {
+    margin-top: 2.5rem;
+    background: #fffbeb;
+    border: 2px dashed #f59e0b;
+    color: #b45309;
+    padding: 1.2rem 3rem;
+    border-radius: 0.75rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+/* Lista del final */
+.checklist {
+    list-style: none;
+    margin-top: 2rem;
+    text-align: left;
+    font-size: 1.4rem;
+    color: var(--text-main);
+}
+
+.checklist li {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.checklist li::before {
+    content: "✓";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: var(--accent-green-light);
+    color: var(--accent-green);
+    border-radius: 50%;
+    font-weight: bold;
+}
+
+/* Navegación Inferior */
+.nav-footer {
+    padding: 1.5rem 3rem;
+    border-top: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--card-bg);
+}
+
+.btn {
+    padding: 0.8rem 2rem;
+    border-radius: 0.75rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+}
+
+.btn-prev {
+    background: #f1f5f9;
+    color: var(--text-main);
+}
+
+.btn-prev:hover {
+    background: #e2e8f0;
+}
+
+.btn-next {
+    background: var(--accent-blue);
+    color: white;
+}
+
+.btn-next:hover {
+    background: var(--accent-hover);
+}
+
+.step-counter {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    font-weight: 600;
+    background: #f1f5f9;
+    padding: 0.5rem 1.5rem;
+    border-radius: 2rem;
+}
+
+</style>
+</head>
+<body>
+
+<div class="presentation-container">
+
+    <a href="index.html" class="btn-close" title="Volver al inicio">✕</a>
+
+    <!-- Pantalla 1: Introducción -->
+    <div class="screen active intro-screen" id="screen-1">
+        <h1>Clase 15</h1>
+        <h2>Diseño y presentación de planillas</h2>
+        <p class="intro-text">Hoy vamos a aprender a mejorar el aspecto de una hoja de cálculo copiando modelos reales.</p>
+    </div>
+
+    <!-- Pantalla 2: Ejercicio 1 -->
+    <div class="screen" id="screen-2">
+        <div class="exercise-header">
+            <div class="exercise-tag">EJERCICIO 1</div>
+            <h2 class="exercise-title">Cartel de aula</h2>
+            <p class="exercise-objective">Copiar el modelo exactamente igual.</p>
+        </div>
+        <div class="model-container">
+            <table class="gsheet sheet-md">
+                <tr>
+                    <td class="cell-header corner"></td>
+                    <td class="cell-header col-header">A</td>
+                    <td class="cell-header col-header">B</td>
+                </tr>
+                <tr>
+                    <td class="cell-header row-header">1</td>
+                    <td colspan="2" class="bg-dark-blue text-center h-tall">TURNO NOCHE</td>
+                </tr>
+                <tr>
+                    <td class="cell-header row-header">2</td>
+                    <td class="bg-green text-center w-wide">Aula</td>
+                    <td class="bg-green text-center">Estado</td>
+                </tr>
+                <tr>
+                    <td class="cell-header row-header">3</td>
+                    <td class="text-center h-tall">101</td>
+                    <td class="text-center h-tall">Libre</td>
+                </tr>
+                <tr>
+                    <td class="cell-header row-header">4</td>
+                    <td class="text-center h-tall">102</td>
+                    <td class="text-center h-tall">Ocupada</td>
+                </tr>
+                <tr>
+                    <td class="cell-header row-header">5</td>
+                    <td class="text-center h-tall">103</td>
+                    <td class="text-center h-tall">Libre</td>
+                </tr>
+            </table>
+            <div class="merged-range-indicator">Rango combinado: <strong>A1:B1</strong></div>
+        </div>
+    </div>
+
+    <!-- Pantalla 3: Ejercicio 2 -->
+    <div class="screen" id="screen-3">
+        <div class="exercise-header">
+            <div class="exercise-tag">EJERCICIO 2</div>
+            <h2 class="exercise-title">Horario de atención</h2>
+            <p class="exercise-objective">Copiar el modelo exactamente igual.</p>
+        </div>
+        <div class="model-container">
+            <table class="gsheet sheet-md">
+                <tr>
+                    <td class="cell-header corner"></td>
+                    <td class="cell-header col-header">A</td>
+                    <td class="cell-header col-header">B</td>
+                </tr>
+                <tr>
+                    <td class="cell-header row-header">1</td>
+                    <td colspan="2" class="bg-gray text-center h-tall">HORARIO DE ATENCIÓN</td>
+                </tr>
+                <tr>
+                    <td class="cell-header row-header">2</td>
+                    <td class="w-wide text-left">Lunes</td>
+                    <td class="text-center">08:00 a 12:00</td>
+                </tr>
+                <tr>
+                    <td class="cell-header row-header">3</td>
+                    <td class="w-wide text-left bg-soft-blue">Martes</td>
+                    <td class="text-center bg-soft-blue">08:00 a 12:00</td>
+                </tr>
+                <tr>
+                    <td class="cell-header row-header">4</td>
+                    <td class="w-wide text-left">Miércoles</td>
+                    <td class="text-center">08:00 a 12:00</td>
+                </tr>
+                <tr>
+                    <td class="cell-header row-header">5</td>
+                    <td class="w-wide text-left bg-soft-blue">Jueves</td>
+                    <td class="text-center bg-soft-blue">14:00 a 18:00</td>
+                </tr>
+                <tr>
+                    <td class="cell-header row-header">6</td>
+                    <td class="w-wide text-left">Viernes</td>
+                    <td class="text-center">14:00 a 18:00</td>
+                </tr>
+            </table>
+            <div class="merged-range-indicator">Rango combinado: <strong>A1:B1</strong></div>
+        </div>
+    </div>
+
+    <!-- Pantalla 4: Ejercicio 3 -->
+    <div class="screen" id="screen-4">
+        <div class="exercise-header">
+            <div class="exercise-tag">EJERCICIO 3</div>
+            <h2 class="exercise-title">Lista de materiales</h2>
+            <p class="exercise-objective">Copiar el modelo exactamente igual.</p>
+        </div>
+        <div class="model-container">
+            <table class="gsheet sheet-md">
+                <tr>
+                    <td class="cell-header corner"></td>
+                    <td class="cell-header col-header">A</td>
+                    <td class="cell-header col-header">B</td>
+                </tr>
+                <tr>
+                    <td class="cell-header row-header">1</td>
+                    <td class="bg-gray text-center w-wide border-all">Material</td>
+                    <td class="bg-gray text-center border-all">Cantidad</td>
+                </tr>
+                <tr>
+                    <td class="cell-header row-header">2</td>
+                    <td class="text-left border-all">Lápices</td>
+                    <td class="text-center border-all">10</td>
+                </tr>
+                <tr>
+                    <td class="cell-header row-header">3</td>
+                    <td class="text-left border-all">Biromes</td>
+                    <td class="text-center border-all">15</td>
+                </tr>
+                <tr>
+                    <td class="cell-header row-header">4</td>
+                    <td class="text-left border-all">Cuadernos</td>
+                    <td class="text-center border-all">8</td>
+                </tr>
+                <tr>
+                    <td class="cell-header row-header">5</td>
+                    <td class="text-left border-all">Carpetas</td>
+                    <td class="text-center border-all">6</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- Pantalla 5: Ejercicio 4 -->
+    <div class="screen" id="screen-5">
+        <div class="exercise-header">
+            <div class="exercise-tag">EJERCICIO 4</div>
+            <h2 class="exercise-title">Agenda de turnos</h2>
+            <p class="exercise-objective">Copiar el modelo exactamente igual.</p>
+        </div>
+        <div class="model-container">
+            <table class="gsheet sheet-lg">
+                <tr>
+                    <td class="cell-header corner"></td>
+                    <td class="cell-header col-header">A</td>
+                    <td class="cell-header col-header">B</td>
+                    <td class="cell-header col-header">C</td>
+                </tr>
+                <tr>
+                    <td class="cell-header row-header">1</td>
+                    <td class="bg-blue text-center">Nombre</td>
+                    <td class="bg-blue text-center">Fecha</td>
+                    <td class="bg-blue text-center">Hora</td>
+                </tr>
+                <tr>
+                    <td class="cell-header row-header">2</td>
+                    <td class="text-left h-tall">Ana</td>
+                    <td class="text-center h-tall">10/09</td>
+                    <td class="text-center h-tall">09:00</td>
+                </tr>
+                <tr>
+                    <td class="cell-header row-header">3</td>
+                    <td class="text-left h-tall bg-soft-blue">Juan</td>
+                    <td class="text-center h-tall bg-soft-blue">10/09</td>
+                    <td class="text-center h-tall bg-soft-blue">09:30</td>
+                </tr>
+                <tr>
+                    <td class="cell-header row-header">4</td>
+                    <td class="text-left h-tall">Pedro</td>
+                    <td class="text-center h-tall">10/09</td>
+                    <td class="text-center h-tall">10:00</td>
+                </tr>
+                <tr>
+                    <td class="cell-header row-header">5</td>
+                    <td class="text-left h-tall bg-soft-blue">Laura</td>
+                    <td class="text-center h-tall bg-soft-blue">10/09</td>
+                    <td class="text-center h-tall bg-soft-blue">10:30</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- Pantalla 6: Ejercicio 5 -->
+    <div class="screen" id="screen-6">
+        <div class="exercise-header">
+            <div class="exercise-tag">EJERCICIO 5</div>
+            <h2 class="exercise-title">Arreglar la planilla</h2>
+            <p class="exercise-objective">La planilla actual está desordenada. Hay que dejarla como el modelo esperado.</p>
+        </div>
+        <div class="model-container">
+            <div class="split-layout">
+                
+                <div class="split-col">
+                    <h3 class="incorrect">Planilla actual</h3>
+                    <table class="gsheet gsheet-messy">
+                        <tr>
+                            <td class="cell-header corner"></td>
+                            <td class="cell-header col-header">A</td>
+                            <td class="cell-header col-header">B</td>
+                            <td class="cell-header col-header">C</td>
+                        </tr>
+                        <tr>
+                            <td class="cell-header row-header">1</td>
+                            <td><span class="cut-text">nombre emp</span></td>
+                            <td style="text-align:right">Dpto</td>
+                            <td>Su</td>
+                        </tr>
+                        <tr>
+                            <td class="cell-header row-header">2</td>
+                            <td><span class="cut-text">Gomez Marti</span></td>
+                            <td>Ventas</td>
+                            <td>$50</td>
+                        </tr>
+                        <tr>
+                            <td class="cell-header row-header">3</td>
+                            <td style="text-align:center"><span class="cut-text">Perez A</span></td>
+                            <td>Admin</td>
+                            <td style="text-align:left">$55</td>
+                        </tr>
+                        <tr>
+                            <td class="cell-header row-header">4</td>
+                            <td>Lopez</td>
+                            <td style="text-align:right">Sist</td>
+                            <td>$60</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="split-col">
+                    <h3 class="correct">Resultado esperado</h3>
+                    <table class="gsheet" style="transform: scale(0.9); transform-origin: top center;">
+                        <tr>
+                            <td class="cell-header corner"></td>
+                            <td class="cell-header col-header">A</td>
+                            <td class="cell-header col-header">B</td>
+                            <td class="cell-header col-header">C</td>
+                        </tr>
+                        <tr>
+                            <td class="cell-header row-header">1</td>
+                            <td class="bg-gray text-center w-wide">Nombre Empleado</td>
+                            <td class="bg-gray text-center">Departamento</td>
+                            <td class="bg-gray text-center">Sueldo</td>
+                        </tr>
+                        <tr>
+                            <td class="cell-header row-header">2</td>
+                            <td class="text-left">Gómez, Martín</td>
+                            <td class="text-center">Ventas</td>
+                            <td class="text-center">$ 50.000</td>
+                        </tr>
+                        <tr>
+                            <td class="cell-header row-header">3</td>
+                            <td class="text-left bg-soft-blue">Pérez, Ana</td>
+                            <td class="text-center bg-soft-blue">Admin.</td>
+                            <td class="text-center bg-soft-blue">$ 55.000</td>
+                        </tr>
+                        <tr>
+                            <td class="cell-header row-header">4</td>
+                            <td class="text-left">López, Carlos</td>
+                            <td class="text-center">Sistemas</td>
+                            <td class="text-center">$ 60.000</td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+            <div class="observation-box">
+                🔍 ¿Qué cambios observás?
+            </div>
+        </div>
+    </div>
+
+    <!-- Pantalla 7: Ejercicio 6 -->
+    <div class="screen" id="screen-7">
+        <div class="exercise-header">
+            <div class="exercise-tag">EJERCICIO 6</div>
+            <h2 class="exercise-title">Control de asistencia</h2>
+            <p class="exercise-objective">Copiar el modelo exactamente igual.</p>
+        </div>
+        <div class="model-container">
+            <table class="gsheet sheet-md">
+                <tr>
+                    <td class="cell-header corner"></td>
+                    <td class="cell-header col-header">A</td>
+                    <td class="cell-header col-header">B</td>
+                </tr>
+                <tr>
+                    <td class="cell-header row-header">1</td>
+                    <td class="bg-green w-wide text-center">Alumno</td>
+                    <td class="bg-green text-center">Presente</td>
+                </tr>
+                <tr>
+                    <td class="cell-header row-header">2</td>
+                    <td class="text-left bg-soft-blue">María</td>
+                    <td class="text-center bg-soft-blue">Sí</td>
+                </tr>
+                <tr>
+                    <td class="cell-header row-header">3</td>
+                    <td class="text-left">Carlos</td>
+                    <td class="text-center">No</td>
+                </tr>
+                <tr>
+                    <td class="cell-header row-header">4</td>
+                    <td class="text-left bg-soft-blue">Sofía</td>
+                    <td class="text-center bg-soft-blue">Sí</td>
+                </tr>
+                <tr>
+                    <td class="cell-header row-header">5</td>
+                    <td class="text-left">Tomás</td>
+                    <td class="text-center">Sí</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- Pantalla 8: Ejercicio 7 -->
+    <div class="screen" id="screen-8">
+        <div class="exercise-header">
+            <div class="exercise-tag">EJERCICIO 7</div>
+            <h2 class="exercise-title">Planilla de gastos</h2>
+            <p class="exercise-objective">Copiar el modelo exactamente igual.</p>
+        </div>
+        <div class="model-container">
+            <table class="gsheet sheet-md">
+                <tr>
+                    <td class="cell-header corner"></td>
+                    <td class="cell-header col-header">A</td>
+                    <td class="cell-header col-header">B</td>
+                </tr>
+                <tr>
+                    <td class="cell-header row-header">1</td>
+                    <td class="bg-gray w-wide text-center">Concepto</td>
+                    <td class="bg-gray text-center">Monto</td>
+                </tr>
+                <tr>
+                    <td class="cell-header row-header">2</td>
+                    <td class="text-left">Transporte</td>
+                    <td class="text-center">$2500</td>
+                </tr>
+                <tr>
+                    <td class="cell-header row-header">3</td>
+                    <td class="text-left">Comida</td>
+                    <td class="text-center">$4200</td>
+                </tr>
+                <tr>
+                    <td class="cell-header row-header">4</td>
+                    <td class="text-left">Internet</td>
+                    <td class="text-center">$1800</td>
+                </tr>
+                <tr>
+                    <td class="cell-header row-header">5</td>
+                    <td class="text-left">Luz</td>
+                    <td class="text-center">$3200</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- Pantalla 9: Ejercicio 8 -->
+    <div class="screen" id="screen-9">
+        <div class="exercise-header">
+            <div class="exercise-tag">EJERCICIO 8</div>
+            <h2 class="exercise-title">Desafío final</h2>
+            <p class="exercise-objective">Reconstruir una planilla completa y de mayor tamaño.</p>
+        </div>
+        <div class="model-container">
+            <table class="gsheet sheet-mega">
+                <tr>
+                    <td class="cell-header corner"></td>
+                    <td class="cell-header col-header">A</td>
+                    <td class="cell-header col-header">B</td>
+                    <td class="cell-header col-header">C</td>
+                </tr>
+                <tr>
+                    <td class="cell-header row-header">1</td>
+                    <td colspan="3" class="bg-dark-blue text-center h-mega border-all">CONTROL DE PRODUCTOS</td>
+                </tr>
+                <tr>
+                    <td class="cell-header row-header">2</td>
+                    <td class="bg-green text-center w-wide border-all">Producto</td>
+                    <td class="bg-green text-center border-all">Precio</td>
+                    <td class="bg-green text-center border-all">Stock</td>
+                </tr>
+                <tr>
+                    <td class="cell-header row-header">3</td>
+                    <td class="text-left border-all">Pan</td>
+                    <td class="text-center border-all">1500</td>
+                    <td class="text-center border-all">20</td>
+                </tr>
+                <tr>
+                    <td class="cell-header row-header">4</td>
+                    <td class="text-left bg-soft-blue border-all">Leche</td>
+                    <td class="text-center bg-soft-blue border-all">1800</td>
+                    <td class="text-center bg-soft-blue border-all">15</td>
+                </tr>
+                <tr>
+                    <td class="cell-header row-header">5</td>
+                    <td class="text-left border-all">Yerba</td>
+                    <td class="text-center border-all">3200</td>
+                    <td class="text-center border-all">10</td>
+                </tr>
+                <tr>
+                    <td class="cell-header row-header">6</td>
+                    <td class="text-left bg-soft-blue border-all">Azúcar</td>
+                    <td class="text-center bg-soft-blue border-all">1200</td>
+                    <td class="text-center bg-soft-blue border-all">25</td>
+                </tr>
+            </table>
+            <div class="merged-range-indicator">Rango combinado: <strong>A1:C1</strong></div>
+        </div>
+    </div>
+
+    <!-- Pantalla 10: Ejercicio 9 -->
+    <div class="screen" id="screen-10">
+        <div class="exercise-header">
+            <div class="exercise-tag">EJERCICIO 9</div>
+            <h2 class="exercise-title">Encontrá las diferencias</h2>
+            <p class="exercise-objective">Compará ambas planillas y detectá al menos 5 errores en la primera.</p>
+        </div>
+        <div class="model-container">
+            <div class="split-layout">
+                
+                <div class="split-col">
+                    <h3 class="incorrect">Planilla Incorrecta</h3>
+                    <table class="gsheet gsheet-messy">
+                        <tr>
+                            <td class="cell-header corner"></td>
+                            <td class="cell-header col-header">A</td>
+                            <td class="cell-header col-header">B</td>
+                        </tr>
+                        <tr>
+                            <td class="cell-header row-header">1</td>
+                            <td>Producto</td>
+                            <td>Precio</td>
+                        </tr>
+                        <tr>
+                            <td class="cell-header row-header">2</td>
+                            <td><span class="cut-text">Detergente liq</span></td>
+                            <td class="text-left">2500</td>
+                        </tr>
+                        <tr>
+                            <td class="cell-header row-header">3</td>
+                            <td>Lavandina</td>
+                            <td class="text-left">1800</td>
+                        </tr>
+                        <tr>
+                            <td class="cell-header row-header">4</td>
+                            <td>Esponja</td>
+                            <td class="text-left">600</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="split-col">
+                    <h3 class="correct">Planilla Correcta</h3>
+                    <table class="gsheet">
+                        <tr>
+                            <td class="cell-header corner"></td>
+                            <td class="cell-header col-header">A</td>
+                            <td class="cell-header col-header">B</td>
+                        </tr>
+                        <tr>
+                            <td class="cell-header row-header">1</td>
+                            <td class="bg-blue text-center w-wide">Producto</td>
+                            <td class="bg-blue text-center">Precio</td>
+                        </tr>
+                        <tr>
+                            <td class="cell-header row-header">2</td>
+                            <td class="text-left bg-soft-blue">Detergente líquido</td>
+                            <td class="text-center bg-soft-blue">2500</td>
+                        </tr>
+                        <tr>
+                            <td class="cell-header row-header">3</td>
+                            <td class="text-left">Lavandina</td>
+                            <td class="text-center">1800</td>
+                        </tr>
+                        <tr>
+                            <td class="cell-header row-header">4</td>
+                            <td class="text-left bg-soft-blue">Esponja</td>
+                            <td class="text-center bg-soft-blue">600</td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+            <div class="observation-box">
+                👀 ¿Qué diferencias encontrás?
+            </div>
+        </div>
+    </div>
+
+    <!-- Pantalla 11: Ejercicio 10 -->
+    <div class="screen" id="screen-11">
+        <div class="exercise-header">
+            <div class="exercise-tag">EJERCICIO 10</div>
+            <h2 class="exercise-title">Reconstrucción total</h2>
+            <p class="exercise-objective">Copiá exactamente este diseño.</p>
+        </div>
+        <div class="model-container">
+            <table class="gsheet sheet-mega">
+                <tr>
+                    <td class="cell-header corner"></td>
+                    <td class="cell-header col-header">A</td>
+                    <td class="cell-header col-header">B</td>
+                    <td class="cell-header col-header">C</td>
+                    <td class="cell-header col-header">D</td>
+                </tr>
+                <tr>
+                    <td class="cell-header row-header">1</td>
+                    <td colspan="4" class="bg-dark-green text-center h-tall border-all">PRESUPUESTO DE OBRA</td>
+                </tr>
+                <tr>
+                    <td class="cell-header row-header">2</td>
+                    <td class="bg-gray text-center border-all">Ítem</td>
+                    <td class="bg-gray text-center border-all w-wide">Descripción</td>
+                    <td class="bg-gray text-center border-all">Cant.</td>
+                    <td class="bg-gray text-center border-all">Subtotal</td>
+                </tr>
+                <tr>
+                    <td class="cell-header row-header">3</td>
+                    <td class="text-center border-all">01</td>
+                    <td class="text-left border-all">Cemento Portland</td>
+                    <td class="text-center border-all">10</td>
+                    <td class="text-center border-all">$ 15.000</td>
+                </tr>
+                <tr>
+                    <td class="cell-header row-header">4</td>
+                    <td class="text-center bg-soft-blue border-all">02</td>
+                    <td class="text-left bg-soft-blue border-all">Arena Fina (m3)</td>
+                    <td class="text-center bg-soft-blue border-all">5</td>
+                    <td class="text-center bg-soft-blue border-all">$ 25.000</td>
+                </tr>
+                <tr>
+                    <td class="cell-header row-header">5</td>
+                    <td class="text-center border-all">03</td>
+                    <td class="text-left border-all">Ladrillos Huecos</td>
+                    <td class="text-center border-all">500</td>
+                    <td class="text-center border-all">$ 40.000</td>
+                </tr>
+                <tr>
+                    <td class="cell-header row-header">6</td>
+                    <td class="text-center bg-soft-blue border-all">04</td>
+                    <td class="text-left bg-soft-blue border-all">Hierro 8mm</td>
+                    <td class="text-center bg-soft-blue border-all">20</td>
+                    <td class="text-center bg-soft-blue border-all">$ 60.000</td>
+                </tr>
+                <tr>
+                    <td class="cell-header row-header">7</td>
+                    <td colspan="3" class="text-right text-bold border-all">TOTAL PRESUPUESTO</td>
+                    <td class="bg-green text-center border-all">$ 140.000</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- Pantalla 12: Cierre -->
+    <div class="screen outro-screen" id="screen-12">
+        <h1>Misión cumplida</h1>
+        <ul class="checklist">
+            <li>Organizar información</li>
+            <li>Mejorar el aspecto de una planilla</li>
+            <li>Ajustar filas y columnas</li>
+            <li>Centrar información</li>
+            <li>Combinar celdas</li>
+            <li>Aplicar formatos</li>
+            <li>Copiar modelos reales</li>
+        </ul>
+    </div>
+
+    <!-- Navegación -->
+    <div class="nav-footer">
+        <button class="btn btn-prev" id="btn-prev" onclick="changeStep(-1)">Anterior</button>
+        <div class="step-counter" id="step-counter">1 / 12</div>
+        <button class="btn btn-next" id="btn-next" onclick="changeStep(1)">Siguiente</button>
+    </div>
+
+</div>
+
+<script>
+let currentStep = 1;
+const totalSteps = 12;
+
+function updateUI() {
+    document.querySelectorAll('.screen').forEach(screen => {
+        screen.classList.remove('active');
+    });
+
+    document.getElementById(`screen-${currentStep}`).classList.add('active');
+    document.getElementById('step-counter').innerText = `${currentStep} / ${totalSteps}`;
+
+    document.getElementById('btn-prev').style.visibility = 
+        currentStep === 1 ? 'hidden' : 'visible';
+
+    document.getElementById('btn-next').style.visibility = 
+        currentStep === totalSteps ? 'hidden' : 'visible';
+}
+
+function changeStep(direction) {
+    currentStep += direction;
+
+    if(currentStep < 1) currentStep = 1;
+    if(currentStep > totalSteps) currentStep = totalSteps;
+
+    updateUI();
+}
+
+document.addEventListener('keydown', function(e) {
+    if(e.key === 'ArrowRight' || e.key === 'Space') {
+        changeStep(1);
+    } else if (e.key === 'ArrowLeft') {
+        changeStep(-1);
+    }
+});
+
+updateUI();
+</script>
+
+</body>
+</html>
