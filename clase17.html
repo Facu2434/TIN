@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 17 - Google Sheets Especial Mundial</title>
+
+<style>
+:root {
+    /* Paleta de colores heredada y adaptada para Google Sheets UI */
+    --bg-body: #f8f9fa; /* Fondo gris claro tipo Sheets */
+    --card-bg: #ffffff;
+    --dark-bg: #0f172a;
+    
+    --text-main: #334155;
+    --text-light: #64748b;
+    --text-dark: #1f2937;
+
+    --accent-blue: #0b57d0; /* Azul Sheets */
+    --accent-blue-light: #d3e3fd; /* Azul claro activo Sheets */
+    --accent-hover: #1d4ed8;
+
+    --accent-green: #059669;
+    --accent-green-light: #ecfdf5;
+    
+    --border-color: #c7c7c7; /* Color de líneas de celda */
+    --toolbar-bg: #edf2fa;
+
+    --font-main: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-main);
+    background: var(--bg-body);
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    color: var(--text-main);
+    overflow: hidden; /* Sin scroll general */
+}
+
+/* =========================================
+   HEADER COMPRIMIDO
+   ========================================= */
+.top-header {
+    height: 40px;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    background: #ffffff;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.header-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.btn-close-red {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: #dc2626;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 12px;
+    transition: background 0.2s;
+}
+
+.btn-close-red:hover {
+    background-color: #b91c1c;
+}
+
+/* =========================================
+   BARRA DE HERRAMIENTAS (SHEETS)
+   ========================================= */
+.sheets-toolbar {
+    height: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    background: var(--toolbar-bg);
+    margin: 6px 12px;
+    border-radius: 24px;
+    gap: 2px;
+    overflow-x: auto;
+}
+
+.sheets-toolbar::-webkit-scrollbar {
+    height: 0px; /* Oculta scroll en toolbar */
+}
+
+.tb-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    color: #444746;
+    transition: background 0.2s;
+    flex-shrink: 0;
+}
+
+.tb-btn:hover {
+    background: #e1e5ea;
+}
+
+.tb-btn.active {
+    background: var(--accent-blue-light);
+    color: var(--accent-blue);
+}
+
+.tb-btn svg {
+    width: 18px;
+    height: 18px;
+}
+
+.tb-dropdown {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 0 8px;
+    height: 32px;
+    border-radius: 4px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    color: #444746;
+    font-family: var(--font-main);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.tb-dropdown:hover {
+    background: #e1e5ea;
+}
+
+.tb-sep {
+    width: 1px;
+    height: 20px;
+    background: #c7c7c7;
+    margin: 0 6px;
+    flex-shrink: 0;
+}
+
+/* =========================================
+   BARRA DE FÓRMULAS
+   ========================================= */
+.formula-bar {
+    height: 32px;
+    min-height: 32px;
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    background: #ffffff;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.fx-icon {
+    font-family: 'Times New Roman', Times, serif;
+    font-style: italic;
+    font-weight: bold;
+    color: #444746;
+    font-size: 1.1rem;
+    margin-right: 12px;
+    user-select: none;
+}
+
+.formula-input {
+    flex: 1;
+    height: 24px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    outline: none;
+    font-size: 0.9rem;
+    font-family: monospace;
+    padding: 0 8px;
+    color: var(--text-dark);
+}
+
+/* =========================================
+   MISION (CONTEXTO DEL EJERCICIO)
+   ========================================= */
+.mission-bar {
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #ffffff;
+    border-bottom: 1px solid #e2e8f0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+
+.exercise-tag {
+    background: var(--accent-blue-light);
+    color: var(--accent-blue);
+    padding: 0.3rem 0.8rem;
+    border-radius: 2rem;
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    white-space: nowrap;
+}
+
+.mission-text {
+    font-size: 1rem;
+    color: var(--text-dark);
+    font-weight: 500;
+}
+
+/* =========================================
+   ESPACIO DE TRABAJO (LA HOJA)
+   ========================================= */
+.workspace {
+    flex: 1;
+    overflow: auto;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+/* La pantalla es un contenedor lógico de los ejercicios */
+.screen {
+    display: none;
+    width: 100%;
+    animation: fadeIn 0.4s ease-out;
+}
+
+.screen.active {
+    display: flex;
+    justify-content: center;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.gsheet {
+    border-collapse: collapse;
+    background: #ffffff;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    table-layout: fixed;
+    width: 100%;
+    max-width: 1100px;
+}
+
+/* Configuración de las columnas A-H */
+.col-header-width {
+    width: calc((100% - 45px) / 8); /* 8 columnas iguales */
+}
+
+.gsheet th, .gsheet td {
+    border: 1px solid var(--border-color);
+    padding: 6px 12px;
+    font-size: 1.3rem;
+    height: 45px;
+    color: #000;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+/* Encabezados de Fila y Columna tipo Google Sheets */
+.gsheet .cell-header {
+    background: #f8f9fa;
+    color: #444746;
+    font-weight: 500;
+    text-align: center;
+    font-size: 1.1rem;
+    user-select: none;
+}
+
+.gsheet .corner {
+    width: 45px;
+    min-width: 45px;
+    background: #f8f9fa;
+}
+
+.gsheet .row-header {
+    width: 45px;
+    min-width: 45px;
+    padding: 0;
+}
+
+/* Clases de formato simulado para los ejercicios */
+.merged-center { text-align: center; font-weight: bold; }
+.bg-blue-theme { background-color: #1a73e8; color: white; }
+.bg-green-theme { background-color: #34a853; color: white; }
+.bg-gray-theme { background-color: #f1f3f4; }
+.border-thick { border: 2px solid #000 !important; }
+
+/* =========================================
+   BARRA INFERIOR (COORDENADAS Y HERRAMIENTAS)
+   ========================================= */
+.bottom-info-bar {
+    height: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    background: #ffffff;
+    border-top: 1px solid #e2e8f0;
+    font-size: 0.95rem;
+    gap: 15px;
+}
+
+.coords-box {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: monospace;
+    font-size: 1.1rem;
+    color: var(--text-dark);
+}
+
+.divider {
+    color: #cbd5e1;
+    font-size: 1.2rem;
+}
+
+.used-tools {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-light);
+}
+
+.tool-tag {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: #f1f5f9;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    color: var(--text-dark);
+    font-weight: 500;
+}
+
+.tool-tag svg {
+    width: 14px;
+    height: 14px;
+    color: var(--accent-blue);
+}
+
+/* =========================================
+   NAVEGACIÓN (FOOTER)
+   ========================================= */
+.nav-footer {
+    height: 56px;
+    min-height: 56px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    background: #ffffff;
+    border-top: 1px solid #e2e8f0;
+}
+
+.btn {
+    padding: 0.6rem 1.5rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+}
+
+.btn-prev {
+    background: #f1f5f9;
+    color: var(--text-main);
+}
+
+.btn-prev:hover {
+    background: #e2e8f0;
+}
+
+.btn-next {
+    background: var(--accent-blue);
+    color: white;
+}
+
+.btn-next:hover {
+    background: var(--accent-hover);
+}
+
+.step-counter {
+    font-size: 1rem;
+    color: var(--text-light);
+    font-weight: 600;
+    background: #f1f5f9;
+    padding: 0.4rem 1.2rem;
+    border-radius: 2rem;
+}
+
+.intro-screen, .outro-screen {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-top: 10vh;
+}
+
+.intro-screen h1, .outro-screen h1 {
+    font-size: 3rem;
+    color: var(--dark-bg);
+    margin-bottom: 1rem;
+}
+
+.intro-screen h2 {
+    font-size: 1.8rem;
+    color: var(--accent-blue);
+    margin-bottom: 2rem;
+    font-weight: 600;
+}
+
+.intro-screen p {
+    font-size: 1.2rem;
+    color: var(--text-light);
+    max-width: 600px;
+    line-height: 1.6;
+}
+
+.checklist {
+    list-style: none;
+    margin-top: 2rem;
+    text-align: left;
+    font-size: 1.2rem;
+    color: var(--text-main);
+}
+
+.checklist li {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.checklist li::before {
+    content: "✓";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: var(--accent-green-light);
+    color: var(--accent-green);
+    border-radius: 50%;
+    font-weight: bold;
+}
+</style>
+</head>
+<body>
+
+<div class="app-container">
+
+    <header class="top-header">
+        <div class="header-title">Clase 17 · Google Sheets</div>
+        <a href="index.html" class="btn-close-red" title="Cerrar">✕</a>
+    </header>
+
+    <div class="sheets-toolbar">
+        <button class="tb-btn" title="Deshacer"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.5 8c-2.65 0-5.05.99-6.9 2.6L2 7v9h9l-3.62-3.62c1.39-1.16 3.16-1.88 5.12-1.88 3.54 0 6.55 2.31 7.6 5.5l2.37-.78C21.08 11.03 17.15 8 12.5 8z"/></svg></button>
+        <button class="tb-btn" title="Rehacer"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.4 10.6C16.55 8.99 14.15 8 11.5 8c-4.65 0-8.58 3.03-9.96 7.22L3.9 16a8.002 8.002 0 0 1 7.6-5.5c1.95 0 3.73.72 5.12 1.88L13 16h9V7l-3.6 3.6z"/></svg></button>
+        <button class="tb-btn" title="Imprimir"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z"/></svg></button>
+        
+        <div class="tb-sep"></div>
+        
+        <button class="tb-dropdown" title="Zoom">100% <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg></button>
+        
+        <div class="tb-sep"></div>
+
+        <button class="tb-btn" id="tb-bold" title="Negrita"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.6 10.79c.97-.67 1.65-1.77 1.65-2.79 0-2.26-1.75-4-4-4H7v14h7.04c2.09 0 3.71-1.7 3.71-3.79 0-1.52-.86-2.82-2.15-3.42zM10 6.5h3c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5h-3v-3zm3.5 9H10v-3h3.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5z"/></svg></button>
+        <button class="tb-btn" id="tb-italic" title="Cursiva"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 4v3h2.21l-3.42 8H6v3h8v-3h-2.21l3.42-8H18V4z"/></svg></button>
+        <button class="tb-btn" id="tb-underline" title="Subrayado"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 17c3.31 0 6-2.69 6-6V3h-2.5v8c0 1.93-1.57 3.5-3.5 3.5S8.5 12.93 8.5 11V3H6v8c0 3.31 2.69 6 6 6zm-7 2v2h14v-2H5z"/></svg></button>
+        <button class="tb-btn" id="tb-textcolor" title="Color de texto"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M2 20h20v4H2v-4zm3.49-3h2.42l1.27-3.58h5.65L16.09 17h2.42L13.25 3h-2.5L5.49 17zm4.42-5.61 2.03-5.79h.12l2.03 5.79H9.91z"/></svg></button>
+        
+        <div class="tb-sep"></div>
+
+        <button class="tb-btn" id="tb-fillcolor" title="Color de relleno"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.56 8.94L7.62 0 6.21 1.41l2.38 2.38-5.15 5.15c-.59.59-.59 1.54 0 2.12l5.5 5.5c.29.29.68.44 1.06.44s.77-.15 1.06-.44l5.5-5.5c.59-.58.59-1.53 0-2.12zM5.21 10L10 5.21 14.79 10H5.21zM19 11.5s-2 2.17-2 3.5c0 1.1.9 2 2 2s2-.9 2-2c0-1.33-2-3.5-2-3.5z"/><path d="M0 20h24v4H0z" fill="#000"/></svg></button>
+        <button class="tb-btn" id="tb-borders" title="Bordes"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M15 21h2v-2h-2v2zm4 0h2v-2h-2v2zM7 21h2v-2H7v2zm4 0h2v-2h-2v2zm8-4h2v-2h-2v2zm0-4h2v-2h-2v2zM3 3v18h2V5h16V3H3zm16 6h2V7h-2v2z"/></svg></button>
+        <button class="tb-btn" id="tb-merge" title="Combinar celdas"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 10V7H4V5h4V2l3 4-3 4zm8 4v3h4v2h-4v3l-3-4 3-4zm-5-3h2v2h-2z"/></svg></button>
+
+        <div class="tb-sep"></div>
+
+        <button class="tb-btn" id="tb-alignleft" title="Alinear a la izquierda"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M15 15H3v2h12v-2zm0-8H3v2h12V7zM3 13h18v-2H3v2zm0 8h18v-2H3v2zM3 3v2h18V3H3z"/></svg></button>
+        <button class="tb-btn" id="tb-aligncenter" title="Centrar"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 15v2h10v-2H7zM3 13h18v-2H3v2zm4-8v2h10V5H7zm-4 6h18V9H3v2zm0 8h18v-2H3v2z"/></svg></button>
+        <button class="tb-btn" id="tb-alignright" title="Alinear a la derecha"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 21h18v-2H3v2zm6-4h12v-2H9v2zm-6-4h18v-2H3v2zm6-4h12V7H9v2zM3 3v2h18V3H3z"/></svg></button>
+        
+        <div class="tb-sep"></div>
+
+        <button class="tb-btn" id="tb-valigntop" title="Alinear arriba"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 11h3v10h2V11h3l-4-4-4 4zM4 3v2h16V3H4z"/></svg></button>
+        <button class="tb-btn" id="tb-valignmiddle" title="Centrar verticalmente"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 19h3v4h2v-4h3l-4-4-4 4zm8-14h-3V1h-2v4H8l4 4 4-4zM4 11v2h16v-2H4z"/></svg></button>
+        <button class="tb-btn" id="tb-valignbottom" title="Alinear abajo"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 13h-3V3h-2v10H8l4 4 4-4zM4 19v2h16v-2H4z"/></svg></button>
+
+        <div class="tb-sep"></div>
+
+        <button class="tb-btn" id="tb-colwidth" title="Ancho de columna"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 21V3H8v18h2zm4-18v18h2V3h-2zm-6 9l2.5-2.5v5L8 12zm8 0l-2.5-2.5v5L16 12z"/></svg></button>
+        <button class="tb-btn" id="tb-rowheight" title="Alto de fila"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 10H3V8h18v2zm0 6H3v-2h18v2zm-9-6l-2.5 2.5h5L12 10zm0 6l-2.5-2.5h5L12 16z"/></svg></button>
+
+    </div>
+
+    <div class="formula-bar">
+        <div class="fx-icon">fx</div>
+        <div class="formula-input"></div>
+    </div>
+
+    <div class="mission-bar">
+        <span class="exercise-tag" id="current-tag"></span>
+        <span class="mission-text" id="current-title"></span>
+    </div>
+
+    <main class="workspace">
+        
+        <!-- Pantalla 1: Introducción -->
+        <div class="screen intro-screen active" id="screen-1" data-tools="" data-coords="-">
+            <h1>Clase 17</h1>
+            <h2>Google Sheets<br>Especial Mundial</h2>
+            <p>Hoy vamos a recrear distintos elementos relacionados con el partido Argentina vs Egipto utilizando únicamente herramientas de formato de Google Sheets.</p>
+        </div>
+
+        <!-- Pantalla 2: Ejercicio 1 (Bandera de Argentina) -->
+        <div class="screen" id="screen-2" data-tag="EJERCICIO 1" data-title="Bandera de Argentina" data-tools="tb-fillcolor,tb-rowheight,tb-colwidth" data-coords="A1:E3">
+            <table class="gsheet" style="height: 600px; width: 100%; max-width: 900px;">
+                <colgroup>
+                    <col class="row-header">
+                    <col style="width: 20%;">
+                    <col style="width: 20%;">
+                    <col style="width: 20%;">
+                    <col style="width: 20%;">
+                    <col style="width: 20%;">
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th class="cell-header corner"></th>
+                        <th class="cell-header">A</th>
+                        <th class="cell-header">B</th>
+                        <th class="cell-header">C</th>
+                        <th class="cell-header">D</th>
+                        <th class="cell-header">E</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="height: 33.33%;">
+                        <td class="cell-header">1</td>
+                        <td style="background-color: #38bdf8;"></td>
+                        <td style="background-color: #38bdf8;"></td>
+                        <td style="background-color: #38bdf8;"></td>
+                        <td style="background-color: #38bdf8;"></td>
+                        <td style="background-color: #38bdf8;"></td>
+                    </tr>
+                    <tr style="height: 33.33%;">
+                        <td class="cell-header">2</td>
+                        <td style="background-color: #ffffff;"></td>
+                        <td style="background-color: #ffffff;"></td>
+                        <td style="background-color: #facc15;"></td>
+                        <td style="background-color: #ffffff;"></td>
+                        <td style="background-color: #ffffff;"></td>
+                    </tr>
+                    <tr style="height: 33.33%;">
+                        <td class="cell-header">3</td>
+                        <td style="background-color: #38bdf8;"></td>
+                        <td style="background-color: #38bdf8;"></td>
+                        <td style="background-color: #38bdf8;"></td>
+                        <td style="background-color: #38bdf8;"></td>
+                        <td style="background-color: #38bdf8;"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pantalla 3: Ejercicio 2 (Resultado del partido) -->
+        <div class="screen" id="screen-3" data-tag="EJERCICIO 2" data-title="Resultado del partido" data-tools="tb-merge,tb-borders,tb-fillcolor,tb-bold,tb-aligncenter" data-coords="A1:D4">
+            <table class="gsheet" style="width: 100%;">
+                <colgroup>
+                    <col class="row-header">
+                    <col style="width: 25%;">
+                    <col style="width: 25%;">
+                    <col style="width: 25%;">
+                    <col style="width: 25%;">
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th class="cell-header corner"></th>
+                        <th class="cell-header">A</th>
+                        <th class="cell-header">B</th>
+                        <th class="cell-header">C</th>
+                        <th class="cell-header">D</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="height: 60px;">
+                        <td class="cell-header">1</td>
+                        <td colspan="4" class="merged-center border-thick text-bold" style="background-color: #1e3a8a; color: white; font-size: 1.8rem;">ARGENTINA vs EGIPTO</td>
+                    </tr>
+                    <tr style="height: 50px;">
+                        <td class="cell-header">2</td>
+                        <td class="text-center border-thick text-bold" style="background-color: #3b82f6; color: white;">Equipo</td>
+                        <td class="text-center border-thick text-bold" style="background-color: #3b82f6; color: white;">Goles</td>
+                        <td class="text-center border-thick text-bold" style="background-color: #3b82f6; color: white;">Resultado</td>
+                        <td class="text-center border-thick text-bold" style="background-color: #3b82f6; color: white;">Clasificación</td>
+                    </tr>
+                    <tr style="height: 50px;">
+                        <td class="cell-header">3</td>
+                        <td class="text-center border-thick" style="background-color: #ffffff;">Argentina</td>
+                        <td class="text-center border-thick" style="background-color: #ffffff;">3</td>
+                        <td class="text-center border-thick" style="background-color: #ffffff;">Ganó</td>
+                        <td class="text-center border-thick" style="background-color: #ffffff;">Cuartos de final</td>
+                    </tr>
+                    <tr style="height: 50px;">
+                        <td class="cell-header">4</td>
+                        <td class="text-center border-thick" style="background-color: #f8fafc;">Egipto</td>
+                        <td class="text-center border-thick" style="background-color: #f8fafc;">2</td>
+                        <td class="text-center border-thick" style="background-color: #f8fafc;">Perdió</td>
+                        <td class="text-center border-thick" style="background-color: #f8fafc;">Eliminado</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pantalla 4: Ejercicio 3 (Cancha de fútbol) -->
+        <div class="screen" id="screen-4" data-tag="EJERCICIO 3" data-title="Cancha de fútbol" data-tools="tb-fillcolor,tb-borders,tb-rowheight,tb-colwidth" data-coords="A1:J9">
+            <table class="gsheet" style="margin: 0 auto; width: 900px;">
+                <colgroup>
+                    <col class="row-header">
+                    <col style="width: 5%;">  <!-- A (Out) -->
+                    <col style="width: 10%;"> <!-- B (Left Box) -->
+                    <col style="width: 10%;"> <!-- C (Left Pen) -->
+                    <col style="width: 15%;"> <!-- D (Left Mid) -->
+                    <col style="width: 10%;"> <!-- E (Center L) -->
+                    <col style="width: 10%;"> <!-- F (Center R) -->
+                    <col style="width: 15%;"> <!-- G (Right Mid) -->
+                    <col style="width: 10%;"> <!-- H (Right Pen) -->
+                    <col style="width: 10%;"> <!-- I (Right Box) -->
+                    <col style="width: 5%;">  <!-- J (Out) -->
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th class="cell-header corner"></th>
+                        <th class="cell-header">A</th>
+                        <th class="cell-header">B</th>
+                        <th class="cell-header">C</th>
+                        <th class="cell-header">D</th>
+                        <th class="cell-header">E</th>
+                        <th class="cell-header">F</th>
+                        <th class="cell-header">G</th>
+                        <th class="cell-header">H</th>
+                        <th class="cell-header">I</th>
+                        <th class="cell-header">J</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="height: 30px;">
+                        <td class="cell-header">1</td>
+                        <td style="background-color: #15803d;"></td>
+                        <td style="background-color: #15803d;"></td>
+                        <td style="background-color: #15803d;"></td>
+                        <td style="background-color: #15803d;"></td>
+                        <td style="background-color: #15803d;"></td>
+                        <td style="background-color: #15803d;"></td>
+                        <td style="background-color: #15803d;"></td>
+                        <td style="background-color: #15803d;"></td>
+                        <td style="background-color: #15803d;"></td>
+                        <td style="background-color: #15803d;"></td>
+                    </tr>
+                    <tr style="height: 60px;">
+                        <td class="cell-header">2</td>
+                        <td style="background-color: #15803d;"></td>
+                        <td style="background-color: #15803d; border-top: 3px solid white !important; border-left: 3px solid white !important;"></td>
+                        <td style="background-color: #15803d; border-top: 3px solid white !important;"></td>
+                        <td style="background-color: #15803d; border-top: 3px solid white !important;"></td>
+                        <td style="background-color: #15803d; border-top: 3px solid white !important; border-right: 3px solid white !important;"></td>
+                        <td style="background-color: #15803d; border-top: 3px solid white !important;"></td>
+                        <td style="background-color: #15803d; border-top: 3px solid white !important;"></td>
+                        <td style="background-color: #15803d; border-top: 3px solid white !important;"></td>
+                        <td style="background-color: #15803d; border-top: 3px solid white !important; border-right: 3px solid white !important;"></td>
+                        <td style="background-color: #15803d;"></td>
+                    </tr>
+                    <tr style="height: 60px;">
+                        <td class="cell-header">3</td>
+                        <td style="background-color: #15803d;"></td>
+                        <td style="background-color: #15803d; border-top: 2px solid white !important; border-left: 3px solid white !important;"></td>
+                        <td style="background-color: #15803d; border-top: 2px solid white !important; border-right: 2px solid white !important;"></td>
+                        <td style="background-color: #15803d;"></td>
+                        <td style="background-color: #15803d; border-right: 3px solid white !important;"></td>
+                        <td style="background-color: #15803d;"></td>
+                        <td style="background-color: #15803d; border-top: 2px solid white !important; border-left: 2px solid white !important;"></td>
+                        <td style="background-color: #15803d; border-top: 2px solid white !important;"></td>
+                        <td style="background-color: #15803d; border-right: 3px solid white !important;"></td>
+                        <td style="background-color: #15803d;"></td>
+                    </tr>
+                    <tr style="height: 60px;">
+                        <td class="cell-header">4</td>
+                        <td style="background-color: #cbd5e1; border: 2px solid white !important;"></td> <!-- Arco Izq -->
+                        <td style="background-color: #15803d; border-top: 2px solid white !important; border-right: 2px solid white !important; border-left: 3px solid white !important;"></td>
+                        <td style="background-color: #15803d; border-right: 2px solid white !important;"></td>
+                        <td style="background-color: #15803d; border-top: 2px solid white !important; border-left: 2px solid white !important;"></td>
+                        <td style="background-color: #15803d; border-top: 2px solid white !important; border-right: 3px solid white !important;"></td>
+                        <td style="background-color: #15803d; border-top: 2px solid white !important; border-right: 2px solid white !important;"></td>
+                        <td style="background-color: #15803d; border-left: 2px solid white !important;"></td>
+                        <td style="background-color: #15803d; border-top: 2px solid white !important; border-left: 2px solid white !important;"></td>
+                        <td style="background-color: #15803d; border-right: 3px solid white !important;"></td>
+                        <td style="background-color: #cbd5e1; border: 2px solid white !important;"></td> <!-- Arco Der -->
+                    </tr>
+                    <tr style="height: 60px;">
+                        <td class="cell-header">5</td>
+                        <td style="background-color: #cbd5e1; border: 2px solid white !important;"></td> <!-- Arco Izq -->
+                        <td style="background-color: #15803d; border-bottom: 2px solid white !important; border-right: 2px solid white !important; border-left: 3px solid white !important;"></td>
+                        <td style="background-color: #15803d; border-right: 2px solid white !important;"></td>
+                        <td style="background-color: #15803d; border-bottom: 2px solid white !important; border-left: 2px solid white !important;"></td>
+                        <td style="background-color: #15803d; border-bottom: 2px solid white !important; border-right: 3px solid white !important;"></td>
+                        <td style="background-color: #15803d; border-bottom: 2px solid white !important; border-right: 2px solid white !important;"></td>
+                        <td style="background-color: #15803d; border-left: 2px solid white !important;"></td>
+                        <td style="background-color: #15803d; border-bottom: 2px solid white !important; border-left: 2px solid white !important;"></td>
+                        <td style="background-color: #15803d; border-right: 3px solid white !important;"></td>
+                        <td style="background-color: #cbd5e1; border: 2px solid white !important;"></td> <!-- Arco Der -->
+                    </tr>
+                    <tr style="height: 60px;">
+                        <td class="cell-header">6</td>
+                        <td style="background-color: #15803d;"></td>
+                        <td style="background-color: #15803d; border-bottom: 2px solid white !important; border-left: 3px solid white !important;"></td>
+                        <td style="background-color: #15803d; border-bottom: 2px solid white !important; border-right: 2px solid white !important;"></td>
+                        <td style="background-color: #15803d;"></td>
+                        <td style="background-color: #15803d; border-right: 3px solid white !important;"></td>
+                        <td style="background-color: #15803d;"></td>
+                        <td style="background-color: #15803d; border-bottom: 2px solid white !important; border-left: 2px solid white !important;"></td>
+                        <td style="background-color: #15803d; border-bottom: 2px solid white !important;"></td>
+                        <td style="background-color: #15803d; border-right: 3px solid white !important;"></td>
+                        <td style="background-color: #15803d;"></td>
+                    </tr>
+                    <tr style="height: 60px;">
+                        <td class="cell-header">7</td>
+                        <td style="background-color: #15803d;"></td>
+                        <td style="background-color: #15803d; border-bottom: 3px solid white !important; border-left: 3px solid white !important;"></td>
+                        <td style="background-color: #15803d; border-bottom: 3px solid white !important;"></td>
+                        <td style="background-color: #15803d; border-bottom: 3px solid white !important;"></td>
+                        <td style="background-color: #15803d; border-bottom: 3px solid white !important; border-right: 3px solid white !important;"></td>
+                        <td style="background-color: #15803d; border-bottom: 3px solid white !important;"></td>
+                        <td style="background-color: #15803d; border-bottom: 3px solid white !important;"></td>
+                        <td style="background-color: #15803d; border-bottom: 3px solid white !important;"></td>
+                        <td style="background-color: #15803d; border-bottom: 3px solid white !important; border-right: 3px solid white !important;"></td>
+                        <td style="background-color: #15803d;"></td>
+                    </tr>
+                    <tr style="height: 30px;">
+                        <td class="cell-header">8</td>
+                        <td style="background-color: #15803d;"></td>
+                        <td style="background-color: #15803d;"></td>
+                        <td style="background-color: #15803d;"></td>
+                        <td style="background-color: #15803d;"></td>
+                        <td style="background-color: #15803d;"></td>
+                        <td style="background-color: #15803d;"></td>
+                        <td style="background-color: #15803d;"></td>
+                        <td style="background-color: #15803d;"></td>
+                        <td style="background-color: #15803d;"></td>
+                        <td style="background-color: #15803d;"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pantalla 5: Ejercicio 4 (Goleadores del partido) -->
+        <div class="screen" id="screen-5" data-tag="EJERCICIO 4" data-title="Goleadores del partido" data-tools="tb-merge,tb-fillcolor,tb-borders,tb-bold,tb-aligncenter" data-coords="A1:C5">
+            <table class="gsheet" style="width: 100%;">
+                <colgroup>
+                    <col class="row-header">
+                    <col style="width: 40%;">
+                    <col style="width: 25%;">
+                    <col style="width: 35%;">
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th class="cell-header corner"></th>
+                        <th class="cell-header">A</th>
+                        <th class="cell-header">B</th>
+                        <th class="cell-header">C</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="height: 60px;">
+                        <td class="cell-header">1</td>
+                        <td colspan="3" class="merged-center border-thick text-bold" style="background-color: #1e3a8a; color: white; font-size: 1.8rem;">GOLEADORES DEL PARTIDO</td>
+                    </tr>
+                    <tr style="height: 50px;">
+                        <td class="cell-header">2</td>
+                        <td class="text-center border-thick text-bold" style="background-color: #3b82f6; color: white;">Jugador</td>
+                        <td class="text-center border-thick text-bold" style="background-color: #3b82f6; color: white;">Minuto</td>
+                        <td class="text-center border-thick text-bold" style="background-color: #3b82f6; color: white;">Tipo de gol</td>
+                    </tr>
+                    <tr style="height: 50px;">
+                        <td class="cell-header">3</td>
+                        <td class="text-center border-thick" style="background-color: #ffffff;">Cristian Romero</td>
+                        <td class="text-center border-thick" style="background-color: #ffffff;">79'</td>
+                        <td class="text-center border-thick" style="background-color: #ffffff;">Cabezazo</td>
+                    </tr>
+                    <tr style="height: 50px;">
+                        <td class="cell-header">4</td>
+                        <td class="text-center border-thick" style="background-color: #f8fafc;">Lionel Messi</td>
+                        <td class="text-center border-thick" style="background-color: #f8fafc;">83'</td>
+                        <td class="text-center border-thick" style="background-color: #f8fafc;">Remate</td>
+                    </tr>
+                    <tr style="height: 50px;">
+                        <td class="cell-header">5</td>
+                        <td class="text-center border-thick" style="background-color: #ffffff;">Enzo Fernández</td>
+                        <td class="text-center border-thick" style="background-color: #ffffff;">90+</td>
+                        <td class="text-center border-thick" style="background-color: #ffffff;">Cabezazo</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pantalla 6: Ejercicio 5 (Bandera de Egipto) -->
+        <div class="screen" id="screen-6" data-tag="EJERCICIO 5" data-title="Bandera de Egipto" data-tools="tb-fillcolor,tb-rowheight,tb-colwidth" data-coords="A1:E3">
+            <table class="gsheet" style="height: 600px; width: 100%; max-width: 900px;">
+                <colgroup>
+                    <col class="row-header">
+                    <col style="width: 20%;">
+                    <col style="width: 20%;">
+                    <col style="width: 20%;">
+                    <col style="width: 20%;">
+                    <col style="width: 20%;">
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th class="cell-header corner"></th>
+                        <th class="cell-header">A</th>
+                        <th class="cell-header">B</th>
+                        <th class="cell-header">C</th>
+                        <th class="cell-header">D</th>
+                        <th class="cell-header">E</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="height: 33.33%;">
+                        <td class="cell-header">1</td>
+                        <td style="background-color: #ef4444;"></td>
+                        <td style="background-color: #ef4444;"></td>
+                        <td style="background-color: #ef4444;"></td>
+                        <td style="background-color: #ef4444;"></td>
+                        <td style="background-color: #ef4444;"></td>
+                    </tr>
+                    <tr style="height: 33.33%;">
+                        <td class="cell-header">2</td>
+                        <td style="background-color: #ffffff;"></td>
+                        <td style="background-color: #ffffff;"></td>
+                        <td style="background-color: #eab308;"></td>
+                        <td style="background-color: #ffffff;"></td>
+                        <td style="background-color: #ffffff;"></td>
+                    </tr>
+                    <tr style="height: 33.33%;">
+                        <td class="cell-header">3</td>
+                        <td style="background-color: #000000;"></td>
+                        <td style="background-color: #000000;"></td>
+                        <td style="background-color: #000000;"></td>
+                        <td style="background-color: #000000;"></td>
+                        <td style="background-color: #000000;"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pantalla 7: Ejercicio 6 (Resumen del partido) -->
+        <div class="screen" id="screen-7" data-tag="EJERCICIO 6" data-title="Resumen del partido" data-tools="tb-merge,tb-borders,tb-fillcolor,tb-bold,tb-aligncenter" data-coords="A1:C7">
+            <table class="gsheet" style="width: 100%;">
+                <colgroup>
+                    <col class="row-header">
+                    <col style="width: 33.33%;">
+                    <col style="width: 33.33%;">
+                    <col style="width: 33.33%;">
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th class="cell-header corner"></th>
+                        <th class="cell-header">A</th>
+                        <th class="cell-header">B</th>
+                        <th class="cell-header">C</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="height: 60px;">
+                        <td class="cell-header">1</td>
+                        <td colspan="3" class="merged-center border-thick text-bold" style="background-color: #1e3a8a; color: white; font-size: 1.8rem;">RESUMEN DEL PARTIDO</td>
+                    </tr>
+                    <tr style="height: 50px;">
+                        <td class="cell-header">2</td>
+                        <td class="text-center border-thick text-bold" style="background-color: #3b82f6; color: white;">Dato</td>
+                        <td class="text-center border-thick text-bold" style="background-color: #3b82f6; color: white;">Argentina</td>
+                        <td class="text-center border-thick text-bold" style="background-color: #3b82f6; color: white;">Egipto</td>
+                    </tr>
+                    <tr style="height: 50px;">
+                        <td class="cell-header">3</td>
+                        <td class="text-center border-thick" style="background-color: #ffffff;">Goles</td>
+                        <td class="text-center border-thick" style="background-color: #ffffff;">3</td>
+                        <td class="text-center border-thick" style="background-color: #ffffff;">2</td>
+                    </tr>
+                    <tr style="height: 50px;">
+                        <td class="cell-header">4</td>
+                        <td class="text-center border-thick" style="background-color: #f8fafc;">Resultado</td>
+                        <td class="text-center border-thick" style="background-color: #f8fafc;">Ganó</td>
+                        <td class="text-center border-thick" style="background-color: #f8fafc;">Perdió</td>
+                    </tr>
+                    <tr style="height: 50px;">
+                        <td class="cell-header">5</td>
+                        <td class="text-center border-thick" style="background-color: #ffffff;">Instancia</td>
+                        <td class="text-center border-thick" style="background-color: #ffffff;">Octavos</td>
+                        <td class="text-center border-thick" style="background-color: #ffffff;">Octavos</td>
+                    </tr>
+                    <tr style="height: 50px;">
+                        <td class="cell-header">6</td>
+                        <td class="text-center border-thick" style="background-color: #f8fafc;">Próximo rival</td>
+                        <td class="text-center border-thick" style="background-color: #f8fafc;">Suiza</td>
+                        <td class="text-center border-thick" style="background-color: #f8fafc;">—</td>
+                    </tr>
+                    <tr style="height: 50px;">
+                        <td class="cell-header">7</td>
+                        <td class="text-center border-thick" style="background-color: #ffffff;">Estado</td>
+                        <td class="text-center border-thick" style="background-color: #ffffff;">Clasificado</td>
+                        <td class="text-center border-thick" style="background-color: #ffffff;">Eliminado</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pantalla 8: Cierre -->
+        <div class="screen outro-screen" id="screen-8" data-tools="" data-coords="-">
+            <h1>Misión cumplida</h1>
+            <ul class="checklist">
+                <li>Pintar rangos</li>
+                <li>Modificar filas</li>
+                <li>Modificar columnas</li>
+                <li>Combinar celdas</li>
+                <li>Aplicar bordes</li>
+                <li>Crear tablas</li>
+                <li>Presentar información</li>
+            </ul>
+        </div>
+
+    </main>
+
+    <div class="bottom-info-bar">
+        <div class="coords-box" id="coords-display">
+            📍 <strong>-</strong>
+        </div>
+        <div class="divider">|</div>
+        <div class="used-tools" id="tools-display">
+            <!-- Herramientas dinámicas -->
+        </div>
+    </div>
+
+    <footer class="nav-footer">
+        <button class="btn btn-prev" id="btn-prev" onclick="changeStep(-1)">Anterior</button>
+        <div class="step-counter" id="step-counter">1 / 8</div>
+        <button class="btn btn-next" id="btn-next" onclick="changeStep(1)">Siguiente</button>
+    </footer>
+
+</div>
+
+<script>
+let currentStep = 1;
+const totalSteps = 8;
+
+const toolData = {
+    'tb-bold': { label: 'Negrita', icon: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.6 10.79c.97-.67 1.65-1.77 1.65-2.79 0-2.26-1.75-4-4-4H7v14h7.04c2.09 0 3.71-1.7 3.71-3.79 0-1.52-.86-2.82-2.15-3.42zM10 6.5h3c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5h-3v-3zm3.5 9H10v-3h3.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-3v-3zm3.5 9H10v-3h3.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5z"/></svg>' },
+    'tb-italic': { label: 'Cursiva', icon: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 4v3h2.21l-3.42 8H6v3h8v-3h-2.21l3.42-8H18V4z"/></svg>' },
+    'tb-underline': { label: 'Subrayado', icon: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 17c3.31 0 6-2.69 6-6V3h-2.5v8c0 1.93-1.57 3.5-3.5 3.5S8.5 12.93 8.5 11V3H6v8c0 3.31 2.69 6 6 6zm-7 2v2h14v-2H5z"/></svg>' },
+    'tb-textcolor': { label: 'Color', icon: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M2 20h20v4H2v-4zm3.49-3h2.42l1.27-3.58h5.65L16.09 17h2.42L13.25 3h-2.5L5.49 17zm4.42-5.61 2.03-5.79h.12l2.03 5.79H9.91z"/></svg>' },
+    'tb-fillcolor': { label: 'Color', icon: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.56 8.94L7.62 0 6.21 1.41l2.38 2.38-5.15 5.15c-.59.59-.59 1.54 0 2.12l5.5 5.5c.29.29.68.44 1.06.44s.77-.15 1.06-.44l5.5-5.5c.59-.58.59-1.53 0-2.12zM5.21 10L10 5.21 14.79 10H5.21zM19 11.5s-2 2.17-2 3.5c0 1.1.9 2 2 2s2-.9 2-2c0-1.33-2-3.5-2-3.5z"/><path d="M0 20h24v4H0z" fill="#000"/></svg>' },
+    'tb-borders': { label: 'Bordes', icon: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M15 21h2v-2h-2v2zm4 0h2v-2h-2v2zM7 21h2v-2H7v2zm4 0h2v-2h-2v2zm8-4h2v-2h-2v2zm0-4h2v-2h-2v2zM3 3v18h2V5h16V3H3zm16 6h2V7h-2v2z"/></svg>' },
+    'tb-merge': { label: 'Combinar', icon: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 10V7H4V5h4V2l3 4-3 4zm8 4v3h4v2h-4v3l-3-4 3-4zm-5-3h2v2h-2z"/></svg>' },
+    'tb-alignleft': { label: 'Alineación', icon: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M15 15H3v2h12v-2zm0-8H3v2h12V7zM3 13h18v-2H3v2zm0 8h18v-2H3v2zM3 3v2h18V3H3z"/></svg>' },
+    'tb-aligncenter': { label: 'Centrar', icon: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 15v2h10v-2H7zM3 13h18v-2H3v2zm4-8v2h10V5H7zm-4 6h18V9H3v2zm0 8h18v-2H3v2z"/></svg>' },
+    'tb-alignright': { label: 'Alineación', icon: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 21h18v-2H3v2zm6-4h12v-2H9v2zm-6-4h18v-2H3v2zm6-4h12V7H9v2zM3 3v2h18V3H3z"/></svg>' },
+    'tb-valigntop': { label: 'Alineación V.', icon: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 11h3v10h2V11h3l-4-4-4 4zM4 3v2h16V3H4z"/></svg>' },
+    'tb-valignmiddle': { label: 'Centrar V.', icon: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 19h3v4h2v-4h3l-4-4-4 4zm8-14h-3V1h-2v4H8l4 4 4-4zM4 11v2h16v-2H4z"/></svg>' },
+    'tb-valignbottom': { label: 'Alineación V.', icon: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 13h-3V3h-2v10H8l4 4 4-4zM4 19v2h16v-2H4z"/></svg>' },
+    'tb-colwidth': { label: 'Ancho Col.', icon: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 21V3H8v18h2zm4-18v18h2V3h-2zm-6 9l2.5-2.5v5L8 12zm8 0l-2.5-2.5v5L16 12z"/></svg>' },
+    'tb-rowheight': { label: 'Alto Fila', icon: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M21 10H3V8h18v2zm0 6H3v-2h18v2zm-9-6l-2.5 2.5h5L12 10zm0 6l-2.5-2.5h5L12 16z"/></svg>' }
+};
+
+function updateUI() {
+    document.querySelectorAll('.screen').forEach(screen => {
+        screen.classList.remove('active');
+    });
+
+    const activeScreen = document.getElementById(`screen-${currentStep}`);
+    if(activeScreen) {
+        activeScreen.classList.add('active');
+        
+        // Actualizar barra de misión
+        const tag = activeScreen.getAttribute('data-tag');
+        const title = activeScreen.getAttribute('data-title');
+        
+        document.querySelector('.mission-bar').style.display = (tag && title) ? 'flex' : 'none';
+        document.getElementById('current-tag').innerText = tag || '';
+        document.getElementById('current-title').innerText = title || '';
+
+        // Actualizar coordenadas
+        const coords = activeScreen.getAttribute('data-coords');
+        document.getElementById('coords-display').innerHTML = coords && coords !== '-' ? `📍 <strong>${coords}</strong>` : '📍 <strong>-</strong>';
+
+        // Actualizar herramientas activas
+        const toolsStr = activeScreen.getAttribute('data-tools');
+        const activeTools = toolsStr ? toolsStr.split(',') : [];
+        
+        // Resetear toolbar superior
+        document.querySelectorAll('.tb-btn').forEach(btn => btn.classList.remove('active'));
+        
+        // Limpiar herramientas inferiores
+        const toolsDisplay = document.getElementById('tools-display');
+        toolsDisplay.innerHTML = 'Herramientas activas: ';
+
+        if (activeTools.length > 0 && activeTools[0] !== "") {
+            activeTools.forEach(toolId => {
+                // Activar en toolbar superior
+                const btn = document.getElementById(toolId);
+                if(btn) btn.classList.add('active');
+                
+                // Agregar a barra inferior
+                if(toolData[toolId]) {
+                    const span = document.createElement('span');
+                    span.className = 'tool-tag';
+                    span.innerHTML = `${toolData[toolId].icon} ${toolData[toolId].label}`;
+                    toolsDisplay.appendChild(span);
+                }
+            });
+        } else {
+             toolsDisplay.innerHTML = '';
+             document.getElementById('coords-display').innerHTML = '';
+             document.querySelector('.divider').style.display = 'none';
+        }
+        
+        if (activeTools.length > 0 && activeTools[0] !== "") {
+             document.querySelector('.divider').style.display = 'block';
+        }
+    }
+    
+    document.getElementById('step-counter').innerText = `${currentStep} / ${totalSteps}`;
+
+    document.getElementById('btn-prev').style.visibility = 
+        currentStep === 1 ? 'hidden' : 'visible';
+
+    document.getElementById('btn-next').style.visibility = 
+        currentStep === totalSteps ? 'hidden' : 'visible';
+}
+
+function changeStep(direction) {
+    currentStep += direction;
+
+    if(currentStep < 1) currentStep = 1;
+    if(currentStep > totalSteps) currentStep = totalSteps;
+
+    updateUI();
+}
+
+document.addEventListener('keydown', function(e) {
+    if(e.key === 'ArrowRight' || e.key === 'Space') {
+        changeStep(1);
+    } else if (e.key === 'ArrowLeft') {
+        changeStep(-1);
+    }
+});
+
+updateUI();
+</script>
+
+</body>
+</html>
