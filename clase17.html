@@ -179,10 +179,17 @@ body {
     font-family: 'Times New Roman', Times, serif;
     font-style: italic;
     font-weight: bold;
-    color: #444746;
+    color: #5f6368;
     font-size: 1.1rem;
-    margin-right: 12px;
+    margin-right: 8px;
     user-select: none;
+}
+
+.fx-sep {
+    width: 1px;
+    height: 18px;
+    background-color: #dadce0;
+    margin-right: 12px;
 }
 
 .formula-input {
@@ -191,8 +198,8 @@ body {
     border: 1px solid transparent;
     border-radius: 4px;
     outline: none;
-    font-size: 0.9rem;
-    font-family: monospace;
+    font-size: 0.95rem;
+    font-family: Arial, sans-serif;
     padding: 0 8px;
     color: var(--text-dark);
 }
@@ -522,6 +529,7 @@ body {
 
     <div class="formula-bar">
         <div class="fx-icon">fx</div>
+        <div class="fx-sep"></div>
         <div class="formula-input"></div>
     </div>
 
@@ -540,50 +548,58 @@ body {
         </div>
 
         <!-- Pantalla 2: Ejercicio 1 (Bandera de Argentina) -->
-        <div class="screen" id="screen-2" data-tag="EJERCICIO 1" data-title="Bandera de Argentina" data-tools="tb-fillcolor,tb-rowheight,tb-colwidth" data-coords="A1:E3">
-            <table class="gsheet" style="height: 600px; width: 100%; max-width: 900px;">
+        <div class="screen" id="screen-2" data-tag="EJERCICIO 1" data-title="Bandera de Argentina" data-tools="tb-fillcolor,tb-rowheight,tb-colwidth" data-coords="A1:I6">
+            <table class="gsheet" style="height: 500px; width: 100%; max-width: 900px;">
                 <colgroup>
                     <col class="row-header">
-                    <col style="width: 20%;">
-                    <col style="width: 20%;">
-                    <col style="width: 20%;">
-                    <col style="width: 20%;">
-                    <col style="width: 20%;">
+                    <col style="width: 11.11%;"><col style="width: 11.11%;"><col style="width: 11.11%;">
+                    <col style="width: 11.11%;"><col style="width: 11.11%;"><col style="width: 11.11%;">
+                    <col style="width: 11.11%;"><col style="width: 11.11%;"><col style="width: 11.11%;">
                 </colgroup>
                 <thead>
                     <tr>
                         <th class="cell-header corner"></th>
-                        <th class="cell-header">A</th>
-                        <th class="cell-header">B</th>
-                        <th class="cell-header">C</th>
-                        <th class="cell-header">D</th>
-                        <th class="cell-header">E</th>
+                        <th class="cell-header">A</th><th class="cell-header">B</th><th class="cell-header">C</th>
+                        <th class="cell-header">D</th><th class="cell-header">E</th><th class="cell-header">F</th>
+                        <th class="cell-header">G</th><th class="cell-header">H</th><th class="cell-header">I</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr style="height: 33.33%;">
+                    <tr style="height: 16.66%;">
                         <td class="cell-header">1</td>
-                        <td style="background-color: #38bdf8;"></td>
-                        <td style="background-color: #38bdf8;"></td>
-                        <td style="background-color: #38bdf8;"></td>
-                        <td style="background-color: #38bdf8;"></td>
-                        <td style="background-color: #38bdf8;"></td>
+                        <td style="background-color: #38bdf8;"></td><td style="background-color: #38bdf8;"></td><td style="background-color: #38bdf8;"></td>
+                        <td style="background-color: #38bdf8;"></td><td style="background-color: #38bdf8;"></td><td style="background-color: #38bdf8;"></td>
+                        <td style="background-color: #38bdf8;"></td><td style="background-color: #38bdf8;"></td><td style="background-color: #38bdf8;"></td>
                     </tr>
-                    <tr style="height: 33.33%;">
+                    <tr style="height: 16.66%;">
                         <td class="cell-header">2</td>
-                        <td style="background-color: #ffffff;"></td>
-                        <td style="background-color: #ffffff;"></td>
-                        <td style="background-color: #facc15;"></td>
-                        <td style="background-color: #ffffff;"></td>
-                        <td style="background-color: #ffffff;"></td>
+                        <td style="background-color: #38bdf8;"></td><td style="background-color: #38bdf8;"></td><td style="background-color: #38bdf8;"></td>
+                        <td style="background-color: #38bdf8;"></td><td style="background-color: #38bdf8;"></td><td style="background-color: #38bdf8;"></td>
+                        <td style="background-color: #38bdf8;"></td><td style="background-color: #38bdf8;"></td><td style="background-color: #38bdf8;"></td>
                     </tr>
-                    <tr style="height: 33.33%;">
+                    <tr style="height: 16.66%;">
                         <td class="cell-header">3</td>
-                        <td style="background-color: #38bdf8;"></td>
-                        <td style="background-color: #38bdf8;"></td>
-                        <td style="background-color: #38bdf8;"></td>
-                        <td style="background-color: #38bdf8;"></td>
-                        <td style="background-color: #38bdf8;"></td>
+                        <td style="background-color: #ffffff;"></td><td style="background-color: #ffffff;"></td><td style="background-color: #ffffff;"></td>
+                        <td style="background-color: #ffffff;"></td><td style="background-color: #facc15;"></td><td style="background-color: #ffffff;"></td>
+                        <td style="background-color: #ffffff;"></td><td style="background-color: #ffffff;"></td><td style="background-color: #ffffff;"></td>
+                    </tr>
+                    <tr style="height: 16.66%;">
+                        <td class="cell-header">4</td>
+                        <td style="background-color: #ffffff;"></td><td style="background-color: #ffffff;"></td><td style="background-color: #ffffff;"></td>
+                        <td style="background-color: #ffffff;"></td><td style="background-color: #facc15;"></td><td style="background-color: #ffffff;"></td>
+                        <td style="background-color: #ffffff;"></td><td style="background-color: #ffffff;"></td><td style="background-color: #ffffff;"></td>
+                    </tr>
+                    <tr style="height: 16.66%;">
+                        <td class="cell-header">5</td>
+                        <td style="background-color: #38bdf8;"></td><td style="background-color: #38bdf8;"></td><td style="background-color: #38bdf8;"></td>
+                        <td style="background-color: #38bdf8;"></td><td style="background-color: #38bdf8;"></td><td style="background-color: #38bdf8;"></td>
+                        <td style="background-color: #38bdf8;"></td><td style="background-color: #38bdf8;"></td><td style="background-color: #38bdf8;"></td>
+                    </tr>
+                    <tr style="height: 16.66%;">
+                        <td class="cell-header">6</td>
+                        <td style="background-color: #38bdf8;"></td><td style="background-color: #38bdf8;"></td><td style="background-color: #38bdf8;"></td>
+                        <td style="background-color: #38bdf8;"></td><td style="background-color: #38bdf8;"></td><td style="background-color: #38bdf8;"></td>
+                        <td style="background-color: #38bdf8;"></td><td style="background-color: #38bdf8;"></td><td style="background-color: #38bdf8;"></td>
                     </tr>
                 </tbody>
             </table>
@@ -591,13 +607,13 @@ body {
 
         <!-- Pantalla 3: Ejercicio 2 (Resultado del partido) -->
         <div class="screen" id="screen-3" data-tag="EJERCICIO 2" data-title="Resultado del partido" data-tools="tb-merge,tb-borders,tb-fillcolor,tb-bold,tb-aligncenter" data-coords="A1:D4">
-            <table class="gsheet" style="width: 100%;">
+            <table class="gsheet" style="width: 100%; font-size: 1.1rem;">
                 <colgroup>
                     <col class="row-header">
+                    <col style="width: 20%;">
+                    <col style="width: 15%;">
                     <col style="width: 25%;">
-                    <col style="width: 25%;">
-                    <col style="width: 25%;">
-                    <col style="width: 25%;">
+                    <col style="width: 40%;">
                 </colgroup>
                 <thead>
                     <tr>
@@ -611,7 +627,7 @@ body {
                 <tbody>
                     <tr style="height: 60px;">
                         <td class="cell-header">1</td>
-                        <td colspan="4" class="merged-center border-thick text-bold" style="background-color: #1e3a8a; color: white; font-size: 1.8rem;">ARGENTINA vs EGIPTO</td>
+                        <td colspan="4" class="merged-center border-thick text-bold" style="background-color: #1e3a8a; color: white; font-size: 1.6rem;">ARGENTINA vs EGIPTO</td>
                     </tr>
                     <tr style="height: 50px;">
                         <td class="cell-header">2</td>
@@ -622,157 +638,260 @@ body {
                     </tr>
                     <tr style="height: 50px;">
                         <td class="cell-header">3</td>
-                        <td class="text-center border-thick" style="background-color: #ffffff;">Argentina</td>
-                        <td class="text-center border-thick" style="background-color: #ffffff;">3</td>
-                        <td class="text-center border-thick" style="background-color: #ffffff;">Ganó</td>
-                        <td class="text-center border-thick" style="background-color: #ffffff;">Cuartos de final</td>
+                        <td class="text-center border-thick" style="background-color: #ffffff; font-size: 1.1rem;">Argentina</td>
+                        <td class="text-center border-thick" style="background-color: #ffffff; font-size: 1.1rem;">3</td>
+                        <td class="text-center border-thick" style="background-color: #ffffff; font-size: 1.1rem;">Ganó</td>
+                        <td class="text-center border-thick" style="background-color: #ffffff; font-size: 1.1rem;">Cuartos de final</td>
                     </tr>
                     <tr style="height: 50px;">
                         <td class="cell-header">4</td>
-                        <td class="text-center border-thick" style="background-color: #f8fafc;">Egipto</td>
-                        <td class="text-center border-thick" style="background-color: #f8fafc;">2</td>
-                        <td class="text-center border-thick" style="background-color: #f8fafc;">Perdió</td>
-                        <td class="text-center border-thick" style="background-color: #f8fafc;">Eliminado</td>
+                        <td class="text-center border-thick" style="background-color: #f8fafc; font-size: 1.1rem;">Egipto</td>
+                        <td class="text-center border-thick" style="background-color: #f8fafc; font-size: 1.1rem;">2</td>
+                        <td class="text-center border-thick" style="background-color: #f8fafc; font-size: 1.1rem;">Perdió</td>
+                        <td class="text-center border-thick" style="background-color: #f8fafc; font-size: 1.1rem;">Eliminado</td>
                     </tr>
                 </tbody>
             </table>
         </div>
 
         <!-- Pantalla 4: Ejercicio 3 (Cancha de fútbol) -->
-        <div class="screen" id="screen-4" data-tag="EJERCICIO 3" data-title="Cancha de fútbol" data-tools="tb-fillcolor,tb-borders,tb-rowheight,tb-colwidth" data-coords="A1:J9">
-            <table class="gsheet" style="margin: 0 auto; width: 900px;">
+        <div class="screen" id="screen-4" data-tag="EJERCICIO 3" data-title="Cancha de fútbol" data-tools="tb-fillcolor,tb-borders,tb-rowheight,tb-colwidth" data-coords="A1:Q13">
+            <table class="gsheet" style="margin: 0 auto; width: 1000px; height: 500px; font-size: 0;">
                 <colgroup>
                     <col class="row-header">
-                    <col style="width: 5%;">  <!-- A (Out) -->
-                    <col style="width: 10%;"> <!-- B (Left Box) -->
-                    <col style="width: 10%;"> <!-- C (Left Pen) -->
-                    <col style="width: 15%;"> <!-- D (Left Mid) -->
-                    <col style="width: 10%;"> <!-- E (Center L) -->
-                    <col style="width: 10%;"> <!-- F (Center R) -->
-                    <col style="width: 15%;"> <!-- G (Right Mid) -->
-                    <col style="width: 10%;"> <!-- H (Right Pen) -->
-                    <col style="width: 10%;"> <!-- I (Right Box) -->
-                    <col style="width: 5%;">  <!-- J (Out) -->
+                    <col style="width: 4%;"> <!-- A: Out L -->
+                    <col style="width: 4%;"> <!-- B: Goal L -->
+                    <col style="width: 4%;"> <!-- C: Small Area L -->
+                    <col style="width: 6%;"> <!-- D: Large Area Outer L -->
+                    <col style="width: 10%;"> <!-- E: Field L -->
+                    <col style="width: 9.5%;"> <!-- F: Field L Mid -->
+                    <col style="width: 5%;"> <!-- G: Circle Outer L -->
+                    <col style="width: 7%;"> <!-- H: Circle Inner L -->
+                    <col style="width: 1%;"> <!-- I: Center Line -->
+                    <col style="width: 7%;"> <!-- J: Circle Inner R -->
+                    <col style="width: 5%;"> <!-- K: Circle Outer R -->
+                    <col style="width: 9.5%;"> <!-- L: Field R Mid -->
+                    <col style="width: 10%;"> <!-- M: Field R -->
+                    <col style="width: 6%;"> <!-- N: Large Area Outer R -->
+                    <col style="width: 4%;"> <!-- O: Small Area R -->
+                    <col style="width: 4%;"> <!-- P: Goal R -->
+                    <col style="width: 4%;"> <!-- Q: Out R -->
                 </colgroup>
                 <thead>
-                    <tr>
-                        <th class="cell-header corner"></th>
-                        <th class="cell-header">A</th>
-                        <th class="cell-header">B</th>
-                        <th class="cell-header">C</th>
-                        <th class="cell-header">D</th>
-                        <th class="cell-header">E</th>
-                        <th class="cell-header">F</th>
-                        <th class="cell-header">G</th>
-                        <th class="cell-header">H</th>
-                        <th class="cell-header">I</th>
-                        <th class="cell-header">J</th>
+                    <tr style="height: 0;">
+                        <th class="cell-header corner" style="height: 30px;"></th>
+                        <th class="cell-header">A</th><th class="cell-header">B</th><th class="cell-header">C</th>
+                        <th class="cell-header">D</th><th class="cell-header">E</th><th class="cell-header">F</th>
+                        <th class="cell-header">G</th><th class="cell-header">H</th><th class="cell-header">I</th>
+                        <th class="cell-header">J</th><th class="cell-header">K</th><th class="cell-header">L</th>
+                        <th class="cell-header">M</th><th class="cell-header">N</th><th class="cell-header">O</th>
+                        <th class="cell-header">P</th><th class="cell-header">Q</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr style="height: 30px;">
+                    <tr style="height: 5%;">
                         <td class="cell-header">1</td>
-                        <td style="background-color: #15803d;"></td>
-                        <td style="background-color: #15803d;"></td>
-                        <td style="background-color: #15803d;"></td>
-                        <td style="background-color: #15803d;"></td>
-                        <td style="background-color: #15803d;"></td>
-                        <td style="background-color: #15803d;"></td>
-                        <td style="background-color: #15803d;"></td>
-                        <td style="background-color: #15803d;"></td>
-                        <td style="background-color: #15803d;"></td>
-                        <td style="background-color: #15803d;"></td>
+                        <td style="border: none;"></td><td style="border: none;"></td><td style="border: none;"></td>
+                        <td style="border: none;"></td><td style="border: none;"></td><td style="border: none;"></td>
+                        <td style="border: none;"></td><td style="border: none;"></td><td style="border: none;"></td>
+                        <td style="border: none;"></td><td style="border: none;"></td><td style="border: none;"></td>
+                        <td style="border: none;"></td><td style="border: none;"></td><td style="border: none;"></td>
+                        <td style="border: none;"></td><td style="border: none;"></td>
                     </tr>
-                    <tr style="height: 60px;">
+                    <tr style="height: 10%;">
                         <td class="cell-header">2</td>
-                        <td style="background-color: #15803d;"></td>
-                        <td style="background-color: #15803d; border-top: 3px solid white !important; border-left: 3px solid white !important;"></td>
-                        <td style="background-color: #15803d; border-top: 3px solid white !important;"></td>
-                        <td style="background-color: #15803d; border-top: 3px solid white !important;"></td>
-                        <td style="background-color: #15803d; border-top: 3px solid white !important; border-right: 3px solid white !important;"></td>
-                        <td style="background-color: #15803d; border-top: 3px solid white !important;"></td>
-                        <td style="background-color: #15803d; border-top: 3px solid white !important;"></td>
-                        <td style="background-color: #15803d; border-top: 3px solid white !important;"></td>
-                        <td style="background-color: #15803d; border-top: 3px solid white !important; border-right: 3px solid white !important;"></td>
-                        <td style="background-color: #15803d;"></td>
+                        <td style="border: none;"></td><td style="border: none;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-top: 3px solid white; border-left: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-top: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-top: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-top: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-top: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-top: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-top: 3px solid white; border-right: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-top: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-top: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-top: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-top: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-top: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-top: 3px solid white; border-right: 3px solid white;"></td>
+                        <td style="border: none;"></td><td style="border: none;"></td>
                     </tr>
-                    <tr style="height: 60px;">
+                    <tr style="height: 10%;">
                         <td class="cell-header">3</td>
-                        <td style="background-color: #15803d;"></td>
-                        <td style="background-color: #15803d; border-top: 2px solid white !important; border-left: 3px solid white !important;"></td>
-                        <td style="background-color: #15803d; border-top: 2px solid white !important; border-right: 2px solid white !important;"></td>
-                        <td style="background-color: #15803d;"></td>
-                        <td style="background-color: #15803d; border-right: 3px solid white !important;"></td>
-                        <td style="background-color: #15803d;"></td>
-                        <td style="background-color: #15803d; border-top: 2px solid white !important; border-left: 2px solid white !important;"></td>
-                        <td style="background-color: #15803d; border-top: 2px solid white !important;"></td>
-                        <td style="background-color: #15803d; border-right: 3px solid white !important;"></td>
-                        <td style="background-color: #15803d;"></td>
+                        <td style="border: none;"></td><td style="border: none;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-top: 3px solid white; border-left: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-top: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-top: 3px solid white; border-right: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-right: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-top: 3px solid white; border-left: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-top: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-top: 3px solid white; border-right: 3px solid white;"></td>
+                        <td style="border: none;"></td><td style="border: none;"></td>
                     </tr>
-                    <tr style="height: 60px;">
+                    <tr style="height: 10%;">
                         <td class="cell-header">4</td>
-                        <td style="background-color: #cbd5e1; border: 2px solid white !important;"></td> <!-- Arco Izq -->
-                        <td style="background-color: #15803d; border-top: 2px solid white !important; border-right: 2px solid white !important; border-left: 3px solid white !important;"></td>
-                        <td style="background-color: #15803d; border-right: 2px solid white !important;"></td>
-                        <td style="background-color: #15803d; border-top: 2px solid white !important; border-left: 2px solid white !important;"></td>
-                        <td style="background-color: #15803d; border-top: 2px solid white !important; border-right: 3px solid white !important;"></td>
-                        <td style="background-color: #15803d; border-top: 2px solid white !important; border-right: 2px solid white !important;"></td>
-                        <td style="background-color: #15803d; border-left: 2px solid white !important;"></td>
-                        <td style="background-color: #15803d; border-top: 2px solid white !important; border-left: 2px solid white !important;"></td>
-                        <td style="background-color: #15803d; border-right: 3px solid white !important;"></td>
-                        <td style="background-color: #cbd5e1; border: 2px solid white !important;"></td> <!-- Arco Der -->
+                        <td style="border: none;"></td><td style="border: none;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-top: 3px solid white; border-left: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-top: 3px solid white; border-right: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-right: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-right: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-left: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-top: 3px solid white; border-left: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-top: 3px solid white; border-right: 3px solid white;"></td>
+                        <td style="border: none;"></td><td style="border: none;"></td>
                     </tr>
-                    <tr style="height: 60px;">
+                    <tr style="height: 10%;">
                         <td class="cell-header">5</td>
-                        <td style="background-color: #cbd5e1; border: 2px solid white !important;"></td> <!-- Arco Izq -->
-                        <td style="background-color: #15803d; border-bottom: 2px solid white !important; border-right: 2px solid white !important; border-left: 3px solid white !important;"></td>
-                        <td style="background-color: #15803d; border-right: 2px solid white !important;"></td>
-                        <td style="background-color: #15803d; border-bottom: 2px solid white !important; border-left: 2px solid white !important;"></td>
-                        <td style="background-color: #15803d; border-bottom: 2px solid white !important; border-right: 3px solid white !important;"></td>
-                        <td style="background-color: #15803d; border-bottom: 2px solid white !important; border-right: 2px solid white !important;"></td>
-                        <td style="background-color: #15803d; border-left: 2px solid white !important;"></td>
-                        <td style="background-color: #15803d; border-bottom: 2px solid white !important; border-left: 2px solid white !important;"></td>
-                        <td style="background-color: #15803d; border-right: 3px solid white !important;"></td>
-                        <td style="background-color: #cbd5e1; border: 2px solid white !important;"></td> <!-- Arco Der -->
+                        <td style="border: none;"></td><td style="border: none;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-left: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-right: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-right: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-top: 3px solid white; border-left: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-top: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-top: 3px solid white; border-right: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-top: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-top: 3px solid white; border-right: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-left: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-left: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-right: 3px solid white;"></td>
+                        <td style="border: none;"></td><td style="border: none;"></td>
                     </tr>
-                    <tr style="height: 60px;">
+                    <tr style="height: 14%;">
                         <td class="cell-header">6</td>
-                        <td style="background-color: #15803d;"></td>
-                        <td style="background-color: #15803d; border-bottom: 2px solid white !important; border-left: 3px solid white !important;"></td>
-                        <td style="background-color: #15803d; border-bottom: 2px solid white !important; border-right: 2px solid white !important;"></td>
-                        <td style="background-color: #15803d;"></td>
-                        <td style="background-color: #15803d; border-right: 3px solid white !important;"></td>
-                        <td style="background-color: #15803d;"></td>
-                        <td style="background-color: #15803d; border-bottom: 2px solid white !important; border-left: 2px solid white !important;"></td>
-                        <td style="background-color: #15803d; border-bottom: 2px solid white !important;"></td>
-                        <td style="background-color: #15803d; border-right: 3px solid white !important;"></td>
-                        <td style="background-color: #15803d;"></td>
+                        <td style="border: none;"></td>
+                        <td style="background: #cbd5e1; border: 1px solid #cbd5e1; border-top: 3px solid #94a3b8; border-left: 3px solid #94a3b8;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-left: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-right: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-right: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-left: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-right: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-right: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-left: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-left: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-right: 3px solid white;"></td>
+                        <td style="background: #cbd5e1; border: 1px solid #cbd5e1; border-top: 3px solid #94a3b8; border-right: 3px solid #94a3b8;"></td>
+                        <td style="border: none;"></td>
                     </tr>
-                    <tr style="height: 60px;">
+                    <tr style="height: 2%;">
                         <td class="cell-header">7</td>
-                        <td style="background-color: #15803d;"></td>
-                        <td style="background-color: #15803d; border-bottom: 3px solid white !important; border-left: 3px solid white !important;"></td>
-                        <td style="background-color: #15803d; border-bottom: 3px solid white !important;"></td>
-                        <td style="background-color: #15803d; border-bottom: 3px solid white !important;"></td>
-                        <td style="background-color: #15803d; border-bottom: 3px solid white !important; border-right: 3px solid white !important;"></td>
-                        <td style="background-color: #15803d; border-bottom: 3px solid white !important;"></td>
-                        <td style="background-color: #15803d; border-bottom: 3px solid white !important;"></td>
-                        <td style="background-color: #15803d; border-bottom: 3px solid white !important;"></td>
-                        <td style="background-color: #15803d; border-bottom: 3px solid white !important; border-right: 3px solid white !important;"></td>
-                        <td style="background-color: #15803d;"></td>
+                        <td style="border: none;"></td>
+                        <td style="background: #cbd5e1; border: 1px solid #cbd5e1; border-left: 3px solid #94a3b8;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-left: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-right: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-right: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-left: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d;"></td>
+                        <td style="background: #ffffff; border: 1px solid #ffffff;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-right: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-left: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-left: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-right: 3px solid white;"></td>
+                        <td style="background: #cbd5e1; border: 1px solid #cbd5e1; border-right: 3px solid #94a3b8;"></td>
+                        <td style="border: none;"></td>
                     </tr>
-                    <tr style="height: 30px;">
+                    <tr style="height: 14%;">
                         <td class="cell-header">8</td>
-                        <td style="background-color: #15803d;"></td>
-                        <td style="background-color: #15803d;"></td>
-                        <td style="background-color: #15803d;"></td>
-                        <td style="background-color: #15803d;"></td>
-                        <td style="background-color: #15803d;"></td>
-                        <td style="background-color: #15803d;"></td>
-                        <td style="background-color: #15803d;"></td>
-                        <td style="background-color: #15803d;"></td>
-                        <td style="background-color: #15803d;"></td>
-                        <td style="background-color: #15803d;"></td>
+                        <td style="border: none;"></td>
+                        <td style="background: #cbd5e1; border: 1px solid #cbd5e1; border-bottom: 3px solid #94a3b8; border-left: 3px solid #94a3b8;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-left: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-right: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-right: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-left: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-right: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-right: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-left: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-left: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-right: 3px solid white;"></td>
+                        <td style="background: #cbd5e1; border: 1px solid #cbd5e1; border-bottom: 3px solid #94a3b8; border-right: 3px solid #94a3b8;"></td>
+                        <td style="border: none;"></td>
+                    </tr>
+                    <tr style="height: 10%;">
+                        <td class="cell-header">9</td>
+                        <td style="border: none;"></td><td style="border: none;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-bottom: 3px solid white; border-left: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-bottom: 3px solid white; border-right: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-right: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-bottom: 3px solid white; border-left: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-bottom: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-bottom: 3px solid white; border-right: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-bottom: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-bottom: 3px solid white; border-right: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-left: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-bottom: 3px solid white; border-left: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-bottom: 3px solid white; border-right: 3px solid white;"></td>
+                        <td style="border: none;"></td><td style="border: none;"></td>
+                    </tr>
+                    <tr style="height: 10%;">
+                        <td class="cell-header">10</td>
+                        <td style="border: none;"></td><td style="border: none;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-bottom: 3px solid white; border-left: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-bottom: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-bottom: 3px solid white; border-right: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-right: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-bottom: 3px solid white; border-left: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-bottom: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-bottom: 3px solid white; border-right: 3px solid white;"></td>
+                        <td style="border: none;"></td><td style="border: none;"></td>
+                    </tr>
+                    <tr style="height: 10%;">
+                        <td class="cell-header">11</td>
+                        <td style="border: none;"></td><td style="border: none;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-bottom: 3px solid white; border-left: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-bottom: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-bottom: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-bottom: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-bottom: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-bottom: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-bottom: 3px solid white; border-right: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-bottom: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-bottom: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-bottom: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-bottom: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-bottom: 3px solid white;"></td>
+                        <td style="background: #15803d; border: 1px solid #15803d; border-bottom: 3px solid white; border-right: 3px solid white;"></td>
+                        <td style="border: none;"></td><td style="border: none;"></td>
+                    </tr>
+                    <tr style="height: 5%;">
+                        <td class="cell-header">12</td>
+                        <td style="border: none;"></td><td style="border: none;"></td><td style="border: none;"></td>
+                        <td style="border: none;"></td><td style="border: none;"></td><td style="border: none;"></td>
+                        <td style="border: none;"></td><td style="border: none;"></td><td style="border: none;"></td>
+                        <td style="border: none;"></td><td style="border: none;"></td><td style="border: none;"></td>
+                        <td style="border: none;"></td><td style="border: none;"></td><td style="border: none;"></td>
+                        <td style="border: none;"></td><td style="border: none;"></td>
                     </tr>
                 </tbody>
             </table>
@@ -780,11 +899,119 @@ body {
 
         <!-- Pantalla 5: Ejercicio 4 (Goleadores del partido) -->
         <div class="screen" id="screen-5" data-tag="EJERCICIO 4" data-title="Goleadores del partido" data-tools="tb-merge,tb-fillcolor,tb-borders,tb-bold,tb-aligncenter" data-coords="A1:C5">
-            <table class="gsheet" style="width: 100%;">
+            <table class="gsheet" style="width: 100%; font-size: 1.1rem;">
                 <colgroup>
                     <col class="row-header">
                     <col style="width: 40%;">
-                    <col style="width: 25%;">
+                    <col style="width: 20%;">
+                    <col style="width: 40%;">
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th class="cell-header corner"></th>
+                        <th class="cell-header">A</th>
+                        <th class="cell-header">B</th>
+                        <th class="cell-header">C</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="height: 60px;">
+                        <td class="cell-header">1</td>
+                        <td colspan="3" class="merged-center border-thick text-bold" style="background-color: #1e3a8a; color: white; font-size: 1.6rem;">GOLEADORES DEL PARTIDO</td>
+                    </tr>
+                    <tr style="height: 50px;">
+                        <td class="cell-header">2</td>
+                        <td class="text-center border-thick text-bold" style="background-color: #3b82f6; color: white;">Jugador</td>
+                        <td class="text-center border-thick text-bold" style="background-color: #3b82f6; color: white;">Minuto</td>
+                        <td class="text-center border-thick text-bold" style="background-color: #3b82f6; color: white;">Tipo de gol</td>
+                    </tr>
+                    <tr style="height: 50px;">
+                        <td class="cell-header">3</td>
+                        <td class="text-center border-thick" style="background-color: #ffffff; font-size: 1.1rem;">Cristian Romero</td>
+                        <td class="text-center border-thick" style="background-color: #ffffff; font-size: 1.1rem;">79'</td>
+                        <td class="text-center border-thick" style="background-color: #ffffff; font-size: 1.1rem;">Cabezazo</td>
+                    </tr>
+                    <tr style="height: 50px;">
+                        <td class="cell-header">4</td>
+                        <td class="text-center border-thick" style="background-color: #f8fafc; font-size: 1.1rem;">Lionel Messi</td>
+                        <td class="text-center border-thick" style="background-color: #f8fafc; font-size: 1.1rem;">83'</td>
+                        <td class="text-center border-thick" style="background-color: #f8fafc; font-size: 1.1rem;">Remate</td>
+                    </tr>
+                    <tr style="height: 50px;">
+                        <td class="cell-header">5</td>
+                        <td class="text-center border-thick" style="background-color: #ffffff; font-size: 1.1rem;">Enzo Fernández</td>
+                        <td class="text-center border-thick" style="background-color: #ffffff; font-size: 1.1rem;">90+</td>
+                        <td class="text-center border-thick" style="background-color: #ffffff; font-size: 1.1rem;">Cabezazo</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pantalla 6: Ejercicio 5 (Bandera de Egipto) -->
+        <div class="screen" id="screen-6" data-tag="EJERCICIO 5" data-title="Bandera de Egipto" data-tools="tb-fillcolor,tb-rowheight,tb-colwidth" data-coords="A1:I6">
+            <table class="gsheet" style="height: 500px; width: 100%; max-width: 900px;">
+                <colgroup>
+                    <col class="row-header">
+                    <col style="width: 11.11%;"><col style="width: 11.11%;"><col style="width: 11.11%;">
+                    <col style="width: 11.11%;"><col style="width: 11.11%;"><col style="width: 11.11%;">
+                    <col style="width: 11.11%;"><col style="width: 11.11%;"><col style="width: 11.11%;">
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th class="cell-header corner"></th>
+                        <th class="cell-header">A</th><th class="cell-header">B</th><th class="cell-header">C</th>
+                        <th class="cell-header">D</th><th class="cell-header">E</th><th class="cell-header">F</th>
+                        <th class="cell-header">G</th><th class="cell-header">H</th><th class="cell-header">I</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="height: 16.66%;">
+                        <td class="cell-header">1</td>
+                        <td style="background-color: #ef4444;"></td><td style="background-color: #ef4444;"></td><td style="background-color: #ef4444;"></td>
+                        <td style="background-color: #ef4444;"></td><td style="background-color: #ef4444;"></td><td style="background-color: #ef4444;"></td>
+                        <td style="background-color: #ef4444;"></td><td style="background-color: #ef4444;"></td><td style="background-color: #ef4444;"></td>
+                    </tr>
+                    <tr style="height: 16.66%;">
+                        <td class="cell-header">2</td>
+                        <td style="background-color: #ef4444;"></td><td style="background-color: #ef4444;"></td><td style="background-color: #ef4444;"></td>
+                        <td style="background-color: #ef4444;"></td><td style="background-color: #ef4444;"></td><td style="background-color: #ef4444;"></td>
+                        <td style="background-color: #ef4444;"></td><td style="background-color: #ef4444;"></td><td style="background-color: #ef4444;"></td>
+                    </tr>
+                    <tr style="height: 16.66%;">
+                        <td class="cell-header">3</td>
+                        <td style="background-color: #ffffff;"></td><td style="background-color: #ffffff;"></td><td style="background-color: #ffffff;"></td>
+                        <td style="background-color: #ffffff;"></td><td style="background-color: #eab308;"></td><td style="background-color: #ffffff;"></td>
+                        <td style="background-color: #ffffff;"></td><td style="background-color: #ffffff;"></td><td style="background-color: #ffffff;"></td>
+                    </tr>
+                    <tr style="height: 16.66%;">
+                        <td class="cell-header">4</td>
+                        <td style="background-color: #ffffff;"></td><td style="background-color: #ffffff;"></td><td style="background-color: #ffffff;"></td>
+                        <td style="background-color: #ffffff;"></td><td style="background-color: #eab308;"></td><td style="background-color: #ffffff;"></td>
+                        <td style="background-color: #ffffff;"></td><td style="background-color: #ffffff;"></td><td style="background-color: #ffffff;"></td>
+                    </tr>
+                    <tr style="height: 16.66%;">
+                        <td class="cell-header">5</td>
+                        <td style="background-color: #000000;"></td><td style="background-color: #000000;"></td><td style="background-color: #000000;"></td>
+                        <td style="background-color: #000000;"></td><td style="background-color: #000000;"></td><td style="background-color: #000000;"></td>
+                        <td style="background-color: #000000;"></td><td style="background-color: #000000;"></td><td style="background-color: #000000;"></td>
+                    </tr>
+                    <tr style="height: 16.66%;">
+                        <td class="cell-header">6</td>
+                        <td style="background-color: #000000;"></td><td style="background-color: #000000;"></td><td style="background-color: #000000;"></td>
+                        <td style="background-color: #000000;"></td><td style="background-color: #000000;"></td><td style="background-color: #000000;"></td>
+                        <td style="background-color: #000000;"></td><td style="background-color: #000000;"></td><td style="background-color: #000000;"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pantalla 7: Ejercicio 6 (Resumen del partido) -->
+        <div class="screen" id="screen-7" data-tag="EJERCICIO 6" data-title="Resumen del partido" data-tools="tb-merge,tb-borders,tb-fillcolor,tb-bold,tb-aligncenter" data-coords="A1:C7">
+            <table class="gsheet" style="width: 100%; font-size: 1.1rem;">
+                <colgroup>
+                    <col class="row-header">
+                    <col style="width: 30%;">
+                    <col style="width: 35%;">
                     <col style="width: 35%;">
                 </colgroup>
                 <thead>
@@ -798,107 +1025,7 @@ body {
                 <tbody>
                     <tr style="height: 60px;">
                         <td class="cell-header">1</td>
-                        <td colspan="3" class="merged-center border-thick text-bold" style="background-color: #1e3a8a; color: white; font-size: 1.8rem;">GOLEADORES DEL PARTIDO</td>
-                    </tr>
-                    <tr style="height: 50px;">
-                        <td class="cell-header">2</td>
-                        <td class="text-center border-thick text-bold" style="background-color: #3b82f6; color: white;">Jugador</td>
-                        <td class="text-center border-thick text-bold" style="background-color: #3b82f6; color: white;">Minuto</td>
-                        <td class="text-center border-thick text-bold" style="background-color: #3b82f6; color: white;">Tipo de gol</td>
-                    </tr>
-                    <tr style="height: 50px;">
-                        <td class="cell-header">3</td>
-                        <td class="text-center border-thick" style="background-color: #ffffff;">Cristian Romero</td>
-                        <td class="text-center border-thick" style="background-color: #ffffff;">79'</td>
-                        <td class="text-center border-thick" style="background-color: #ffffff;">Cabezazo</td>
-                    </tr>
-                    <tr style="height: 50px;">
-                        <td class="cell-header">4</td>
-                        <td class="text-center border-thick" style="background-color: #f8fafc;">Lionel Messi</td>
-                        <td class="text-center border-thick" style="background-color: #f8fafc;">83'</td>
-                        <td class="text-center border-thick" style="background-color: #f8fafc;">Remate</td>
-                    </tr>
-                    <tr style="height: 50px;">
-                        <td class="cell-header">5</td>
-                        <td class="text-center border-thick" style="background-color: #ffffff;">Enzo Fernández</td>
-                        <td class="text-center border-thick" style="background-color: #ffffff;">90+</td>
-                        <td class="text-center border-thick" style="background-color: #ffffff;">Cabezazo</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <!-- Pantalla 6: Ejercicio 5 (Bandera de Egipto) -->
-        <div class="screen" id="screen-6" data-tag="EJERCICIO 5" data-title="Bandera de Egipto" data-tools="tb-fillcolor,tb-rowheight,tb-colwidth" data-coords="A1:E3">
-            <table class="gsheet" style="height: 600px; width: 100%; max-width: 900px;">
-                <colgroup>
-                    <col class="row-header">
-                    <col style="width: 20%;">
-                    <col style="width: 20%;">
-                    <col style="width: 20%;">
-                    <col style="width: 20%;">
-                    <col style="width: 20%;">
-                </colgroup>
-                <thead>
-                    <tr>
-                        <th class="cell-header corner"></th>
-                        <th class="cell-header">A</th>
-                        <th class="cell-header">B</th>
-                        <th class="cell-header">C</th>
-                        <th class="cell-header">D</th>
-                        <th class="cell-header">E</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr style="height: 33.33%;">
-                        <td class="cell-header">1</td>
-                        <td style="background-color: #ef4444;"></td>
-                        <td style="background-color: #ef4444;"></td>
-                        <td style="background-color: #ef4444;"></td>
-                        <td style="background-color: #ef4444;"></td>
-                        <td style="background-color: #ef4444;"></td>
-                    </tr>
-                    <tr style="height: 33.33%;">
-                        <td class="cell-header">2</td>
-                        <td style="background-color: #ffffff;"></td>
-                        <td style="background-color: #ffffff;"></td>
-                        <td style="background-color: #eab308;"></td>
-                        <td style="background-color: #ffffff;"></td>
-                        <td style="background-color: #ffffff;"></td>
-                    </tr>
-                    <tr style="height: 33.33%;">
-                        <td class="cell-header">3</td>
-                        <td style="background-color: #000000;"></td>
-                        <td style="background-color: #000000;"></td>
-                        <td style="background-color: #000000;"></td>
-                        <td style="background-color: #000000;"></td>
-                        <td style="background-color: #000000;"></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <!-- Pantalla 7: Ejercicio 6 (Resumen del partido) -->
-        <div class="screen" id="screen-7" data-tag="EJERCICIO 6" data-title="Resumen del partido" data-tools="tb-merge,tb-borders,tb-fillcolor,tb-bold,tb-aligncenter" data-coords="A1:C7">
-            <table class="gsheet" style="width: 100%;">
-                <colgroup>
-                    <col class="row-header">
-                    <col style="width: 33.33%;">
-                    <col style="width: 33.33%;">
-                    <col style="width: 33.33%;">
-                </colgroup>
-                <thead>
-                    <tr>
-                        <th class="cell-header corner"></th>
-                        <th class="cell-header">A</th>
-                        <th class="cell-header">B</th>
-                        <th class="cell-header">C</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr style="height: 60px;">
-                        <td class="cell-header">1</td>
-                        <td colspan="3" class="merged-center border-thick text-bold" style="background-color: #1e3a8a; color: white; font-size: 1.8rem;">RESUMEN DEL PARTIDO</td>
+                        <td colspan="3" class="merged-center border-thick text-bold" style="background-color: #1e3a8a; color: white; font-size: 1.6rem;">RESUMEN DEL PARTIDO</td>
                     </tr>
                     <tr style="height: 50px;">
                         <td class="cell-header">2</td>
@@ -908,33 +1035,33 @@ body {
                     </tr>
                     <tr style="height: 50px;">
                         <td class="cell-header">3</td>
-                        <td class="text-center border-thick" style="background-color: #ffffff;">Goles</td>
-                        <td class="text-center border-thick" style="background-color: #ffffff;">3</td>
-                        <td class="text-center border-thick" style="background-color: #ffffff;">2</td>
+                        <td class="text-center border-thick" style="background-color: #ffffff; font-size: 1.1rem;">Goles</td>
+                        <td class="text-center border-thick" style="background-color: #ffffff; font-size: 1.1rem;">3</td>
+                        <td class="text-center border-thick" style="background-color: #ffffff; font-size: 1.1rem;">2</td>
                     </tr>
                     <tr style="height: 50px;">
                         <td class="cell-header">4</td>
-                        <td class="text-center border-thick" style="background-color: #f8fafc;">Resultado</td>
-                        <td class="text-center border-thick" style="background-color: #f8fafc;">Ganó</td>
-                        <td class="text-center border-thick" style="background-color: #f8fafc;">Perdió</td>
+                        <td class="text-center border-thick" style="background-color: #f8fafc; font-size: 1.1rem;">Resultado</td>
+                        <td class="text-center border-thick" style="background-color: #f8fafc; font-size: 1.1rem;">Ganó</td>
+                        <td class="text-center border-thick" style="background-color: #f8fafc; font-size: 1.1rem;">Perdió</td>
                     </tr>
                     <tr style="height: 50px;">
                         <td class="cell-header">5</td>
-                        <td class="text-center border-thick" style="background-color: #ffffff;">Instancia</td>
-                        <td class="text-center border-thick" style="background-color: #ffffff;">Octavos</td>
-                        <td class="text-center border-thick" style="background-color: #ffffff;">Octavos</td>
+                        <td class="text-center border-thick" style="background-color: #ffffff; font-size: 1.1rem;">Instancia</td>
+                        <td class="text-center border-thick" style="background-color: #ffffff; font-size: 1.1rem;">Octavos</td>
+                        <td class="text-center border-thick" style="background-color: #ffffff; font-size: 1.1rem;">Octavos</td>
                     </tr>
                     <tr style="height: 50px;">
                         <td class="cell-header">6</td>
-                        <td class="text-center border-thick" style="background-color: #f8fafc;">Próximo rival</td>
-                        <td class="text-center border-thick" style="background-color: #f8fafc;">Suiza</td>
-                        <td class="text-center border-thick" style="background-color: #f8fafc;">—</td>
+                        <td class="text-center border-thick" style="background-color: #f8fafc; font-size: 1.1rem;">Próximo rival</td>
+                        <td class="text-center border-thick" style="background-color: #f8fafc; font-size: 1.1rem;">Suiza</td>
+                        <td class="text-center border-thick" style="background-color: #f8fafc; font-size: 1.1rem;">—</td>
                     </tr>
                     <tr style="height: 50px;">
                         <td class="cell-header">7</td>
-                        <td class="text-center border-thick" style="background-color: #ffffff;">Estado</td>
-                        <td class="text-center border-thick" style="background-color: #ffffff;">Clasificado</td>
-                        <td class="text-center border-thick" style="background-color: #ffffff;">Eliminado</td>
+                        <td class="text-center border-thick" style="background-color: #ffffff; font-size: 1.1rem;">Estado</td>
+                        <td class="text-center border-thick" style="background-color: #ffffff; font-size: 1.1rem;">Clasificado</td>
+                        <td class="text-center border-thick" style="background-color: #ffffff; font-size: 1.1rem;">Eliminado</td>
                     </tr>
                 </tbody>
             </table>
@@ -979,7 +1106,7 @@ let currentStep = 1;
 const totalSteps = 8;
 
 const toolData = {
-    'tb-bold': { label: 'Negrita', icon: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.6 10.79c.97-.67 1.65-1.77 1.65-2.79 0-2.26-1.75-4-4-4H7v14h7.04c2.09 0 3.71-1.7 3.71-3.79 0-1.52-.86-2.82-2.15-3.42zM10 6.5h3c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5h-3v-3zm3.5 9H10v-3h3.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-3v-3zm3.5 9H10v-3h3.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5z"/></svg>' },
+    'tb-bold': { label: 'Negrita', icon: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.6 10.79c.97-.67 1.65-1.77 1.65-2.79 0-2.26-1.75-4-4-4H7v14h7.04c2.09 0 3.71-1.7 3.71-3.79 0-1.52-.86-2.82-2.15-3.42zM10 6.5h3c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5h-3v-3zm3.5 9H10v-3h3.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5z"/></svg>' },
     'tb-italic': { label: 'Cursiva', icon: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 4v3h2.21l-3.42 8H6v3h8v-3h-2.21l3.42-8H18V4z"/></svg>' },
     'tb-underline': { label: 'Subrayado', icon: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 17c3.31 0 6-2.69 6-6V3h-2.5v8c0 1.93-1.57 3.5-3.5 3.5S8.5 12.93 8.5 11V3H6v8c0 3.31 2.69 6 6 6zm-7 2v2h14v-2H5z"/></svg>' },
     'tb-textcolor': { label: 'Color', icon: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M2 20h20v4H2v-4zm3.49-3h2.42l1.27-3.58h5.65L16.09 17h2.42L13.25 3h-2.5L5.49 17zm4.42-5.61 2.03-5.79h.12l2.03 5.79H9.91z"/></svg>' },
