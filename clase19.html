@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 19 - Introducción a Canva</title>
+
+<style>
+:root {
+    --canva-cyan: #00C4CC;
+    --canva-blue: #2D8CFF;
+    --canva-purple: #7D2AE8;
+    --canva-gradient: linear-gradient(135deg, var(--canva-cyan), var(--canva-blue), var(--canva-purple));
+    
+    --bg-body: #ffffff;
+    --bg-workspace: #f9fafb;
+    --card-bg: #ffffff;
+    
+    --text-main: #0e1318;
+    --text-light: #5e6d7d;
+    --border-color: #e5e7eb;
+    
+    --shadow-soft: 0 8px 30px rgba(0,0,0,0.06);
+    --shadow-hover: 0 12px 40px rgba(0,0,0,0.1);
+    
+    --font-main: "Inter", system-ui, -apple-system, sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-main);
+    background: var(--bg-body);
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    color: var(--text-main);
+    overflow: hidden;
+}
+
+/* =========================================
+   HEADER
+   ========================================= */
+.top-header {
+    height: 60px;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    background: var(--card-bg);
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+    z-index: 10;
+}
+
+.header-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    background: var(--canva-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.5px;
+}
+
+.btn-close {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background-color: #f3f4f6;
+    color: var(--text-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    transition: all 0.2s;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-close:hover {
+    background-color: #e5e7eb;
+    color: var(--text-main);
+}
+
+/* =========================================
+   ESPACIO DE TRABAJO
+   ========================================= */
+.workspace {
+    flex: 1;
+    overflow-y: auto;
+    background: var(--bg-workspace);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+}
+
+.screen {
+    display: none;
+    width: 100%;
+    max-width: 1200px;
+    height: 100%;
+    animation: fadeIn 0.4s ease-out;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.screen.active {
+    display: flex;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* =========================================
+   TYPOGRAPHY & CARDS
+   ========================================= */
+.title-main {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: var(--text-main);
+    margin-bottom: 0.5rem;
+    letter-spacing: -1px;
+    text-align: center;
+}
+
+.subtitle-main {
+    font-size: 1.8rem;
+    font-weight: 600;
+    background: var(--canva-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.text-desc {
+    font-size: 1.2rem;
+    color: var(--text-light);
+    text-align: center;
+    max-width: 600px;
+    line-height: 1.5;
+    margin-bottom: 3rem;
+}
+
+.logo-large {
+    width: 240px;
+    height: auto;
+    border-radius: 50%;
+    box-shadow: var(--shadow-soft);
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--text-main);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    width: 100%;
+    max-width: 1000px;
+}
+
+.grid-8 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    width: 100%;
+    max-width: 1000px;
+}
+
+.card {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 32px 24px;
+    box-shadow: var(--shadow-soft);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 1px solid rgba(0,0,0,0.02);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+}
+
+.card-icon {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 20px;
+    color: var(--canva-purple);
+}
+
+.card-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-main);
+    line-height: 1.4;
+}
+
+.card-small {
+    padding: 24px;
+    border-radius: 16px;
+}
+
+.card-small .card-icon {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 16px;
+    color: var(--canva-blue);
+}
+
+/* =========================================
+   UI MOCKUP (Screen 4)
+   ========================================= */
+.ui-mockup-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    height: 60vh;
+    min-height: 500px;
+    background: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: var(--shadow-hover);
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.ui-topbar {
+    height: 56px;
+    background: var(--canva-gradient);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.ui-logo-placeholder {
+    width: 80px;
+    height: 24px;
+    background: rgba(255,255,255,0.3);
+    border-radius: 4px;
+}
+
+.ui-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.ui-btn {
+    padding: 6px 16px;
+    background: white;
+    color: var(--canva-purple);
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.ui-body {
+    display: flex;
+    flex: 1;
+    background: #f3f4f6;
+}
+
+.ui-sidebar {
+    width: 80px;
+    background: #111827;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+    gap: 20px;
+}
+
+.ui-sidebar-item {
+    width: 40px;
+    height: 40px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 8px;
+}
+
+.ui-canvas-area {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+}
+
+.ui-canvas {
+    width: 100%;
+    max-width: 600px;
+    height: 100%;
+    background: white;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.ui-footer {
+    height: 40px;
+    background: white;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    justify-content: center;
+}
+
+.ui-footer-item {
+    width: 120px;
+    height: 20px;
+    background: #f3f4f6;
+    border-radius: 4px;
+}
+
+/* Tooltips for Mockup */
+.tooltip {
+    position: absolute;
+    background: var(--text-main);
+    color: white;
+    padding: 10px 16px;
+    border-radius: 12px;
+    font-weight: 400;
+    font-size: 0.9rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    display: flex;
+    align-items: center;
+    z-index: 20;
+}
+
+.tooltip strong {
+    color: var(--canva-cyan);
+    font-weight: 700;
+    margin-right: 6px;
+}
+
+.tooltip::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: var(--text-main);
+    transform: rotate(45deg);
+}
+
+.tt-topbar { top: 70px; left: 35%; transform: translateX(-50%); }
+.tt-topbar::after { top: -5px; left: calc(50% - 5px); }
+
+.tt-sidebar { top: 35%; left: 100px; }
+.tt-sidebar::after { left: -5px; top: calc(50% - 5px); }
+
+.tt-canvas { top: 50%; left: 50%; transform: translate(-50%, -50%); }
+.tt-canvas::after { display: none; }
+
+.tt-share { top: 70px; right: 140px; }
+.tt-share::after { top: -5px; right: 30px; }
+
+.tt-download { top: 120px; right: 20px; }
+.tt-download::after { display: none; }
+
+.tt-pages { bottom: 50px; left: 50%; transform: translateX(-50%); }
+.tt-pages::after { bottom: -5px; left: calc(50% - 5px); }
+
+/* =========================================
+   EXERCISES (Screens 5, 6, 7)
+   ========================================= */
+.exercise-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.ex-tag {
+    display: inline-block;
+    background: #f3e8ff;
+    color: var(--canva-purple);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-weight: 800;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+.ex-title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--text-main);
+    margin-bottom: 1rem;
+}
+
+.ex-objective {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.model-canvas-wrapper {
+    width: 100%;
+    max-width: 900px;
+    height: 50vh;
+    min-height: 400px;
+    background: #f3f4f6;
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    border: 2px dashed #cbd5e1;
+}
+
+.model-canvas {
+    background: white;
+    box-shadow: var(--shadow-soft);
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Ex 1: Elementos */
+.canvas-elements {
+    width: 100%;
+    height: 100%;
+    max-width: 800px;
+}
+.shape { position: absolute; }
+.s-circle { width: 120px; height: 120px; background: var(--canva-blue); border-radius: 50%; top: 15%; left: 15%; }
+.s-square { width: 100px; height: 100px; background: var(--canva-cyan); top: 50%; left: 40%; transform: rotate(15deg); }
+.s-star { width: 140px; height: 140px; top: 10%; right: 15%; color: var(--canva-purple); }
+.s-arrow { width: 120px; height: 120px; bottom: 15%; right: 25%; color: #F59E0B; }
+.s-line { width: 200px; height: 8px; background: #475569; bottom: 20%; left: 10%; transform: rotate(-20deg); border-radius: 4px; }
+
+/* Ex 2: Logo */
+.canvas-logo {
+    width: 400px;
+    height: 400px;
+}
+.logo-circle {
+    width: 250px;
+    height: 250px;
+    background: var(--canva-purple);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 120px;
+    font-weight: 900;
+    font-family: serif;
+    box-shadow: 0 20px 40px rgba(125, 42, 232, 0.3);
+}
+
+/* Ex 3: Collage */
+.canvas-collage {
+    width: 600px;
+    height: 400px;
+    background: #e0f2fe;
+    flex-direction: column;
+    padding: 32px;
+}
+.col-header { text-align: center; margin-bottom: 24px; }
+.col-title { font-size: 2rem; font-weight: 900; color: #0369a1; text-transform: uppercase; letter-spacing: 2px; }
+.col-subtitle { font-size: 1.1rem; color: #0284c7; }
+.col-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    width: 100%;
+    flex: 1;
+}
+.col-img {
+    background: white;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #bae6fd;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+/* =========================================
+   CHECKLIST (Screen 8)
+   ========================================= */
+.checklist {
+    list-style: none;
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.checklist li {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--text-main);
+    background: white;
+    padding: 16px 32px;
+    border-radius: 100px;
+    box-shadow: var(--shadow-soft);
+}
+
+.checklist-icon {
+    width: 32px;
+    height: 32px;
+    color: white;
+    background: var(--canva-cyan);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+}
+
+/* =========================================
+   NAVEGACIÓN (FOOTER)
+   ========================================= */
+.nav-footer {
+    height: 80px;
+    min-height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+    background: var(--card-bg);
+    border-top: 1px solid var(--border-color);
+    z-index: 10;
+}
+
+.btn {
+    padding: 12px 32px;
+    border-radius: 100px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+}
+
+.btn-prev {
+    background: #f3f4f6;
+    color: var(--text-light);
+}
+
+.btn-prev:hover {
+    background: #e5e7eb;
+    color: var(--text-main);
+}
+
+.btn-next {
+    background: var(--canva-purple);
+    color: white;
+    box-shadow: 0 4px 12px rgba(125, 42, 232, 0.3);
+}
+
+.btn-next:hover {
+    background: #6018d4; /* Darker purple */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(125, 42, 232, 0.4);
+}
+
+.step-counter {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    font-weight: 700;
+    background: #f3f4f6;
+    padding: 8px 20px;
+    border-radius: 100px;
+}
+</style>
+</head>
+<body>
+
+<div class="app-container">
+
+    <header class="top-header">
+        <div class="header-title">Clase 19 · Introducción a Canva</div>
+        <a href="index.html" class="btn-close" title="Cerrar">✕</a>
+    </header>
+
+    <main class="workspace">
+        
+        <!-- Pantalla 1: Bienvenida -->
+        <div class="screen active" id="screen-1">
+            <h1 class="title-main">Clase 19</h1>
+            <h2 class="subtitle-main">Introducción a Canva</h2>
+            <p class="text-desc">Aprende a crear diseños increíbles de forma fácil y rápida con la herramienta online líder.</p>
+            <img src="image_ca7f9f.png" alt="Canva Logo" class="logo-large">
+        </div>
+
+        <!-- Pantalla 2: ¿Qué es Canva? -->
+        <div class="screen" id="screen-2">
+            <h2 class="section-title">¿Qué es Canva?</h2>
+            <div class="grid-4">
+                <div class="card">
+                    <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
+                    <div class="card-title">Herramienta de diseño online</div>
+                </div>
+                <div class="card">
+                    <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+                    <div class="card-title">Funciona desde el navegador</div>
+                </div>
+                <div class="card">
+                    <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    <div class="card-title">Permite trabajar colaborativamente</div>
+                </div>
+                <div class="card">
+                    <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><rect x="7" y="7" width="3" height="9"/><rect x="14" y="7" width="3" height="5"/></svg>
+                    <div class="card-title">Tiene miles de plantillas</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pantalla 3: ¿Qué podemos crear? -->
+        <div class="screen" id="screen-3">
+            <h2 class="section-title">¿Qué podemos crear?</h2>
+            <div class="grid-8">
+                <div class="card card-small">
+                    <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                    <div class="card-title">Presentaciones</div>
+                </div>
+                <div class="card card-small">
+                    <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/></svg>
+                    <div class="card-title">Logos</div>
+                </div>
+                <div class="card card-small">
+                    <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                    <div class="card-title">Redes sociales</div>
+                </div>
+                <div class="card card-small">
+                    <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                    <div class="card-title">Curriculum (CV)</div>
+                </div>
+                <div class="card card-small">
+                    <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                    <div class="card-title">Posters</div>
+                </div>
+                <div class="card card-small">
+                    <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                    <div class="card-title">Folletos</div>
+                </div>
+                <div class="card card-small">
+                    <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/><path d="M16 18h.01"/></svg>
+                    <div class="card-title">Invitaciones</div>
+                </div>
+                <div class="card card-small">
+                    <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33 2.78 2.78 0 0 0 1.94 2c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
+                    <div class="card-title">Miniaturas de YT</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pantalla 4: Interfaz -->
+        <div class="screen" id="screen-4">
+            <h2 class="section-title">Conociendo la interfaz</h2>
+            
+            <div class="ui-mockup-wrapper">
+                <div class="ui-topbar">
+                    <div class="ui-logo-placeholder"></div>
+                    <div class="ui-actions">
+                        <div class="ui-btn share">Compartir</div>
+                        <div class="ui-btn download">Descargar</div>
+                    </div>
+                </div>
+                <div class="ui-body">
+                    <div class="ui-sidebar">
+                        <div class="ui-sidebar-item"></div>
+                        <div class="ui-sidebar-item"></div>
+                        <div class="ui-sidebar-item"></div>
+                        <div class="ui-sidebar-item"></div>
+                    </div>
+                    <div class="ui-canvas-area">
+                        <div class="ui-canvas"></div>
+                    </div>
+                </div>
+                <div class="ui-footer">
+                    <div class="ui-footer-item"></div>
+                </div>
+                
+                <!-- Tooltips -->
+                <div class="tooltip tt-sidebar"><strong>Barra lateral</strong> &mdash; Elementos, texto, imágenes y plantillas.</div>
+                <div class="tooltip tt-topbar"><strong>Barra superior</strong> &mdash; Herramientas del diseño.</div>
+                <div class="tooltip tt-canvas"><strong>Lienzo</strong> &mdash; Zona donde se crea el diseño.</div>
+                <div class="tooltip tt-pages"><strong>Páginas</strong> &mdash; Agregar y ordenar páginas.</div>
+                <div class="tooltip tt-share"><strong>Compartir</strong> &mdash; Invitar colaboradores.</div>
+                <div class="tooltip tt-download"><strong>Descargar</strong> &mdash; Exportar el trabajo.</div>
+                
+                </div>
+            </div>
+
+        <!-- Pantalla 5: Ejercicio 1 -->
+        <div class="screen" id="screen-5">
+            <div class="exercise-header">
+                <div class="ex-tag">Ejercicio 1</div>
+                <h2 class="ex-title">Elementos gráficos</h2>
+                <p class="ex-objective">Crear una composición utilizando 1 círculo, 1 cuadrado, 1 estrella, 1 flecha y 1 línea de diferentes colores sin superponerlos.</p>
+            </div>
+            
+            <div class="model-canvas-wrapper">
+                <div class="model-canvas canvas-elements">
+                    <div class="shape s-circle"></div>
+                    <div class="shape s-square"></div>
+                    
+                    <svg class="shape s-star" viewBox="0 0 24 24" fill="currentColor">
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                    </svg>
+                    
+                    <svg class="shape s-arrow" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    
+                    <div class="shape s-line"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pantalla 6: Ejercicio 2 -->
+        <div class="screen" id="screen-6">
+            <div class="exercise-header">
+                <div class="ex-tag">Ejercicio 2</div>
+                <h2 class="ex-title">Mi primer logo</h2>
+                <p class="ex-objective">Crear un logo sencillo que contenga un círculo de color de fondo y una letra perfectamente centrada.</p>
+            </div>
+            
+            <div class="model-canvas-wrapper">
+                <div class="model-canvas canvas-logo">
+                    <div class="logo-circle">C</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pantalla 7: Ejercicio 3 -->
+        <div class="screen" id="screen-7">
+            <div class="exercise-header">
+                <div class="ex-tag">Ejercicio 3</div>
+                <h2 class="ex-title">Mini collage</h2>
+                <p class="ex-objective">Crear un collage utilizando 4 imágenes alineadas, un título, un subtítulo y un fondo de color.</p>
+            </div>
+            
+            <div class="model-canvas-wrapper">
+                <div class="model-canvas canvas-collage">
+                    <div class="col-header">
+                        <div class="col-title">Vacaciones</div>
+                        <div class="col-subtitle">Recuerdos inolvidables</div>
+                    </div>
+                    <div class="col-grid">
+                        <div class="col-img">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                        </div>
+                        <div class="col-img">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                        </div>
+                        <div class="col-img">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                        </div>
+                        <div class="col-img">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pantalla 8: Cierre -->
+        <div class="screen" id="screen-8">
+            <h1 class="title-main" style="font-size: 4rem;">¡Excelente!</h1>
+            <h2 class="subtitle-main" style="font-size: 2.5rem;">Hoy aprendimos...</h2>
+            
+            <ul class="checklist">
+                <li>
+                    <div class="checklist-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></div>
+                    Qué es Canva y cómo funciona.
+                </li>
+                <li>
+                    <div class="checklist-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></div>
+                    Para qué sirve y qué podemos crear.
+                </li>
+                <li>
+                    <div class="checklist-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></div>
+                    Cómo agregar y organizar elementos.
+                </li>
+                <li>
+                    <div class="checklist-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></div>
+                    Cómo crear un logo desde cero.
+                </li>
+                <li>
+                    <div class="checklist-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></div>
+                    Cómo armar un collage estructurado.
+                </li>
+            </ul>
+        </div>
+
+    </main>
+
+    <footer class="nav-footer">
+        <button class="btn btn-prev" id="btn-prev" onclick="changeStep(-1)">Anterior</button>
+        <div class="step-counter" id="step-counter">1 / 8</div>
+        <button class="btn btn-next" id="btn-next" onclick="changeStep(1)">Siguiente</button>
+    </footer>
+
+</div>
+
+<script>
+let currentStep = 1;
+const totalSteps = 8;
+
+function updateUI() {
+    document.querySelectorAll('.screen').forEach(screen => {
+        screen.classList.remove('active');
+    });
+
+    const activeScreen = document.getElementById(`screen-${currentStep}`);
+    if(activeScreen) {
+        activeScreen.classList.add('active');
+    }
+    
+    document.getElementById('step-counter').innerText = `${currentStep} / ${totalSteps}`;
+
+    document.getElementById('btn-prev').style.visibility = 
+        currentStep === 1 ? 'hidden' : 'visible';
+
+    document.getElementById('btn-next').style.visibility = 
+        currentStep === totalSteps ? 'hidden' : 'visible';
+}
+
+function changeStep(direction) {
+    currentStep += direction;
+
+    if(currentStep < 1) currentStep = 1;
+    if(currentStep > totalSteps) currentStep = totalSteps;
+
+    updateUI();
+}
+
+document.addEventListener('keydown', function(e) {
+    if(e.key === 'ArrowRight' || e.key === 'Space') {
+        changeStep(1);
+    } else if (e.key === 'ArrowLeft') {
+        changeStep(-1);
+    }
+});
+
+updateUI();
+</script>
+
+</body>
+</html>
