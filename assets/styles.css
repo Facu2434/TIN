@@ -1,0 +1,552 @@
+/* =========================================================
+   TIN — Sistema visual compartido
+   Tecnología de la Información · 4to año
+
+   Este archivo es la base de estilo de TODO el repo: el índice
+   y, de acá en adelante, cada clase nueva. La idea es que una
+   clase nueva no tenga que reinventar colores ni componentes:
+   solo importa este archivo y usa las clases ya definidas
+   (.card, .btn, .badge, .top-header, .nav-footer, etc).
+   ========================================================= */
+
+:root{
+  /* Paleta base (heredada del index original) */
+  --bg:#f5f1e8;
+  --bg-soft:#f8f5ef;
+  --card:#ffffff;
+
+  --text:#2d2d2d;
+  --muted:#666;
+  --muted-soft:#8a8a8a;
+
+  --accent:#2a9d8f;     /* teal — acción principal */
+  --accent-dark:#218074;
+  --accent2:#e76f51;    /* terracota — acento cálido */
+
+  --current:#16a34a;    /* verde — "clase actual" */
+
+  --border:#e4ddd1;
+
+  --radius-lg:24px;
+  --radius-md:14px;
+  --radius-sm:8px;
+
+  --shadow-sm:0 6px 14px rgba(0,0,0,0.04);
+  --shadow-md:0 14px 34px rgba(0,0,0,0.08);
+
+  --font-main: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:var(--font-main);
+  background:linear-gradient(180deg, var(--bg-soft) 0%, var(--bg) 100%);
+  color:var(--text);
+  line-height:1.6;
+}
+
+a{ color:inherit; }
+
+/* =========================================================
+   HEADER (portada / índice)
+   ========================================================= */
+.site-header{
+  max-width:1200px;
+  margin:0 auto;
+  padding:56px 20px 40px;
+  text-align:center;
+}
+
+.site-header .eyebrow{
+  display:inline-block;
+  background:var(--card);
+  border:1px solid var(--border);
+  color:var(--muted);
+  font-size:0.85rem;
+  font-weight:600;
+  padding:6px 16px;
+  border-radius:999px;
+  margin-bottom:18px;
+}
+
+.site-header h1{
+  font-size:clamp(2.3rem, 5vw, 3.6rem);
+  font-weight:800;
+  letter-spacing:-1px;
+  margin-bottom:14px;
+}
+
+.site-header p{
+  font-size:1.15rem;
+  color:var(--muted);
+  max-width:640px;
+  margin:0 auto;
+}
+
+/* =========================================================
+   UNIDADES (agrupación temática)
+   ========================================================= */
+.unit{
+  max-width:1200px;
+  margin:0 auto;
+  padding:0 20px 56px;
+}
+
+.unit-header{
+  display:flex;
+  align-items:baseline;
+  gap:14px;
+  margin-bottom:24px;
+  padding-bottom:14px;
+  border-bottom:2px solid var(--border);
+}
+
+.unit-header .unit-icon{
+  font-size:1.6rem;
+}
+
+.unit-header h2{
+  font-size:1.5rem;
+  font-weight:800;
+}
+
+.unit-header .unit-count{
+  color:var(--muted-soft);
+  font-size:0.95rem;
+  font-weight:600;
+}
+
+/* =========================================================
+   GRID + CARD (clases)
+   ========================================================= */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
+  gap:24px;
+}
+
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:28px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  min-height:220px;
+  position:relative;
+  overflow:hidden;
+  box-shadow:var(--shadow-sm);
+  transition:0.25s ease;
+}
+
+.card::before{
+  content:"";
+  position:absolute;
+  top:0; left:0; right:0;
+  height:6px;
+  background:linear-gradient(90deg, var(--accent), var(--accent2));
+}
+
+.card:hover{
+  transform:translateY(-6px);
+  box-shadow:var(--shadow-md);
+}
+
+.card.current{
+  border:3px solid var(--current);
+  box-shadow:0 0 0 6px rgba(22,163,74,0.08), var(--shadow-md);
+}
+
+.card.current::after{
+  content:"CLASE ACTUAL";
+  position:absolute;
+  top:16px; right:16px;
+  background:var(--current);
+  color:white;
+  font-size:0.7rem;
+  font-weight:800;
+  letter-spacing:0.5px;
+  padding:7px 11px;
+  border-radius:999px;
+  animation:pulse 1.4s infinite;
+}
+
+@keyframes pulse{
+  0%,100%{ transform:scale(1); opacity:1; }
+  50%{ transform:scale(1.08); opacity:0.75; }
+}
+
+.card h3{
+  font-size:1.4rem;
+  line-height:1.25;
+  margin-bottom:10px;
+  padding-right:80px;
+}
+
+.card p{
+  font-size:1rem;
+  color:var(--muted);
+  margin-bottom:22px;
+}
+
+.card .card-meta{
+  font-size:0.8rem;
+  color:var(--muted-soft);
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:0.4px;
+  margin-bottom:8px;
+}
+
+/* =========================================================
+   BOTONES
+   ========================================================= */
+.btn{
+  display:inline-block;
+  padding:13px 20px;
+  background:var(--accent);
+  color:white;
+  text-decoration:none;
+  border-radius:var(--radius-md);
+  font-weight:700;
+  font-size:0.95rem;
+  text-align:center;
+  border:none;
+  cursor:pointer;
+  transition:0.2s ease;
+}
+
+.btn:hover{ opacity:0.92; }
+
+.btn-secondary{
+  background:#f3f4f6;
+  color:var(--muted);
+}
+
+.btn-secondary:hover{
+  background:#e5e7eb;
+  color:var(--text);
+  opacity:1;
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+.site-footer{
+  margin-top:20px;
+  text-align:center;
+  font-size:0.9rem;
+  color:var(--muted-soft);
+  padding:24px 20px 40px;
+}
+
+/* =========================================================
+   MÓDULO DE CLASE (carrusel de pantallas)
+   =========================================================
+   Poné <body class="module-page"> en una clase nueva y usá
+   este esqueleto (ver clase21.html como referencia):
+
+   <div class="app-container">
+     <header class="top-header">...<a class="btn-close" href="index.html">✕</a></header>
+     <main class="workspace">
+       <div class="screen active" id="screen-1">...</div>
+       <div class="screen" id="screen-2">...</div>
+     </main>
+     <footer class="nav-footer">
+       <button class="btn btn-secondary" id="btn-prev">Anterior</button>
+       <div class="step-counter" id="step-counter">1 / N</div>
+       <button class="btn" id="btn-next">Siguiente</button>
+     </footer>
+   </div>
+   <script src="assets/module.js"></script>
+   <script>initStepModule(N);</script>
+   ========================================================= */
+
+body.module-page{
+  height:100vh;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+}
+
+.app-container{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+
+.top-header{
+  height:60px;
+  min-height:60px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 24px;
+  background:var(--card);
+  border-bottom:1px solid var(--border);
+  z-index:10;
+}
+
+.top-header .header-title{
+  font-size:1.05rem;
+  font-weight:800;
+}
+
+.btn-close{
+  width:32px;
+  height:32px;
+  border-radius:var(--radius-sm);
+  background:#f3f4f6;
+  color:var(--muted);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-decoration:none;
+  font-weight:800;
+  font-size:14px;
+  transition:0.2s ease;
+}
+
+.btn-close:hover{
+  background:#e5e7eb;
+  color:var(--text);
+}
+
+.workspace{
+  flex:1;
+  overflow-y:auto;
+  background:var(--bg-soft);
+  display:flex;
+  justify-content:center;
+  /* align-items:flex-start (no "center") a propósito: junto con el
+     margin:auto 0 de .screen, centra verticalmente cuando el
+     contenido entra, pero si una pantalla es más alta que la
+     ventana, arranca arriba y queda scrolleable en vez de
+     recortarse por arriba (bug clásico de centrar con flexbox). */
+  align-items:flex-start;
+  padding:24px;
+}
+
+.screen{
+  display:none;
+  width:100%;
+  max-width:1100px;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  margin:auto 0;
+  animation:fadeIn 0.35s ease-out;
+}
+
+.screen.active{ display:flex; }
+
+@keyframes fadeIn{
+  from{ opacity:0; transform:translateY(12px); }
+  to{ opacity:1; transform:translateY(0); }
+}
+
+.title-main{
+  font-size:clamp(2.2rem, 5vw, 3.2rem);
+  font-weight:800;
+  letter-spacing:-1px;
+  text-align:center;
+  margin-bottom:0.5rem;
+}
+
+.subtitle-main{
+  font-size:clamp(1.3rem, 3vw, 1.7rem);
+  font-weight:700;
+  color:var(--accent-dark);
+  text-align:center;
+  margin-bottom:1.2rem;
+}
+
+.text-desc{
+  font-size:1.1rem;
+  color:var(--muted);
+  text-align:center;
+  max-width:620px;
+  margin:0 auto 1.5rem;
+}
+
+.section-title{
+  font-size:1.9rem;
+  font-weight:800;
+  text-align:center;
+  margin-bottom:1.8rem;
+}
+
+/* Tarjetas de concepto (reutilizan .card, centradas) */
+.grid-concepts{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(210px, 1fr));
+  gap:20px;
+  width:100%;
+}
+
+.card.concept{
+  align-items:center;
+  text-align:center;
+  min-height:auto;
+  padding:26px 20px;
+}
+
+.card.concept .card-icon{
+  width:44px;
+  height:44px;
+  margin-bottom:14px;
+  color:var(--accent);
+}
+
+.card.concept .card-title{
+  font-size:1.05rem;
+  font-weight:700;
+}
+
+.card.concept .card-desc{
+  font-size:0.9rem;
+  color:var(--muted);
+  margin-top:6px;
+}
+
+/* Ejercicios */
+.exercise-header{
+  text-align:center;
+  margin-bottom:1.6rem;
+}
+
+.ex-tag{
+  display:inline-block;
+  background:#fdf0ea;
+  color:var(--accent2);
+  padding:6px 16px;
+  border-radius:999px;
+  font-weight:800;
+  font-size:0.8rem;
+  letter-spacing:0.5px;
+  text-transform:uppercase;
+  margin-bottom:10px;
+}
+
+.ex-title{
+  font-size:clamp(1.6rem, 4vw, 2.1rem);
+  font-weight:800;
+  margin-bottom:0.6rem;
+}
+
+.ex-objective{
+  font-size:1.05rem;
+  color:var(--muted);
+  max-width:680px;
+  margin:0 auto;
+}
+
+.model-canvas-wrapper{
+  width:100%;
+  max-width:800px;
+  min-height:340px;
+  background:#f3f0e8;
+  border:2px dashed var(--border);
+  border-radius:var(--radius-lg);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:32px;
+  margin-top:1.6rem;
+}
+
+.model-canvas{
+  background:white;
+  box-shadow:var(--shadow-sm);
+  position:relative;
+  display:flex;
+  overflow:hidden;
+}
+
+/* Checklist de cierre */
+.checklist{
+  list-style:none;
+  margin-top:2.2rem;
+  display:flex;
+  flex-direction:column;
+  gap:1rem;
+  width:100%;
+  max-width:640px;
+}
+
+.checklist li{
+  display:flex;
+  align-items:center;
+  gap:1.2rem;
+  font-size:1.1rem;
+  font-weight:600;
+  background:var(--card);
+  border:1px solid var(--border);
+  padding:14px 24px;
+  border-radius:999px;
+  box-shadow:var(--shadow-sm);
+}
+
+.checklist-icon{
+  flex-shrink:0;
+  width:28px;
+  height:28px;
+  color:white;
+  background:var(--accent);
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:5px;
+}
+
+/* Navegación inferior */
+.nav-footer{
+  height:76px;
+  min-height:76px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:0 32px;
+  background:var(--card);
+  border-top:1px solid var(--border);
+  z-index:10;
+}
+
+.nav-footer .btn{
+  padding:12px 28px;
+  border-radius:999px;
+}
+
+.step-counter{
+  font-size:1rem;
+  font-weight:700;
+  color:var(--muted);
+  background:#f3f4f6;
+  padding:8px 18px;
+  border-radius:999px;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+@media (max-width:700px){
+  .site-header{ padding:40px 16px 30px; }
+  .unit{ padding:0 16px 40px; }
+  .card{ min-height:auto; }
+  .card h3{ padding-right:0; }
+  .card.current::after{
+    position:static;
+    display:inline-block;
+    margin-bottom:12px;
+  }
+  .workspace{ padding:16px; }
+  .model-canvas-wrapper{ padding:16px; min-height:auto; }
+  .nav-footer{ padding:0 16px; }
+}
