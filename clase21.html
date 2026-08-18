@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 21 — Texto y tipografía en Canva</title>
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body class="module-page">
+
+<div class="app-container">
+
+  <header class="top-header">
+    <div class="header-title">Clase 21 · Texto y tipografía</div>
+    <a href="index.html" class="btn-close" title="Cerrar">✕</a>
+  </header>
+
+  <main class="workspace">
+
+    <!-- Pantalla 1: Portada -->
+    <div class="screen active" id="screen-1">
+      <h1 class="title-main">Clase 21</h1>
+      <h2 class="subtitle-main">Texto y tipografía en Canva</h2>
+      <p class="text-desc">Ya conocemos la interfaz de Canva y trabajamos con formas y réplica de imágenes. Ahora vamos a aprender a usar el texto para que un diseño se entienda de un vistazo.</p>
+    </div>
+
+    <!-- Pantalla 2: Concepto -->
+    <div class="screen" id="screen-2">
+      <h2 class="section-title">Jerarquía de texto</h2>
+      <p class="text-desc" style="margin-bottom:2rem;">En todo diseño con texto hay niveles: no todo el texto pesa lo mismo. Estas cuatro herramientas son las que usamos para marcar esos niveles.</p>
+      <div class="grid-concepts">
+        <div class="card concept">
+          <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7V4h16v3"/><path d="M9 20h6"/><path d="M12 4v16"/></svg>
+          <div class="card-title">Tamaño</div>
+          <div class="card-desc">Lo más importante va más grande (título). Lo secundario, más chico.</div>
+        </div>
+        <div class="card concept">
+          <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4v16"/><path d="M6 4h8a4 4 0 0 1 0 8H6"/><path d="M6 12h9a4 4 0 0 1 0 8H6"/></svg>
+          <div class="card-title">Peso (negrita)</div>
+          <div class="card-desc">Resalta una palabra o frase clave dentro del texto.</div>
+        </div>
+        <div class="card concept">
+          <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="14" y2="12"/><line x1="4" y1="18" x2="18" y2="18"/></svg>
+          <div class="card-title">Alineación</div>
+          <div class="card-desc">Centrado, izquierda o derecha, según lo que quieras transmitir.</div>
+        </div>
+        <div class="card concept">
+          <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
+          <div class="card-title">Color y contraste</div>
+          <div class="card-desc">Un texto oscuro sobre fondo claro (o al revés) para que se lea bien.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pantalla 3: Ejercicio -->
+    <div class="screen" id="screen-3">
+      <div class="exercise-header">
+        <div class="ex-tag">Ejercicio</div>
+        <h2 class="ex-title">Recreá este afiche</h2>
+        <p class="ex-objective">Armá en Canva un diseño lo más parecido posible a este modelo: mismo título, subtítulo y cuerpo de texto, respetando el tamaño de cada nivel, la alineación y los colores. Si querés, podés cambiar el texto por el de un evento inventado por vos — pero mantené la misma estructura (título grande, subtítulo mediano, cuerpo chico).</p>
+      </div>
+
+      <div class="model-canvas-wrapper">
+        <div class="model-canvas" style="width:360px; height:460px; flex-direction:column; align-items:center; justify-content:center; padding:40px 32px; background:#fdf6ee; text-align:center;">
+          <div style="width:56px; height:4px; background:var(--accent2); border-radius:4px; margin-bottom:22px;"></div>
+          <div style="font-size:2rem; font-weight:900; letter-spacing:1px; color:var(--text); line-height:1.15; text-transform:uppercase;">Muestra<br>de Arte</div>
+          <div style="font-size:1.05rem; font-weight:700; color:var(--accent2); margin-top:16px;">Viernes 21 de agosto · 18 hs</div>
+          <div style="font-size:0.9rem; color:var(--muted); margin-top:20px; line-height:1.5;">Exposición de trabajos de los<br>alumnos de 4to año.<br>Entrada libre y gratuita.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pantalla 4: Cierre -->
+    <div class="screen" id="screen-4">
+      <h1 class="title-main" style="font-size:2.6rem;">¡Muy bien!</h1>
+      <h2 class="subtitle-main">Hoy aprendimos...</h2>
+      <ul class="checklist">
+        <li>
+          <div class="checklist-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></div>
+          Por qué el texto tiene distintos niveles de importancia.
+        </li>
+        <li>
+          <div class="checklist-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></div>
+          Cómo usar tamaño, peso, alineación y color para ordenar un texto.
+        </li>
+        <li>
+          <div class="checklist-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></div>
+          Cómo recrear un diseño existente prestando atención al detalle.
+        </li>
+      </ul>
+    </div>
+
+  </main>
+
+  <footer class="nav-footer">
+    <button class="btn btn-secondary" id="btn-prev">Anterior</button>
+    <div class="step-counter" id="step-counter">1 / 4</div>
+    <button class="btn" id="btn-next">Siguiente</button>
+  </footer>
+
+</div>
+
+<script src="assets/module.js"></script>
+<script>initStepModule(4);</script>
+
+</body>
+</html>
