@@ -3,706 +3,111 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Tecnología de la Información</title>
-
-<style>
-
-:root{
-
---bg:#f5f1e8;
-
---card:#ffffff;
-
---text:#2d2d2d;
---muted:#666;
-
---accent:#2a9d8f;
---accent2:#e76f51;
-
---border:#e4ddd1;
-
---current:#16a34a;
-
-}
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
-
-body{
-
-font-family:
-system-ui,
--apple-system,
-BlinkMacSystemFont,
-"Segoe UI",
-sans-serif;
-
-background:
-linear-gradient(
-180deg,
-#f8f5ef 0%,
-#f1ece2 100%
-);
-
-color:var(--text);
-
-padding:40px 20px;
-
-min-height:100vh;
-
-}
-
-.container{
-max-width:1200px;
-margin:auto;
-}
-
-header{
-margin-bottom:50px;
-text-align:center;
-}
-
-header h1{
-
-font-size:clamp(2.5rem,5vw,4.3rem);
-
-margin-bottom:15px;
-
-font-weight:800;
-
-letter-spacing:-1px;
-
-}
-
-header p{
-
-font-size:1.2rem;
-
-color:var(--muted);
-
-max-width:700px;
-
-margin:auto;
-
-line-height:1.6;
-
-}
-
-.section{
-margin-bottom:50px;
-}
-
-.section-title{
-
-font-size:1.7rem;
-
-margin-bottom:30px;
-
-display:flex;
-align-items:center;
-gap:12px;
-
-font-weight:700;
-
-}
-
-.badge{
-
-background:var(--accent);
-
-color:white;
-
-font-size:0.9rem;
-
-padding:6px 12px;
-
-border-radius:999px;
-
-}
-
-.grid{
-
-display:grid;
-
-grid-template-columns:
-repeat(auto-fit,minmax(320px,1fr));
-
-gap:26px;
-
-}
-
-.card{
-
-background:var(--card);
-
-border:1px solid var(--border);
-
-border-radius:24px;
-
-padding:30px;
-
-transition:0.25s ease;
-
-cursor:pointer;
-
-position:relative;
-
-overflow:hidden;
-
-min-height:240px;
-
-display:flex;
-flex-direction:column;
-justify-content:space-between;
-
-box-shadow:
-0 6px 14px rgba(0,0,0,0.04);
-
-}
-
-.card:hover{
-
-transform:
-translateY(-6px);
-
-box-shadow:
-0 14px 34px rgba(0,0,0,0.08);
-
-}
-
-  
-
-.card::before{
-
-content:"";
-
-position:absolute;
-
-top:0;
-left:0;
-right:0;
-
-height:6px;
-
-background:
-linear-gradient(
-90deg,
-var(--accent),
-var(--accent2)
-);
-
-}
-
-.card.current{
-
-border:3px solid var(--current);
-
-transform:scale(1.02);
-
-box-shadow:
-0 0 0 6px rgba(22,163,74,0.08),
-0 14px 34px rgba(0,0,0,0.08);
-
-}
-
-.card.current:hover{
-
-transform:
-translateY(-6px) scale(1.02);
-
-box-shadow:
-0 20px 40px rgba(0,0,0,0.12);
-
-}
-  
-.card.current::after{
-
-content:"CLASE ACTUAL";
-
-position:absolute;
-
-top:18px;
-right:18px;
-
-background:var(--current);
-
-color:white;
-
-font-size:0.75rem;
-
-font-weight:800;
-
-padding:8px 12px;
-
-border-radius:999px;
-
-letter-spacing:0.5px;
-
-animation:pulse 1.3s infinite;
-
-}
-
-@keyframes pulse{
-
-0%{
-transform:scale(1);
-opacity:1;
-}
-
-50%{
-transform:scale(1.08);
-opacity:0.75;
-}
-
-100%{
-transform:scale(1);
-opacity:1;
-}
-
-}
-
-.card h3{
-
-font-size:1.65rem;
-
-margin-bottom:14px;
-
-line-height:1.2;
-
-padding-right:90px;
-
-}
-
-.card p{
-
-font-size:1.05rem;
-
-line-height:1.6;
-
-color:var(--muted);
-
-margin-bottom:28px;
-
-}
-
-.btn{
-
-display:inline-block;
-
-padding:14px 20px;
-
-background:var(--accent);
-
-color:white;
-
-text-decoration:none;
-
-border-radius:14px;
-
-font-weight:700;
-
-font-size:1rem;
-
-transition:0.2s ease;
-
-text-align:center;
-
-}
-
-.btn:hover{
-opacity:0.92;
-}
-
-footer{
-
-margin-top:70px;
-
-text-align:center;
-
-font-size:0.95rem;
-
-color:#777;
-
-padding-bottom:20px;
-
-}
-
-@media(max-width:700px){
-
-body{
-padding:25px 15px;
-}
-
-.card{
-min-height:auto;
-}
-
-.card h3{
-padding-right:0;
-}
-
-.card.current::after{
-
-position:static;
-
-display:inline-block;
-
-margin-bottom:14px;
-
-}
-
-}
-
-</style>
+<title>Tecnología de la Información — 4to año</title>
+<link rel="stylesheet" href="assets/styles.css">
 </head>
-
 <body>
 
-<div class="container">
-
-<header>
-
-<h1>
-Tecnología de la Información
-</h1>
-
-<p>
-Materiales interactivos, ejercicios y actividades prácticas realizadas en clase.
-</p>
-
+<header class="site-header">
+  <span class="eyebrow">4to año · Tecnología de la Información</span>
+  <h1>Material de clase</h1>
+  <p>Módulos interactivos, ejercicios y actividades prácticas que vamos usando en clase, organizados por tema.</p>
 </header>
 
-<!-- ================================================= -->
-<!-- CLASES -->
-<!-- ================================================= -->
+<main id="unidades"></main>
 
-<section class="section">
-
-<h2 class="section-title">
-📘 Clases
-<span class="badge">
-Actualizado
-</span>
-</h2>
-
-<div class="grid">
-
-<!-- REPASO -->
-
-<div class="card">
-
-<div>
-
-<h3>
-🧠 Repaso de evaluación
-</h3>
-
-<p>
-Errores comunes y mejoras para organizar documentos.
-</p>
-
-</div>
-
-<a href="repaso.html" class="btn">
-Abrir módulo
-</a>
-
-</div>
-
-<!-- CLASE 6 -->
-
-<div class="card">
-
-<div>
-
-<h3>
-📄 Clase 6 — Formato
-</h3>
-
-<p>
-Copiar un texto y mejorar su presentación usando formato básico.
-</p>
-
-</div>
-
-<a href="clase6.html" class="btn">
-Abrir módulo
-</a>
-
-</div>
-
-<!-- CLASE 7 -->
-
-<div class="card">
-
-<div>
-
-<h3>
-📊 Clase 7 — Tablas
-</h3>
-
-<p>
-Cómo organizar información usando filas y columnas.
-</p>
-
-</div>
-
-<a href="clase7.html" class="btn">
-Abrir módulo
-</a>
-
-</div>
-
-<!-- CLASE 8 -->
-
-<div class="card">
-
-<div>
-
-<h3>
-🎨 Clase 8 — Formato en tablas
-</h3>
-
-<p>
-Bordes, colores y combinación de celdas para mejorar tablas.
-</p>
-
-</div>
-
-<a href="clase8.html" class="btn">
-Abrir módulo
-</a>
-
-</div>
-
-<!-- CLASE 9 -->
-
-<div class="card">
-
-<div>
-
-<h3>
-🧾 Clase 9 — Facturas
-</h3>
-
-<p>
-Tablas más completas usando títulos, subtotales y formato visual.
-</p>
-
-</div>
-
-<a href="clase9.html" class="btn">
-Abrir módulo
-</a>
-
-</div>
-
-<!-- CLASE 10 -->
-
-<div class="card">
-
-<div>
-
-<h3>
-📅 Clase 10 — Organización personal
-</h3>
-
-<p>
-Reconstrucción de información, modelos visuales y tablas aplicadas a situaciones reales.
-</p>
-
-</div>
-
-<a href="clase10.html" class="btn">
-Abrir módulo
-</a>
-
-</div>
-
-<!-- CLASE 11 -->
-  
-<div class="card">
-
-<div>
-
-<h3>
-🎲 Clase 11 — Ruleta de actividades
-</h3>
-
-<p>
-Elegí aleatoriamente un modelo para copiar en Google Docs.
-</p>
-
-</div>
-
-<a href="ruleta.html" class="btn">
-Abrir ruleta
-</a>
-
-</div>
-
-
-  
-<!-- CLASE 12 -->
-
-<div class="card">
-
-<div>
-
-<h3>
-📗 Clase 12 — Google Sheets
-</h3>
-
-<p>
-Primer contacto con hojas de cálculo. Filas, columnas, celdas y exploración visual de la herramienta.
-</p>
-
-</div>
-
-<a href="clase12.html" class="btn">
-Abrir módulo
-</a>
-
-</div>
-  
-  <!-- CLASE 13 -->
-
-<div class="card">
-
-<div>
-
-<h3>
-📗 Clase 13 — Explorando Google Sheets
-</h3>
-
-<p>
-Práctica con coordenadas, colores, figuras y tablas simples para seguir ganando confianza en el uso de hojas de cálculo.
-</p>
-
-</div>
-
-<a href="clase13.html" class="btn">
-Abrir módulo
-</a>
-
-</div>
-
-<div class="card">
-
-<div>
-
-<h3>
-📄 Clase 14 — Dibujos, gráficos y tablas
-</h3>
-
-<p>
-Agregamos una tanda de ejercicios y seguimos conociendo Sheets.
-</p>
-
-</div>
-
-<a href="clase14.html" class="btn">
-Abrir módulo
-</a>
-
-</div>  
-
-
-<div class="card">
-
-<div>
-
-<h3>
-📄 Clase 15 — Copiamos modelos
-</h3>
-
-<p>
-Ahora vamos a copiar modelos en los ejercicios, del modelo al final
-</p>
-
-</div>
-
-<a href="clase15.html" class="btn">
-Abrir módulo
-</a>
-
-</div>    
-
-<div class="card">
-
-<div>
-
-<h3>
-📄 Clase 16 — Copiamos y aplicamos herramientas
-</h3>
-
-<p>
-Agregamos más dificultad a los ejercicios. Copiamos tal cual está el modelo
-</p>
-
-</div>
-
-<a href="clase16.html" class="btn">
-Abrir módulo
-</a>
-
-</div> 
-
-<div class="card">
-
-<div>
-
-<h3>
-📄 Clase 17 — Especial Mundial ⚽
-</h3>
-
-<p>
-Hacemos tablas sobre el partido de hoy!!!
-</p>
-
-</div>
-
-<a href="clase17.html" class="btn">
-Abrir módulo
-</a>
-
-</div>
-  
-<div class="card current">
-
-<div>
-
-<h3>
-📄 Clase 19 — CANVA - DISEÑOS
-</h3>
-
-<p>
-Hoy conocemos CANVA
-</p>
-
-</div>
-
-<a href="clase19.html" class="btn">
-Abrir módulo
-</a>
-
-</div>
-
-
-  
-  </div>
-
-</section>
-
-<footer>
-Facundo Sueldo
+<footer class="site-footer">
+  Facundo Sueldo
 </footer>
 
-</div>
+<script>
+/* =========================================================
+   DATOS DE LAS CLASES
+   =========================================================
+   Para agregar una clase nueva: sumá un objeto al final del
+   array de la unidad que corresponda (o creá una unidad nueva
+   en UNIDADES). El sistema arma las tarjetas solo, agrupa por
+   unidad y le pone el cartel de "CLASE ACTUAL" automáticamente
+   a la ÚLTIMA clase del repo (la última de la última unidad).
+   No hace falta tocar HTML ni mover el badge a mano.
+   ========================================================= */
+
+const UNIDADES = [
+  {
+    nombre: "Google Docs",
+    icono: "📄",
+    clases: [
+      { emoji: "🧠", titulo: "Repaso de evaluación", desc: "Errores comunes y mejoras para organizar documentos.", href: "repaso.html" },
+      { emoji: "📄", titulo: "Clase 6 — Formato", desc: "Copiar un texto y mejorar su presentación usando formato básico.", href: "clase6.html" },
+      { emoji: "📊", titulo: "Clase 7 — Tablas", desc: "Cómo organizar información usando filas y columnas.", href: "clase7.html" },
+      { emoji: "🎨", titulo: "Clase 8 — Formato en tablas", desc: "Bordes, colores y combinación de celdas para mejorar tablas.", href: "clase8.html" },
+      { emoji: "🧾", titulo: "Clase 9 — Facturas", desc: "Tablas más completas usando títulos, subtotales y formato visual.", href: "clase9.html" },
+      { emoji: "📅", titulo: "Clase 10 — Organización personal", desc: "Reconstrucción de información, modelos visuales y tablas aplicadas a situaciones reales.", href: "clase10.html" },
+      { emoji: "🎲", titulo: "Clase 11 — Ruleta de actividades", desc: "Elegí aleatoriamente un modelo para copiar en Google Docs.", href: "ruleta.html" },
+    ]
+  },
+  {
+    nombre: "Google Sheets",
+    icono: "📗",
+    clases: [
+      { emoji: "📗", titulo: "Clase 12 — Google Sheets", desc: "Primer contacto con hojas de cálculo. Filas, columnas, celdas y exploración visual de la herramienta.", href: "clase12.html" },
+      { emoji: "📗", titulo: "Clase 13 — Explorando Google Sheets", desc: "Práctica con coordenadas, colores, figuras y tablas simples para seguir ganando confianza en el uso de hojas de cálculo.", href: "clase13.html" },
+      { emoji: "📄", titulo: "Clase 14 — Dibujos, gráficos y tablas", desc: "Agregamos una tanda de ejercicios y seguimos conociendo Sheets.", href: "clase14.html" },
+      { emoji: "📄", titulo: "Clase 15 — Copiamos modelos", desc: "Ahora vamos a copiar modelos en los ejercicios, del modelo al final.", href: "clase15.html" },
+      { emoji: "📄", titulo: "Clase 16 — Copiamos y aplicamos herramientas", desc: "Agregamos más dificultad a los ejercicios. Copiamos tal cual está el modelo.", href: "clase16.html" },
+      { emoji: "⚽", titulo: "Clase 17 — Especial Mundial", desc: "Hacemos tablas sobre el partido de hoy.", href: "clase17.html" },
+    ]
+  },
+  {
+    nombre: "Canva",
+    icono: "🎨",
+    clases: [
+      { emoji: "🎨", titulo: "Clase 19 — Introducción a Canva", desc: "Primer contacto con Canva: interfaz, elementos gráficos y ejercicios de diseño.", href: "clase19.html" },
+      { emoji: "🔤", titulo: "Clase 21 — Texto y tipografía", desc: "Jerarquía de texto y recreación de un afiche modelo en Canva.", href: "clase21.html" },
+    ]
+  },
+];
+
+/* ===== Render ===== */
+const main = document.getElementById("unidades");
+
+// Encontrar la última clase del repo (para el badge automático)
+const todas = UNIDADES.flatMap(u => u.clases);
+const ultima = todas[todas.length - 1];
+
+UNIDADES.forEach(unidad => {
+  const section = document.createElement("section");
+  section.className = "unit";
+
+  const header = document.createElement("div");
+  header.className = "unit-header";
+  header.innerHTML = `
+    <span class="unit-icon">${unidad.icono}</span>
+    <h2>${unidad.nombre}</h2>
+    <span class="unit-count">${unidad.clases.length} clase${unidad.clases.length !== 1 ? "s" : ""}</span>
+  `;
+  section.appendChild(header);
+
+  const grid = document.createElement("div");
+  grid.className = "grid";
+
+  unidad.clases.forEach(c => {
+    const card = document.createElement("div");
+    card.className = "card" + (c === ultima ? " current" : "");
+    card.innerHTML = `
+      <div>
+        <h3>${c.emoji} ${c.titulo}</h3>
+        <p>${c.desc}</p>
+      </div>
+      <a href="${c.href}" class="btn">Abrir módulo</a>
+    `;
+    grid.appendChild(card);
+  });
+
+  section.appendChild(grid);
+  main.appendChild(section);
+});
+</script>
 
 </body>
 </html>
