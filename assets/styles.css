@@ -415,6 +415,147 @@ body.module-page{
   margin-top:6px;
 }
 
+/* Galería de ejemplos (volantes/diseños ya armados como muestra) */
+.examples-grid{
+  display:flex;
+  flex-wrap:wrap;
+  gap:22px;
+  justify-content:center;
+  width:100%;
+}
+
+.flyer-card{
+  width:250px;
+  border-radius:16px;
+  overflow:hidden;
+  box-shadow:var(--shadow-sm);
+  background:white;
+  flex-shrink:0;
+}
+
+.flyer-card .flyer-photo{
+  width:100%;
+  height:170px;
+  object-fit:cover;
+  display:block;
+}
+
+.flyer-card .flyer-top{
+  padding:16px 16px 14px;
+  text-align:center;
+}
+
+.flyer-card .flyer-name{
+  font-weight:800;
+  font-size:1rem;
+  line-height:1.25;
+  text-transform:uppercase;
+  letter-spacing:0.3px;
+}
+
+.flyer-card .flyer-sub{
+  font-size:0.8rem;
+  color:var(--muted);
+  margin-top:6px;
+  line-height:1.4;
+  font-weight:600;
+}
+
+.flyer-card .flyer-services{
+  font-size:0.76rem;
+  color:var(--muted);
+  margin-top:10px;
+  line-height:1.65;
+}
+
+.flyer-card .flyer-contact{
+  padding:10px 12px;
+  text-align:center;
+  font-size:0.78rem;
+  font-weight:700;
+  color:white;
+}
+
+/* Chips (lista de rubros posibles) */
+.chip-list{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  justify-content:center;
+  margin:1.2rem 0 1.6rem;
+}
+
+.chip{
+  background:var(--card);
+  border:1px solid var(--border);
+  padding:9px 16px;
+  border-radius:999px;
+  font-size:0.9rem;
+  font-weight:600;
+  color:var(--text);
+}
+
+.chip.wildcard{
+  border-style:dashed;
+  color:var(--muted);
+}
+
+/* Pasos numerados */
+.steps{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  width:100%;
+  max-width:600px;
+  margin:0 auto 1.6rem;
+}
+
+.step{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius-md);
+  padding:12px 18px;
+  font-size:0.95rem;
+}
+
+.step .step-num{
+  flex-shrink:0;
+  width:26px;
+  height:26px;
+  border-radius:50%;
+  background:var(--accent);
+  color:white;
+  font-weight:800;
+  font-size:0.85rem;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* Requisitos del ejercicio */
+.req-list{
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px;
+  justify-content:center;
+  margin-top:0.4rem;
+}
+
+.req{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  background:#fdf0ea;
+  color:var(--accent2);
+  padding:8px 16px;
+  border-radius:999px;
+  font-size:0.85rem;
+  font-weight:700;
+}
+
 /* Ejercicios */
 .exercise-header{
   text-align:center;
