@@ -20,14 +20,14 @@
     <!-- Pantalla 1: Portada -->
     <div class="screen active" id="screen-1">
       <h1 class="title-main">Clase 22</h1>
-      <h2 class="subtitle-main">Del volante a la tarjeta de presentación</h2>
-      <p class="text-desc">La clase pasada armaste un volante. Hoy vamos a tomar esa misma idea y reducirla a lo esencial: una tarjeta de presentación. Vamos a ver qué se mantiene y qué se saca.</p>
+      <h2 class="subtitle-main">De la tarjeta mínima al volante completo</h2>
+      <p class="text-desc">La clase pasada armaste un volante. Hoy vamos a armar una tarjeta de presentación, arrancando por lo esencial y sumando cosas a medida que avanzás.</p>
     </div>
 
     <!-- Pantalla 2: Comparativa -->
     <div class="screen" id="screen-2">
       <h2 class="section-title">Un mismo emprendimiento, tres niveles</h2>
-      <p class="text-desc" style="margin-bottom:1.2rem;">Este es un volante real (Taller El Profe, service técnico de PC). Los colores marcan qué tipo de dato es cada elemento, para ver qué se mantiene en cada reducción.</p>
+      <p class="text-desc" style="margin-bottom:1.2rem;">Mismo emprendimiento real (Taller El Profe, service técnico de PC), de menos a más. Los colores marcan qué tipo de dato es cada elemento, para ver qué se va sumando en cada paso.</p>
 
       <div class="compare-legend">
         <div class="compare-legend-item"><span class="compare-dot logo"></span> Logo</div>
@@ -39,22 +39,26 @@
 
       <div class="compare-row">
 
-        <!-- Columna 1: Volante completo -->
+        <!-- Columna 1: Tarjeta mínima -->
         <div class="compare-col">
           <div class="compare-col-label">
-            <div class="compare-title">1. Volante completo</div>
-            <span class="compare-tag">Como se usa hoy</span>
+            <div class="compare-title">1. Tarjeta mínima</div>
+            <span class="compare-tag">Arrancá por acá</span>
           </div>
-          <img class="compare-flyer-img" src="assets/examples/volante_taller.jpg" alt="Volante completo de Taller El Profe">
+          <div class="compare-card final">
+            <div class="compare-logo"><img src="assets/examples/logo_taller.png" alt="Logo"></div>
+            <div>
+              <div class="compare-name">Taller El Profe</div>
+              <div class="compare-rubro">Servicio técnico de PC</div>
+              <div class="compare-rule"></div>
+              <div class="compare-contact">📱 11 3556 1263<br>📍 Flores, CABA</div>
+            </div>
+          </div>
           <div class="compare-check">
-            <div class="compare-check-item"><span class="compare-dot logo"></span> Logo</div>
-            <div class="compare-check-item"><span class="compare-dot identidad"></span> Nombre grande</div>
-            <div class="compare-check-item"><span class="compare-dot extra"></span> Pregunta / bajada</div>
-            <div class="compare-check-item"><span class="compare-dot extra"></span> 4 beneficios con ícono</div>
-            <div class="compare-check-item"><span class="compare-dot extra"></span> Código QR</div>
-            <div class="compare-check-item"><span class="compare-dot extra"></span> Redes / mapa</div>
-            <div class="compare-check-item"><span class="compare-dot contacto"></span> WhatsApp</div>
-            <div class="compare-check-item"><span class="compare-dot ubicacion"></span> Ubicación</div>
+            <div class="compare-check-item"><span class="compare-dot logo"></span> Logo <span class="mark ok">✓</span></div>
+            <div class="compare-check-item"><span class="compare-dot identidad"></span> Nombre / rubro <span class="mark ok">✓</span></div>
+            <div class="compare-check-item"><span class="compare-dot contacto"></span> Un contacto <span class="mark ok">✓</span></div>
+            <div class="compare-check-item"><span class="compare-dot ubicacion"></span> Ubicación <span class="mark ok">✓</span></div>
           </div>
         </div>
 
@@ -82,10 +86,8 @@
           <div class="compare-check">
             <div class="compare-check-item"><span class="compare-dot logo"></span> Logo <span class="mark ok">✓</span></div>
             <div class="compare-check-item"><span class="compare-dot identidad"></span> Nombre / rubro <span class="mark ok">✓</span></div>
-            <div class="compare-check-item dropped"><span class="compare-dot extra"></span> Pregunta / bajada <span class="mark no">✕</span></div>
-            <div class="compare-check-item"><span class="compare-dot extra"></span> Lista corta de servicios <span class="mark ok">✓</span></div>
-            <div class="compare-check-item"><span class="compare-dot extra"></span> Frase diferencial <span class="mark ok">✓</span></div>
-            <div class="compare-check-item dropped"><span class="compare-dot extra"></span> QR / redes <span class="mark no">✕</span></div>
+            <div class="compare-check-item"><span class="compare-dot extra"></span> Lista corta de servicios <span class="compare-badge-new">nuevo</span></div>
+            <div class="compare-check-item"><span class="compare-dot extra"></span> Frase diferencial <span class="compare-badge-new">nuevo</span></div>
             <div class="compare-check-item"><span class="compare-dot contacto"></span> Contacto <span class="mark ok">✓</span></div>
             <div class="compare-check-item"><span class="compare-dot ubicacion"></span> Ubicación <span class="mark ok">✓</span></div>
           </div>
@@ -93,26 +95,21 @@
 
         <div class="compare-arrow">→</div>
 
-        <!-- Columna 3: Tarjeta final -->
+        <!-- Columna 3: Volante completo -->
         <div class="compare-col">
           <div class="compare-col-label">
-            <div class="compare-title">3. Tarjeta final</div>
-            <span class="compare-tag">Lo mínimo, para todos</span>
+            <div class="compare-title">3. Volante completo</div>
+            <span class="compare-tag">Versión real, con todo</span>
           </div>
-          <div class="compare-card final">
-            <div class="compare-logo"><img src="assets/examples/logo_taller.png" alt="Logo"></div>
-            <div>
-              <div class="compare-name">Taller El Profe</div>
-              <div class="compare-rubro">Servicio técnico de PC</div>
-              <div class="compare-rule"></div>
-              <div class="compare-contact">📱 11 3556 1263<br>📍 Flores, CABA</div>
-            </div>
-          </div>
+          <img class="compare-flyer-img" src="assets/examples/volante_taller.jpg" alt="Volante completo de Taller El Profe">
           <div class="compare-check">
             <div class="compare-check-item"><span class="compare-dot logo"></span> Logo <span class="mark ok">✓</span></div>
-            <div class="compare-check-item"><span class="compare-dot identidad"></span> Nombre / rubro <span class="mark ok">✓</span></div>
-            <div class="compare-check-item dropped"><span class="compare-dot extra"></span> Servicios / frase <span class="mark no">✕</span></div>
-            <div class="compare-check-item"><span class="compare-dot contacto"></span> Un contacto <span class="mark ok">✓</span></div>
+            <div class="compare-check-item"><span class="compare-dot identidad"></span> Nombre grande <span class="mark ok">✓</span></div>
+            <div class="compare-check-item"><span class="compare-dot extra"></span> Pregunta / bajada <span class="compare-badge-new">nuevo</span></div>
+            <div class="compare-check-item"><span class="compare-dot extra"></span> 4 beneficios con ícono <span class="compare-badge-new">nuevo</span></div>
+            <div class="compare-check-item"><span class="compare-dot extra"></span> Código QR <span class="compare-badge-new">nuevo</span></div>
+            <div class="compare-check-item"><span class="compare-dot extra"></span> Redes / mapa <span class="compare-badge-new">nuevo</span></div>
+            <div class="compare-check-item"><span class="compare-dot contacto"></span> WhatsApp <span class="mark ok">✓</span></div>
             <div class="compare-check-item"><span class="compare-dot ubicacion"></span> Ubicación <span class="mark ok">✓</span></div>
           </div>
         </div>
@@ -152,18 +149,36 @@
       </div>
     </div>
 
+    <!-- Pantalla 4: Intercambio -->
+    <div class="screen" id="screen-4">
+      <div class="exercise-header">
+        <div class="ex-tag">Actividad extra</div>
+        <h2 class="ex-title">Intercambio con un compañero</h2>
+        <p class="ex-objective">Cuando termines tu tarjeta, mostrásela a un compañero o compañera. Entre los dos revisen si cumple lo básico.</p>
+      </div>
+
+      <ul class="checklist">
+        <li><span class="checklist-icon">✓</span> ¿Se lee bien el nombre y el rubro?</li>
+        <li><span class="checklist-icon">✓</span> ¿Tiene un contacto claro (teléfono, WhatsApp)?</li>
+        <li><span class="checklist-icon">✓</span> ¿Se entiende dónde encontrarlo?</li>
+        <li><span class="checklist-icon">✓</span> ¿Está todo alineado, sin elementos superpuestos?</li>
+      </ul>
+
+      <p class="ex-objective" style="margin-top:1.8rem;">¿Les sobra tiempo a los dos? Ayúdense a sumar la versión intermedia: 2 o 3 servicios y una frase que diferencie el emprendimiento.</p>
+    </div>
+
   </main>
 
   <footer class="nav-footer">
     <button class="btn btn-secondary" id="btn-prev">Anterior</button>
-    <div class="step-counter" id="step-counter">1 / 3</div>
+    <div class="step-counter" id="step-counter">1 / 4</div>
     <button class="btn" id="btn-next">Siguiente</button>
   </footer>
 
 </div>
 
 <script src="assets/module.js"></script>
-<script>initStepModule(3);</script>
+<script>initStepModule(4);</script>
 
 </body>
 </html>
