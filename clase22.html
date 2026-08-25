@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 22 — Del volante a la tarjeta</title>
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body class="module-page">
+
+<div class="app-container">
+
+  <header class="top-header">
+    <div class="header-title">Clase 22 · Tarjeta de presentación</div>
+    <a href="index.html" class="btn-close" title="Cerrar">✕</a>
+  </header>
+
+  <main class="workspace">
+
+    <!-- Pantalla 1: Portada -->
+    <div class="screen active" id="screen-1">
+      <h1 class="title-main">Clase 22</h1>
+      <h2 class="subtitle-main">Del volante a la tarjeta de presentación</h2>
+      <p class="text-desc">La clase pasada armaste un volante. Hoy vamos a tomar esa misma idea y reducirla a lo esencial: una tarjeta de presentación. Vamos a ver qué se mantiene y qué se saca.</p>
+    </div>
+
+    <!-- Pantalla 2: Comparativa -->
+    <div class="screen" id="screen-2">
+      <h2 class="section-title">Un mismo emprendimiento, tres niveles</h2>
+      <p class="text-desc" style="margin-bottom:1.2rem;">Este es un volante real (Taller El Profe, service técnico de PC). Los colores marcan qué tipo de dato es cada elemento, para ver qué se mantiene en cada reducción.</p>
+
+      <div class="compare-legend">
+        <div class="compare-legend-item"><span class="compare-dot logo"></span> Logo</div>
+        <div class="compare-legend-item"><span class="compare-dot identidad"></span> Nombre / rubro</div>
+        <div class="compare-legend-item"><span class="compare-dot contacto"></span> Contacto</div>
+        <div class="compare-legend-item"><span class="compare-dot ubicacion"></span> Ubicación</div>
+        <div class="compare-legend-item"><span class="compare-dot extra"></span> Extra</div>
+      </div>
+
+      <div class="compare-row">
+
+        <!-- Columna 1: Volante completo -->
+        <div class="compare-col">
+          <div class="compare-col-label">
+            <div class="compare-title">1. Volante completo</div>
+            <span class="compare-tag">Como se usa hoy</span>
+          </div>
+          <img class="compare-flyer-img" src="assets/examples/volante_taller.jpg" alt="Volante completo de Taller El Profe">
+          <div class="compare-check">
+            <div class="compare-check-item"><span class="compare-dot logo"></span> Logo</div>
+            <div class="compare-check-item"><span class="compare-dot identidad"></span> Nombre grande</div>
+            <div class="compare-check-item"><span class="compare-dot extra"></span> Pregunta / bajada</div>
+            <div class="compare-check-item"><span class="compare-dot extra"></span> 4 beneficios con ícono</div>
+            <div class="compare-check-item"><span class="compare-dot extra"></span> Código QR</div>
+            <div class="compare-check-item"><span class="compare-dot extra"></span> Redes / mapa</div>
+            <div class="compare-check-item"><span class="compare-dot contacto"></span> WhatsApp</div>
+            <div class="compare-check-item"><span class="compare-dot ubicacion"></span> Ubicación</div>
+          </div>
+        </div>
+
+        <div class="compare-arrow">→</div>
+
+        <!-- Columna 2: Intermedio -->
+        <div class="compare-col">
+          <div class="compare-col-label">
+            <div class="compare-title">2. Intermedio</div>
+            <span class="compare-tag">Si te sobra tiempo</span>
+          </div>
+          <div class="compare-card">
+            <div class="compare-top-row">
+              <div class="compare-logo"><img src="assets/examples/logo_taller.png" alt="Logo"></div>
+              <div>
+                <div class="compare-name">Taller El Profe</div>
+                <div class="compare-rubro">Servicio técnico de PC</div>
+              </div>
+            </div>
+            <div class="compare-rule"></div>
+            <div class="compare-services"><b>Servicios:</b> SSD · Instalación de programas · Internet sin cortes</div>
+            <div class="compare-tagline">"Especializado para adultos mayores"</div>
+            <div class="compare-contact">📱 11 3556 1263 · 📍 Flores, CABA</div>
+          </div>
+          <div class="compare-check">
+            <div class="compare-check-item"><span class="compare-dot logo"></span> Logo <span class="mark ok">✓</span></div>
+            <div class="compare-check-item"><span class="compare-dot identidad"></span> Nombre / rubro <span class="mark ok">✓</span></div>
+            <div class="compare-check-item dropped"><span class="compare-dot extra"></span> Pregunta / bajada <span class="mark no">✕</span></div>
+            <div class="compare-check-item"><span class="compare-dot extra"></span> Lista corta de servicios <span class="mark ok">✓</span></div>
+            <div class="compare-check-item"><span class="compare-dot extra"></span> Frase diferencial <span class="mark ok">✓</span></div>
+            <div class="compare-check-item dropped"><span class="compare-dot extra"></span> QR / redes <span class="mark no">✕</span></div>
+            <div class="compare-check-item"><span class="compare-dot contacto"></span> Contacto <span class="mark ok">✓</span></div>
+            <div class="compare-check-item"><span class="compare-dot ubicacion"></span> Ubicación <span class="mark ok">✓</span></div>
+          </div>
+        </div>
+
+        <div class="compare-arrow">→</div>
+
+        <!-- Columna 3: Tarjeta final -->
+        <div class="compare-col">
+          <div class="compare-col-label">
+            <div class="compare-title">3. Tarjeta final</div>
+            <span class="compare-tag">Lo mínimo, para todos</span>
+          </div>
+          <div class="compare-card final">
+            <div class="compare-logo"><img src="assets/examples/logo_taller.png" alt="Logo"></div>
+            <div>
+              <div class="compare-name">Taller El Profe</div>
+              <div class="compare-rubro">Servicio técnico de PC</div>
+              <div class="compare-rule"></div>
+              <div class="compare-contact">📱 11 3556 1263<br>📍 Flores, CABA</div>
+            </div>
+          </div>
+          <div class="compare-check">
+            <div class="compare-check-item"><span class="compare-dot logo"></span> Logo <span class="mark ok">✓</span></div>
+            <div class="compare-check-item"><span class="compare-dot identidad"></span> Nombre / rubro <span class="mark ok">✓</span></div>
+            <div class="compare-check-item dropped"><span class="compare-dot extra"></span> Servicios / frase <span class="mark no">✕</span></div>
+            <div class="compare-check-item"><span class="compare-dot contacto"></span> Un contacto <span class="mark ok">✓</span></div>
+            <div class="compare-check-item"><span class="compare-dot ubicacion"></span> Ubicación <span class="mark ok">✓</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Pantalla 3: Consigna -->
+    <div class="screen" id="screen-3">
+      <div class="exercise-header">
+        <div class="ex-tag">Actividad</div>
+        <h2 class="ex-title">Armá tu tarjeta de presentación</h2>
+        <p class="ex-objective">Retomá el emprendimiento que elegiste la clase pasada (o elegí uno de estos rubros):</p>
+      </div>
+
+      <div class="chip-list">
+        <span class="chip">Service de computación</span>
+        <span class="chip">Albañilería</span>
+        <span class="chip">Electricista</span>
+        <span class="chip">Modista</span>
+        <span class="chip">Reparación de ropa</span>
+        <span class="chip">Venta de productos de limpieza</span>
+        <span class="chip wildcard">🃏 Tu propio emprendimiento</span>
+      </div>
+
+      <div class="steps">
+        <div class="step"><span class="step-num">1</span> Armá la tarjeta con los elementos mínimos: logo o nombre, rubro, un contacto y la ubicación.</div>
+        <div class="step"><span class="step-num">2</span> Si te sobra tiempo: agregale una lista corta de servicios y una frase que te diferencie (nivel intermedio).</div>
+      </div>
+
+      <p class="ex-objective" style="margin-bottom:0.8rem; font-weight:700;">La tarjeta tiene que tener:</p>
+      <div class="req-list">
+        <span class="req">🏷️ Nombre y rubro</span>
+        <span class="req">📞 Un contacto</span>
+        <span class="req">📍 Ubicación</span>
+        <span class="req">📐 Todo bien alineado</span>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="nav-footer">
+    <button class="btn btn-secondary" id="btn-prev">Anterior</button>
+    <div class="step-counter" id="step-counter">1 / 3</div>
+    <button class="btn" id="btn-next">Siguiente</button>
+  </footer>
+
+</div>
+
+<script src="assets/module.js"></script>
+<script>initStepModule(3);</script>
+
+</body>
+</html>
