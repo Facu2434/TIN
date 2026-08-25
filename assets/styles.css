@@ -817,6 +817,18 @@ body.module-page{
 .compare-check-item .mark.ok{ color:var(--accent); }
 .compare-check-item .mark.no{ color:#ccc; }
 
+.compare-badge-new{
+  margin-left:auto;
+  background:#fdf0ea;
+  color:var(--accent2);
+  font-size:0.6rem;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:0.3px;
+  padding:2px 7px;
+  border-radius:999px;
+}
+
 .compare-arrow{
   align-self:center;
   font-size:1.6rem;
