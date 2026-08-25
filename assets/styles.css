@@ -675,6 +675,156 @@ body.module-page{
 }
 
 /* =========================================================
+   COMPARATIVA (transformación de un formato a otro,
+   ej: volante → tarjeta). Pensado para reutilizarse en
+   cualquier clase que compare "versión completa" vs
+   "versión reducida" de una misma pieza.
+   ========================================================= */
+.compare-legend{
+  display:flex;
+  flex-wrap:wrap;
+  gap:16px;
+  justify-content:center;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:999px;
+  padding:10px 20px;
+  margin:0 auto 1.8rem;
+  width:fit-content;
+}
+
+.compare-legend-item{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  font-size:0.8rem;
+  font-weight:700;
+  color:var(--text);
+}
+
+.compare-dot{
+  width:11px;
+  height:11px;
+  border-radius:50%;
+  flex-shrink:0;
+}
+.compare-dot.logo{ background:#2a9d8f; }
+.compare-dot.identidad{ background:#e76f51; }
+.compare-dot.contacto{ background:#ffb703; }
+.compare-dot.ubicacion{ background:#e63946; }
+.compare-dot.extra{ background:#8e44ad; }
+
+.compare-row{
+  display:flex;
+  align-items:flex-start;
+  justify-content:center;
+  gap:18px;
+  flex-wrap:wrap;
+  width:100%;
+}
+
+.compare-col{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  overflow:hidden;
+  width:250px;
+  flex-shrink:0;
+  box-shadow:var(--shadow-sm);
+}
+
+.compare-col-label{
+  padding:14px 16px 10px;
+  border-bottom:1px solid var(--border);
+}
+
+.compare-col-label .compare-title{
+  font-weight:800;
+  font-size:0.92rem;
+}
+
+.compare-col-label .compare-tag{
+  display:block;
+  font-size:0.7rem;
+  font-weight:600;
+  color:var(--muted-soft);
+  margin-top:2px;
+}
+
+.compare-flyer-img{
+  width:100%;
+  display:block;
+  aspect-ratio:1050/600;
+  object-fit:cover;
+}
+
+.compare-card{
+  background:#132a4d;
+  color:white;
+  padding:16px;
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+  min-height:180px;
+}
+
+.compare-card.final{
+  flex-direction:row;
+  align-items:center;
+  gap:12px;
+}
+
+.compare-card .compare-logo{
+  width:50px; height:50px;
+  border-radius:50%;
+  background:white;
+  overflow:hidden;
+  flex-shrink:0;
+  display:flex; align-items:center; justify-content:center;
+}
+.compare-card.final .compare-logo{ width:58px; height:58px; }
+.compare-card .compare-logo img{ width:100%; height:100%; object-fit:contain; }
+
+.compare-card .compare-top-row{ display:flex; align-items:center; gap:10px; }
+
+.compare-card .compare-name{ font-size:0.95rem; font-weight:900; line-height:1.2; }
+.compare-card .compare-rubro{ font-size:0.64rem; font-weight:700; color:#ffb703; text-transform:uppercase; margin-top:2px; }
+.compare-card .compare-rule{ width:100%; height:1px; background:rgba(255,255,255,0.15); }
+.compare-card.final .compare-rule{ width:28px; height:2px; background:#ffb703; margin:5px 0; }
+.compare-card .compare-services{ font-size:0.72rem; line-height:1.55; }
+.compare-card .compare-services b{ color:#ffb703; }
+.compare-card .compare-tagline{ font-size:0.7rem; font-style:italic; color:#cfd8e3; }
+.compare-card .compare-contact{ font-size:0.72rem; line-height:1.55; font-weight:600; margin-top:auto; }
+
+.compare-check{
+  padding:12px 16px 16px;
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+  border-top:1px solid var(--border);
+}
+
+.compare-check-item{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  font-size:0.72rem;
+  color:var(--text);
+}
+.compare-check-item .compare-dot{ width:8px; height:8px; }
+.compare-check-item.dropped{ color:var(--muted-soft); text-decoration:line-through; }
+.compare-check-item .mark{ margin-left:auto; font-weight:800; }
+.compare-check-item .mark.ok{ color:var(--accent); }
+.compare-check-item .mark.no{ color:#ccc; }
+
+.compare-arrow{
+  align-self:center;
+  font-size:1.6rem;
+  color:var(--muted-soft);
+  padding-top:70px;
+}
+
+/* =========================================================
    RESPONSIVE
    ========================================================= */
 @media (max-width:700px){
@@ -690,4 +840,7 @@ body.module-page{
   .workspace{ padding:16px; }
   .model-canvas-wrapper{ padding:16px; min-height:auto; }
   .nav-footer{ padding:0 16px; }
+  .compare-row{ flex-direction:column; align-items:center; }
+  .compare-arrow{ padding-top:0; transform:rotate(90deg); }
+  .compare-col{ width:100%; max-width:300px; }
 }
