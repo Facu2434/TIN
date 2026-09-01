@@ -836,6 +836,28 @@ body.module-page{
   padding-top:70px;
 }
 
+/* Caja de texto (ej: prompt de IA) dentro de una compare-col */
+.prompt-box{
+  margin:18px;
+  padding:16px 18px;
+  background:var(--bg-soft);
+  border:1px dashed var(--border);
+  border-radius:var(--radius-md);
+  font-size:0.85rem;
+  font-style:italic;
+  color:var(--text);
+  line-height:1.5;
+}
+
+.prompt-result{
+  margin:0 18px 4px;
+  font-size:0.72rem;
+  font-weight:700;
+  color:var(--muted-soft);
+  text-transform:uppercase;
+  letter-spacing:0.4px;
+}
+
 /* =========================================================
    RESPONSIVE
    ========================================================= */
