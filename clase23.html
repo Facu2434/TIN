@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase 23 (prueba) — Carteles para tu emprendimiento</title>
+    <style>
+        /* === VARIABLES DE COLOR === */
+        :root {
+            --bg-body: #e2e8f0;
+            --card-bg: #ffffff;
+            --dark-bg: #1e293b;
+            --text-main: #334155;
+            --text-light: #64748b;
+            --accent-blue: #1d4ed8;
+            --accent-blue-light: #eff6ff;
+            --accent-hover: #1e40af;
+
+            --accent-green: #059669;
+            --accent-green-light: #ecfdf5;
+
+            --accent-red: #dc2626;
+            --accent-red-light: #fef2f2;
+
+            --accent-orange: #d97706;
+            --accent-orange-light: #fffbeb;
+
+            --font-main: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+        }
+
+        /* === RESET === */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.5;
+        }
+
+        /* === CONTENEDOR PRINCIPAL === */
+        .app-container {
+            width: 100%;
+            max-width: 1050px;
+            height: 85vh;
+            min-height: 550px;
+            max-height: 800px;
+            background-color: var(--card-bg);
+            box-shadow: 0 20px 40px -10px rgba(30, 41, 59, 0.1), 0 10px 20px -5px rgba(30, 41, 59, 0.05);
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+            border-top: 6px solid var(--accent-blue);
+        }
+
+        /* === PANTALLAS (STEPS) === */
+        .screen {
+            display: none;
+            flex-direction: column;
+            flex-grow: 1;
+            padding: 40px 60px;
+            overflow-y: auto;
+            animation: slideUpFade 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            justify-content: center;
+        }
+
+        .screen.active {
+            display: flex;
+        }
+
+        .screen::-webkit-scrollbar { width: 6px; }
+        .screen::-webkit-scrollbar-track { background: transparent; }
+        .screen::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+
+        @keyframes slideUpFade {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* === TIPOGRAFÍA === */
+        .title {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: var(--dark-bg);
+            line-height: 1.1;
+            letter-spacing: -1px;
+        }
+
+        .subtitle {
+            font-size: clamp(1.4rem, 3vw, 1.8rem);
+            color: var(--text-light);
+            margin-bottom: 40px;
+            font-weight: 500;
+        }
+
+        /* === LISTAS DE CONCEPTOS === */
+        .concept-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .concept-list li {
+            font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            color: var(--text-main);
+            line-height: 1.4;
+            background: #f8fafc;
+            padding: 15px 20px;
+            border-radius: 16px;
+            border: 1px solid #f1f5f9;
+            transition: transform 0.2s ease;
+        }
+
+        .concept-list li:hover {
+            transform: translateX(5px);
+            border-color: #e2e8f0;
+        }
+
+        .icon-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background-color: var(--accent-blue-light);
+            color: var(--accent-blue);
+            flex-shrink: 0;
+        }
+
+        .list-good li .icon-box { background-color: var(--accent-green-light); color: var(--accent-green); }
+        .list-bad li .icon-box { background-color: var(--accent-red-light); color: var(--accent-red); }
+
+        /* === BLOQUES DESTACADOS === */
+        .highlight-box {
+            background-color: var(--accent-blue-light);
+            border-left: 6px solid var(--accent-blue);
+            padding: 30px;
+            border-radius: 0 16px 16px 0;
+            font-size: clamp(1.4rem, 3vw, 1.8rem);
+            color: #1e3a8a;
+            font-weight: 700;
+            margin-top: 30px;
+            line-height: 1.4;
+        }
+
+        .highlight-alert {
+            background-color: var(--accent-red-light);
+            border-left-color: var(--accent-red);
+            color: var(--accent-red);
+        }
+
+        .highlight-tip {
+            background-color: var(--accent-orange-light);
+            border-left-color: var(--accent-orange);
+            color: #92400e;
+            font-size: clamp(1.1rem, 2.2vw, 1.3rem);
+        }
+
+        /* === GRIDS (Tarjetas) === */
+        .parts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 10px;
+        }
+
+        .part-card {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 25px;
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        .part-card .icon-box {
+            background: var(--dark-bg);
+            color: white;
+        }
+
+        .part-card h3 {
+            font-size: 1.4rem;
+            color: var(--dark-bg);
+            margin-bottom: 5px;
+        }
+
+        .part-card p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+        }
+
+        /* === MODELOS (imágenes de referencia) === */
+        .model-card {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 18px;
+            margin-bottom: 18px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .model-card img {
+            width: 140px;
+            border-radius: 10px;
+            box-shadow: 0 8px 18px -6px rgba(30,41,59,0.25);
+            flex-shrink: 0;
+        }
+
+        .model-card h3 {
+            font-size: 1.15rem;
+            color: var(--dark-bg);
+            margin-bottom: 4px;
+        }
+
+        .model-card p {
+            font-size: 0.98rem;
+            color: var(--text-light);
+        }
+
+        /* === PASOS NUMERADOS === */
+        .step-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            counter-reset: step-counter-list;
+        }
+
+        .step-list li {
+            counter-increment: step-counter-list;
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            background: #f8fafc;
+            border: 1px solid #f1f5f9;
+            border-radius: 16px;
+            padding: 18px 20px;
+        }
+
+        .step-list li::before {
+            content: counter(step-counter-list);
+            flex-shrink: 0;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--dark-bg);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.2rem;
+        }
+
+        .step-list span {
+            font-size: clamp(1.1rem, 2.3vw, 1.4rem);
+            padding-top: 6px;
+            line-height: 1.4;
+        }
+
+        /* === CENTRADO ABSOLUTO === */
+        .center-screen {
+            text-align: center;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .center-screen .title {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* === BARRA DE NAVEGACIÓN === */
+        .nav-bar {
+            background-color: #ffffff;
+            border-top: 1px solid #f1f5f9;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
+
+        .step-counter {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #94a3b8;
+            background: #f1f5f9;
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+
+        .btn {
+            background-color: var(--dark-bg);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-prev {
+            background-color: transparent;
+            color: var(--text-light);
+            border: 2px solid #e2e8f0;
+        }
+
+        .btn-prev:hover {
+            background-color: #f8fafc;
+            color: var(--text-main);
+            border-color: #cbd5e1;
+        }
+
+        .btn-next {
+            background-color: var(--accent-blue);
+        }
+
+        .btn-next:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(29, 78, 216, 0.2);
+        }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 768px) {
+            .app-container { height: 95vh; border-radius: 16px; }
+            .screen { padding: 30px 25px; }
+            .concept-list { gap: 15px; }
+            .concept-list li { padding: 12px 15px; }
+            .icon-box { width: 40px; height: 40px; }
+            .parts-grid { grid-template-columns: 1fr; gap: 15px;}
+            .model-card { flex-direction: column; text-align: center; }
+            .model-card img { width: 100%; max-width: 220px; }
+            .nav-bar { padding: 15px 20px; }
+            .btn { padding: 12px 20px; font-size: 1.1rem; }
+        }
+
+        /* === BOTÓN CERRAR (X ROJA) === */
+        .btn-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            color: var(--text-light);
+            cursor: pointer;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 100;
+            text-decoration: none;
+        }
+        .btn-close:hover {
+            background-color: var(--accent-red-light);
+            color: var(--accent-red);
+            border-color: #fca5a5;
+            transform: rotate(90deg);
+        }
+
+</style>
+</head>
+<body>
+
+    <div class="app-container">
+
+        <!-- BOTÓN CERRAR MÓDULO -->
+        <a class="btn-close" href="index.html" title="Cerrar módulo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </a>
+
+        <!-- PANTALLA 1: PORTADA -->
+        <div class="screen active center-screen" id="screen-1">
+            <h1 class="title">
+                Carteles para <span style="color: var(--accent-blue);">tu emprendimiento</span>
+            </h1>
+            <p class="subtitle">
+                Hoy vamos a sumar 3 piezas nuevas al emprendimiento que venís armando: un cartel de precios, uno de promoción y uno de horario de atención.
+            </p>
+        </div>
+
+        <!-- PANTALLA 2: MODELOS REALES -->
+        <div class="screen" id="screen-2">
+            <h1 class="title" style="font-size: 2.2rem;">Modelos de Taller El Profe</h1>
+            <p class="subtitle" style="font-size: 1.1rem; margin-bottom: 20px;">Estos son los 3 carteles reales de mi taller. Te sirven de modelo: no hace falta copiar el diseño exacto, sí la idea de cada uno.</p>
+
+            <div class="model-card">
+                <img src="assets/examples/cartel_precios.png" alt="Cartel de precios de Taller El Profe">
+                <div>
+                    <h3>🏷️ Cartel de precios</h3>
+                    <p>Servicios con su precio, bien alineados.</p>
+                </div>
+            </div>
+            <div class="model-card">
+                <img src="assets/examples/cartel_promocion.png" alt="Cartel de promoción de Taller El Profe">
+                <div>
+                    <h3>🎉 Cartel de promoción</h3>
+                    <p>Una oferta que se nota a simple vista.</p>
+                </div>
+            </div>
+            <div class="model-card">
+                <img src="assets/examples/cartel_horario.jpg" alt="Cartel de horario de atención de Taller El Profe">
+                <div>
+                    <h3>🕒 Cartel de horario</h3>
+                    <p>Días y horarios, fácil de leer de un vistazo.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- PANTALLA 3: CONSIGNA 1 - PRECIOS -->
+        <div class="screen" id="screen-3">
+            <h1 class="title">Cartel de precios</h1>
+            <p class="subtitle" style="margin-bottom: 25px;">Armá un cartel con los servicios de tu emprendimiento y su precio.</p>
+
+            <ul class="concept-list">
+                <li>
+                    <div class="icon-box"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg></div>
+                    <span>Nombre del negocio bien visible</span>
+                </li>
+                <li>
+                    <div class="icon-box"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg></div>
+                    <span>Entre 3 y 5 servicios, cada uno con su precio</span>
+                </li>
+                <li>
+                    <div class="icon-box"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="3" y1="15" x2="21" y2="15"></line></svg></div>
+                    <span>Todo alineado en filas parejas, fácil de leer</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- PANTALLA 4: CONSIGNA 2 - PROMOCIÓN -->
+        <div class="screen" id="screen-4">
+            <h1 class="title">Cartel de promoción</h1>
+            <p class="subtitle" style="margin-bottom: 25px;">Armá un cartel anunciando una oferta (descuento, 2x1, combo, lo que se te ocurra).</p>
+
+            <ul class="concept-list">
+                <li>
+                    <div class="icon-box"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></div>
+                    <span>Que la oferta se note a simple vista (cinta, sello, recuadro de color)</span>
+                </li>
+                <li>
+                    <div class="icon-box"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></div>
+                    <span>Nombre del negocio y un contacto</span>
+                </li>
+                <li>
+                    <div class="icon-box"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18"></path><path d="M6 6l12 12"></path></svg></div>
+                    <span>Sin saturar el diseño con demasiados elementos</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- PANTALLA 5: CONSIGNA 3 - HORARIO -->
+        <div class="screen" id="screen-5">
+            <h1 class="title">Cartel de horario</h1>
+            <p class="subtitle" style="margin-bottom: 25px;">Armá un cartel con los días y horarios en que atendés.</p>
+
+            <ul class="concept-list">
+                <li>
+                    <div class="icon-box"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg></div>
+                    <span>Días y horarios en filas prolijas</span>
+                </li>
+                <li>
+                    <div class="icon-box"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></div>
+                    <span>Se tiene que entender de un vistazo, sin leer todo el texto</span>
+                </li>
+                <li>
+                    <div class="icon-box"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg></div>
+                    <span>Nombre del negocio visible</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- PANTALLA 6: GUÍA - SERVICE TÉCNICO -->
+        <div class="screen" id="screen-6">
+            <h1 class="title" style="font-size: 2.2rem;">🖥️ Service técnico de PC</h1>
+            <p class="subtitle" style="font-size: 1.1rem;">Es el mismo rubro que Taller El Profe — podés arrancar directo copiando la estructura de los 3 modelos y cambiando los datos por los tuyos.</p>
+
+            <div class="parts-grid">
+                <div class="part-card">
+                    <div class="icon-box"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></div>
+                    <div>
+                        <h3>Frases</h3>
+                        <p>"Tu compu como nueva" · "Presupuesto sin cargo" · "Service a domicilio"</p>
+                    </div>
+                </div>
+                <div class="part-card">
+                    <div class="icon-box"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg></div>
+                    <div>
+                        <h3>Servicios típicos</h3>
+                        <p>Formateo, instalación de programas, diagnóstico, backup de archivos, cambio a SSD</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight-box highlight-tip">
+                💡 Dejá claro qué incluye cada servicio, para que no se preste a confusión.
+            </div>
+        </div>
+
+        <!-- PANTALLA 7: GUÍA - ELECTRICISTA -->
+        <div class="screen" id="screen-7">
+            <h1 class="title" style="font-size: 2.2rem;">⚡ Electricista</h1>
+            <p class="subtitle" style="font-size: 1.1rem;">Ustedes dos eligieron el mismo rubro — está bien, pero conviene que cada uno le dé un enfoque distinto para que los carteles no queden iguales.</p>
+
+            <div class="parts-grid">
+                <div class="part-card">
+                    <div class="icon-box"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></div>
+                    <div>
+                        <h3>Frases</h3>
+                        <p>"Arreglamos cortocircuitos" · "A domicilio, mismo día" · "Instalaciones certificadas"</p>
+                    </div>
+                </div>
+                <div class="part-card">
+                    <div class="icon-box"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg></div>
+                    <div>
+                        <h3>Servicios típicos</h3>
+                        <p>Revisión de tablero, instalación de toma, colocación de artefactos, arreglo de cortocircuito</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight-box highlight-tip">
+                💡 Elegí tu enfoque antes de arrancar (por ej. "urgencias a domicilio" o "instalaciones") y mantenelo en los 3 carteles.
+            </div>
+        </div>
+
+        <!-- PANTALLA 8: GUÍA - FLORERÍA -->
+        <div class="screen" id="screen-8">
+            <h1 class="title" style="font-size: 2.2rem;">💐 Florería</h1>
+
+            <div class="parts-grid">
+                <div class="part-card">
+                    <div class="icon-box"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></div>
+                    <div>
+                        <h3>Frases</h3>
+                        <p>"Flores frescas todos los días" · "Armamos tu ramo a pedido" · "Envíos el mismo día"</p>
+                    </div>
+                </div>
+                <div class="part-card">
+                    <div class="icon-box"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><circle cx="12" cy="5" r="2"></circle><circle cx="12" cy="19" r="2"></circle><circle cx="5" cy="12" r="2"></circle><circle cx="19" cy="12" r="2"></circle></svg></div>
+                    <div>
+                        <h3>Servicios / productos típicos</h3>
+                        <p>Ramo chico, ramo grande, arreglo para eventos, plantas</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight-box highlight-tip">
+                💡 Usá colores y tipografía más suaves — algo que transmita lo floral, no el estilo técnico de Taller El Profe.
+            </div>
+        </div>
+
+        <!-- PANTALLA 9: GUÍA - COSTURA -->
+        <div class="screen" id="screen-9">
+            <h1 class="title" style="font-size: 2.2rem;">🧵 Costura / arreglos de ropa</h1>
+
+            <div class="parts-grid">
+                <div class="part-card">
+                    <div class="icon-box"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></div>
+                    <div>
+                        <h3>Frases</h3>
+                        <p>"Tu ropa como nueva" · "Ajustes a medida en el día" · "Arreglos y dobladillos"</p>
+                    </div>
+                </div>
+                <div class="part-card">
+                    <div class="icon-box"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><line x1="20" y1="4" x2="8.12" y2="15.88"></line><line x1="14.47" y1="14.48" x2="20" y2="20"></line><line x1="8.12" y1="8.12" x2="12" y2="12"></line></svg></div>
+                    <div>
+                        <h3>Servicios típicos</h3>
+                        <p>Dobladillo, cambio de cierre, arreglo a medida, achique/agrande de prenda</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight-box highlight-tip">
+                💡 Cobrá por tipo de arreglo, no por tiempo — es más fácil de entender para el cliente.
+            </div>
+        </div>
+
+        <!-- PANTALLA 10: CIERRE -->
+        <div class="screen" id="screen-10">
+            <h1 class="title">Repasá tu trabajo</h1>
+
+            <ul class="concept-list list-good">
+                <li>
+                    <div class="icon-box"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+                    <span>¿Se lee bien el precio de cada servicio?</span>
+                </li>
+                <li>
+                    <div class="icon-box"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+                    <span>¿La promoción se nota a simple vista?</span>
+                </li>
+                <li>
+                    <div class="icon-box"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+                    <span>¿El horario se entiende de un vistazo?</span>
+                </li>
+                <li>
+                    <div class="icon-box"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+                    <span>¿Usaste el mismo nombre y logo en los 3 carteles?</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- === BARRA DE NAVEGACIÓN INFERIOR === -->
+        <div class="nav-bar">
+            <button class="btn btn-prev" id="btn-prev" onclick="changeStep(-1)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                Anterior
+            </button>
+
+            <div class="step-counter" id="step-counter">
+                1 / 10
+            </div>
+
+            <button class="btn btn-next" id="btn-next" onclick="changeStep(1)">
+                Siguiente
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </button>
+        </div>
+
+    </div>
+
+    <!-- === LÓGICA DE NAVEGACIÓN === -->
+    <script>
+        let currentStep = 1;
+        const totalSteps = 10;
+
+        function updateUI() {
+            document.querySelectorAll('.screen').forEach(screen => {
+                screen.classList.remove('active');
+            });
+
+            const activeScreen = document.getElementById(`screen-${currentStep}`);
+            activeScreen.classList.remove('active');
+            void activeScreen.offsetWidth;
+            activeScreen.classList.add('active');
+
+            document.getElementById('step-counter').innerText = `${currentStep} / ${totalSteps}`;
+
+            const btnPrev = document.getElementById('btn-prev');
+            if (currentStep === 1) {
+                btnPrev.style.visibility = 'hidden';
+            } else {
+                btnPrev.style.visibility = 'visible';
+            }
+
+            const btnNext = document.getElementById('btn-next');
+            if (currentStep === totalSteps) {
+                btnNext.style.visibility = 'hidden';
+            } else {
+                btnNext.style.visibility = 'visible';
+            }
+        }
+
+        function changeStep(direction) {
+            currentStep += direction;
+
+            if (currentStep < 1) currentStep = 1;
+            if (currentStep > totalSteps) currentStep = totalSteps;
+
+            updateUI();
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowRight') {
+                changeStep(1);
+            } else if (event.key === 'ArrowLeft') {
+                changeStep(-1);
+            }
+        });
+
+        updateUI();
+    </script>
+</body>
+</html>
