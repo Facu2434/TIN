@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tecnología de la Información — 4to año</title>
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <span class="eyebrow">4to año · Tecnología de la Información</span>
+  <h1>Material de clase</h1>
+  <p>Módulos interactivos, ejercicios y actividades prácticas que vamos usando en clase, organizados por tema.</p>
+</header>
+
+<main id="unidades"></main>
+
+<footer class="site-footer">
+  Facundo Sueldo
+</footer>
+
+<script>
+/* =========================================================
+   DATOS DE LAS CLASES
+   =========================================================
+   Para agregar una clase nueva: sumá un objeto al final del
+   array de la unidad que corresponda (o creá una unidad nueva
+   en UNIDADES). El sistema arma las tarjetas solo, agrupa por
+   unidad y le pone el cartel de "CLASE ACTUAL" automáticamente
+   a la ÚLTIMA clase del repo (la última de la última unidad).
+   No hace falta tocar HTML ni mover el badge a mano.
+   ========================================================= */
+
+const UNIDADES = [
+  {
+    nombre: "Google Docs",
+    icono: "📄",
+    clases: [
+      { emoji: "🧠", titulo: "Repaso de evaluación", desc: "Errores comunes y mejoras para organizar documentos.", href: "repaso.html" },
+      { emoji: "📄", titulo: "Clase 6 — Formato", desc: "Copiar un texto y mejorar su presentación usando formato básico.", href: "clase6.html" },
+      { emoji: "📊", titulo: "Clase 7 — Tablas", desc: "Cómo organizar información usando filas y columnas.", href: "clase7.html" },
+      { emoji: "🎨", titulo: "Clase 8 — Formato en tablas", desc: "Bordes, colores y combinación de celdas para mejorar tablas.", href: "clase8.html" },
+      { emoji: "🧾", titulo: "Clase 9 — Facturas", desc: "Tablas más completas usando títulos, subtotales y formato visual.", href: "clase9.html" },
+      { emoji: "📅", titulo: "Clase 10 — Organización personal", desc: "Reconstrucción de información, modelos visuales y tablas aplicadas a situaciones reales.", href: "clase10.html" },
+      { emoji: "🎲", titulo: "Clase 11 — Ruleta de actividades", desc: "Elegí aleatoriamente un modelo para copiar en Google Docs.", href: "ruleta.html" },
+    ]
+  },
+  {
+    nombre: "Google Sheets",
+    icono: "📗",
+    clases: [
+      { emoji: "📗", titulo: "Clase 12 — Google Sheets", desc: "Primer contacto con hojas de cálculo. Filas, columnas, celdas y exploración visual de la herramienta.", href: "clase12.html" },
+      { emoji: "📗", titulo: "Clase 13 — Explorando Google Sheets", desc: "Práctica con coordenadas, colores, figuras y tablas simples para seguir ganando confianza en el uso de hojas de cálculo.", href: "clase13.html" },
+      { emoji: "📄", titulo: "Clase 14 — Dibujos, gráficos y tablas", desc: "Agregamos una tanda de ejercicios y seguimos conociendo Sheets.", href: "clase14.html" },
+      { emoji: "📄", titulo: "Clase 15 — Copiamos modelos", desc: "Ahora vamos a copiar modelos en los ejercicios, del modelo al final.", href: "clase15.html" },
+      { emoji: "📄", titulo: "Clase 16 — Copiamos y aplicamos herramientas", desc: "Agregamos más dificultad a los ejercicios. Copiamos tal cual está el modelo.", href: "clase16.html" },
+      { emoji: "⚽", titulo: "Clase 17 — Especial Mundial", desc: "Hacemos tablas sobre el partido de hoy.", href: "clase17.html" },
+    ]
+  },
+  {
+    nombre: "Canva",
+    icono: "🎨",
+    clases: [
+      { emoji: "🎨", titulo: "Clase 19 — Introducción a Canva", desc: "Primer contacto con Canva: interfaz, elementos gráficos y ejercicios de diseño.", href: "clase19.html" },
+      { emoji: "🪧", titulo: "Clase 21 — Volantes y logos", desc: "Armamos el logo y el volante de un emprendimiento real, con ejemplos y banco de imágenes de Canva.", href: "clase21.html" },
+      { emoji: "🪪", titulo: "Clase 22 — Tarjeta de presentación", desc: "De la tarjeta mínima al volante completo: vamos sumando elementos paso a paso.", href: "clase22.html" },
+      { emoji: "🏷️", titulo: "Clase 23 — Carteles para tu emprendimiento", desc: "Armamos un cartel de precios, uno de promoción y uno de horario de atención para el emprendimiento de cada uno.", href: "clase23.html" },
+    ]
+  },
+];
+
+/* ===== Render ===== */
+const main = document.getElementById("unidades");
+
+// Encontrar la última clase del repo (para el badge automático)
+const todas = UNIDADES.flatMap(u => u.clases);
+const ultima = todas[todas.length - 1];
+
+UNIDADES.forEach(unidad => {
+  const section = document.createElement("section");
+  section.className = "unit";
+
+  const header = document.createElement("div");
+  header.className = "unit-header";
+  header.innerHTML = `
+    <span class="unit-icon">${unidad.icono}</span>
+    <h2>${unidad.nombre}</h2>
+    <span class="unit-count">${unidad.clases.length} clase${unidad.clases.length !== 1 ? "s" : ""}</span>
+  `;
+  section.appendChild(header);
+
+  const grid = document.createElement("div");
+  grid.className = "grid";
+
+  unidad.clases.forEach(c => {
+    const card = document.createElement("div");
+    card.className = "card" + (c === ultima ? " current" : "");
+    card.innerHTML = `
+      <div>
+        <h3>${c.emoji} ${c.titulo}</h3>
+        <p>${c.desc}</p>
+      </div>
+      <a href="${c.href}" class="btn">Abrir módulo</a>
+    `;
+    grid.appendChild(card);
+  });
+
+  section.appendChild(grid);
+  main.appendChild(section);
+});
+</script>
+
+</body>
+</html>
