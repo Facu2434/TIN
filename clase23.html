@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 23 — Carteles para tu emprendimiento</title>
+<style>
+  :root{
+    --bg:#eef1f8;
+    --card-bg:#ffffff;
+    --accent:#3b5bfb;
+    --accent-dark:#2a41c9;
+    --accent-soft:#eaeeff;
+    --accent2:#ff8a3d;
+    --accent2-soft:#fff1e6;
+    --text:#1f2430;
+    --muted:#6b7280;
+    --border:#e7e9f2;
+    --radius-lg:28px;
+    --radius-md:18px;
+    --radius-sm:12px;
+    --shadow:0 14px 34px -10px rgba(30,40,90,.22);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    min-height:100vh;
+    background:var(--bg);
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    color:var(--text);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px 10px;
+  }
+  .app-container{
+    width:100%;
+    max-width:480px;
+    background:var(--card-bg);
+    border-radius:var(--radius-lg);
+    box-shadow:var(--shadow);
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    min-height:660px;
+    max-height:94vh;
+  }
+  .top-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:20px 22px 6px;
+  }
+  .header-title{
+    font-weight:800;
+    font-size:0.92rem;
+    color:var(--accent-dark);
+  }
+  .btn-close{
+    width:32px;
+    height:32px;
+    border-radius:50%;
+    background:var(--accent-soft);
+    color:var(--accent);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-decoration:none;
+    font-weight:800;
+    font-size:0.85rem;
+    flex-shrink:0;
+  }
+  .progress-track{
+    height:6px;
+    background:var(--accent-soft);
+    border-radius:999px;
+    margin:14px 22px 4px;
+    overflow:hidden;
+  }
+  .progress-fill{
+    height:100%;
+    background:linear-gradient(90deg,var(--accent),var(--accent2));
+    border-radius:999px;
+    transition:width .25s ease;
+  }
+  .step-counter{
+    text-align:center;
+    font-size:0.72rem;
+    font-weight:700;
+    color:var(--muted);
+    margin:2px 0 8px;
+  }
+  .workspace{
+    flex:1;
+    overflow-y:auto;
+    padding:6px 22px 18px;
+  }
+  .screen{display:none;animation:fadeIn .3s ease;}
+  .screen.active{display:block;}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+
+  .badge{
+    display:inline-block;
+    background:var(--accent2);
+    color:#fff;
+    font-size:0.68rem;
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:.4px;
+    padding:5px 13px;
+    border-radius:999px;
+    margin-bottom:10px;
+  }
+  .title-main{font-size:1.7rem;font-weight:800;margin:6px 0 2px;}
+  .subtitle-main{font-size:1.15rem;font-weight:700;color:var(--accent);margin:0 0 12px;}
+  .text-desc{font-size:0.95rem;line-height:1.55;color:var(--text);margin:0 0 6px;}
+  .section-title{font-size:1.25rem;font-weight:800;margin:2px 0 12px;}
+
+  .tile{
+    background:var(--accent-soft);
+    border-radius:var(--radius-md);
+    padding:14px 16px;
+    margin-bottom:12px;
+  }
+  .tile-icon{font-size:1.4rem;margin-bottom:4px;display:block;}
+  .tile-title{
+    font-size:0.7rem;
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:.4px;
+    color:var(--accent-dark);
+    margin-bottom:6px;
+  }
+  .tile-body{font-size:0.92rem;line-height:1.5;color:var(--text);}
+  .tile-orange{background:var(--accent2-soft);}
+  .tile-orange .tile-title{color:#c85f1a;}
+
+  .model-card{
+    margin-bottom:16px;
+  }
+  .model-card img{
+    width:100%;
+    border-radius:var(--radius-md);
+    box-shadow:0 8px 20px -8px rgba(30,40,90,.28);
+    display:block;
+  }
+  .model-label{
+    font-size:0.78rem;
+    font-weight:800;
+    color:var(--accent-dark);
+    margin:8px 0 4px;
+  }
+
+  .chip-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:4px;}
+  .chip{
+    background:#fff;
+    border:1.5px solid var(--border);
+    border-radius:999px;
+    padding:7px 13px;
+    font-size:0.82rem;
+    font-weight:600;
+    color:var(--text);
+  }
+
+  .req-tile{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    background:#fff;
+    border:1.5px solid var(--border);
+    border-radius:var(--radius-sm);
+    padding:12px 14px;
+    margin-bottom:8px;
+    font-size:0.9rem;
+  }
+  .req-tile .dot{
+    width:22px;height:22px;border-radius:50%;
+    background:var(--accent);color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    font-size:0.75rem;font-weight:800;flex-shrink:0;
+  }
+
+  .checklist-tile{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    background:#fff;
+    border:1.5px solid var(--border);
+    border-radius:999px;
+    padding:12px 16px;
+    margin-bottom:8px;
+    font-size:0.88rem;
+    font-weight:600;
+  }
+  .checklist-tile .check{
+    width:22px;height:22px;border-radius:50%;
+    background:#e7fbf0;color:#1a9e5c;
+    display:flex;align-items:center;justify-content:center;
+    font-size:0.75rem;font-weight:800;flex-shrink:0;
+  }
+
+  .nav-footer{
+    display:flex;
+    gap:10px;
+    padding:12px 22px 22px;
+  }
+  .btn{
+    flex:1;
+    padding:14px;
+    border-radius:999px;
+    border:none;
+    font-weight:800;
+    font-size:0.92rem;
+    cursor:pointer;
+    font-family:inherit;
+  }
+  .btn-secondary{
+    background:var(--accent-soft);
+    color:var(--accent-dark);
+  }
+  #btn-next{
+    background:linear-gradient(135deg,var(--accent),var(--accent-dark));
+    color:#fff;
+    box-shadow:0 10px 22px -8px rgba(59,91,251,.6);
+  }
+</style>
+</head>
+<body>
+
+<div class="app-container">
+
+  <header class="top-header">
+    <div class="header-title">Clase 23 · Carteles</div>
+    <a href="index.html" class="btn-close" title="Cerrar">✕</a>
+  </header>
+  <div class="progress-track"><div class="progress-fill" id="progress-fill" style="width:10%;"></div></div>
+  <div class="step-counter" id="step-counter">1 / 10</div>
+
+  <main class="workspace">
+
+    <!-- 1: Portada -->
+    <div class="screen active" id="screen-1">
+      <span class="badge">Clase 23</span>
+      <h1 class="title-main">Carteles para tu emprendimiento</h1>
+      <p class="text-desc">Hoy vamos a sumar 3 piezas nuevas al emprendimiento que venís armando: un cartel de precios, uno de promoción y uno de horario de atención.</p>
+    </div>
+
+    <!-- 2: Modelos reales -->
+    <div class="screen" id="screen-2">
+      <h2 class="section-title">Modelos de Taller El Profe</h2>
+      <p class="text-desc" style="margin-bottom:14px;">Estos son los 3 carteles reales de mi taller. Te sirven de modelo: no hace falta copiar el diseño exacto, sí la idea de cada uno.</p>
+
+      <div class="model-card">
+        <div class="model-label">🏷️ Cartel de precios</div>
+        <img src="assets/examples/cartel_precios.png" alt="Cartel de precios de Taller El Profe">
+      </div>
+      <div class="model-card">
+        <div class="model-label">🎉 Cartel de promoción</div>
+        <img src="assets/examples/cartel_promocion.png" alt="Cartel de promoción de Taller El Profe">
+      </div>
+      <div class="model-card">
+        <div class="model-label">🕒 Cartel de horario</div>
+        <img src="assets/examples/cartel_horario.jpg" alt="Cartel de horario de atención de Taller El Profe">
+      </div>
+    </div>
+
+    <!-- 3: Consigna precios -->
+    <div class="screen" id="screen-3">
+      <span class="badge">Consigna 1</span>
+      <h2 class="section-title">Cartel de precios</h2>
+      <p class="text-desc" style="margin-bottom:14px;">Armá un cartel con los servicios de tu emprendimiento y su precio.</p>
+      <div class="req-tile"><span class="dot">1</span> Nombre del negocio bien visible</div>
+      <div class="req-tile"><span class="dot">2</span> Entre 3 y 5 servicios, cada uno con su precio</div>
+      <div class="req-tile"><span class="dot">3</span> Todo alineado en filas parejas, fácil de leer</div>
+    </div>
+
+    <!-- 4: Consigna promoción -->
+    <div class="screen" id="screen-4">
+      <span class="badge">Consigna 2</span>
+      <h2 class="section-title">Cartel de promoción</h2>
+      <p class="text-desc" style="margin-bottom:14px;">Armá un cartel anunciando una oferta (descuento, 2x1, combo, lo que se te ocurra).</p>
+      <div class="req-tile"><span class="dot">1</span> Que la oferta se note a simple vista (cinta, sello, recuadro de color)</div>
+      <div class="req-tile"><span class="dot">2</span> Nombre del negocio y un contacto</div>
+      <div class="req-tile"><span class="dot">3</span> Sin saturar el diseño con demasiados elementos</div>
+    </div>
+
+    <!-- 5: Consigna horario -->
+    <div class="screen" id="screen-5">
+      <span class="badge">Consigna 3</span>
+      <h2 class="section-title">Cartel de horario</h2>
+      <p class="text-desc" style="margin-bottom:14px;">Armá un cartel con los días y horarios en que atendés.</p>
+      <div class="req-tile"><span class="dot">1</span> Días y horarios en filas prolijas</div>
+      <div class="req-tile"><span class="dot">2</span> Se tiene que entender de un vistazo, sin leer todo el texto</div>
+      <div class="req-tile"><span class="dot">3</span> Nombre del negocio visible</div>
+    </div>
+
+    <!-- 6: Guía - Service técnico -->
+    <div class="screen" id="screen-6">
+      <span class="badge">Guía para tu proyecto</span>
+      <h2 class="section-title">🖥️ Service técnico de PC</h2>
+      <p class="text-desc" style="margin-bottom:12px;">Es el mismo rubro que Taller El Profe — podés arrancar directo copiando la estructura de los 3 modelos y cambiando los datos por los tuyos.</p>
+      <div class="tile">
+        <span class="tile-icon">💬</span>
+        <div class="tile-title">Frases</div>
+        <div class="tile-body">"Tu compu como nueva" · "Presupuesto sin cargo" · "Service a domicilio"</div>
+      </div>
+      <div class="tile">
+        <span class="tile-icon">🛠️</span>
+        <div class="tile-title">Servicios típicos</div>
+        <div class="tile-body">Formateo, instalación de programas, diagnóstico, backup de archivos, cambio a SSD</div>
+      </div>
+      <div class="tile tile-orange">
+        <span class="tile-icon">💡</span>
+        <div class="tile-title">Recomendación</div>
+        <div class="tile-body">Dejá claro qué incluye cada servicio, para que no se preste a confusión.</div>
+      </div>
+    </div>
+
+    <!-- 7: Guía - Electricista -->
+    <div class="screen" id="screen-7">
+      <span class="badge">Guía para tu proyecto</span>
+      <h2 class="section-title">⚡ Electricista</h2>
+      <p class="text-desc" style="margin-bottom:12px;">Ustedes dos eligieron el mismo rubro — está bien, pero conviene que cada uno le dé un enfoque distinto para que los carteles no queden iguales.</p>
+      <div class="tile">
+        <span class="tile-icon">💬</span>
+        <div class="tile-title">Frases</div>
+        <div class="tile-body">"Arreglamos cortocircuitos" · "A domicilio, mismo día" · "Instalaciones certificadas"</div>
+      </div>
+      <div class="tile">
+        <span class="tile-icon">🛠️</span>
+        <div class="tile-title">Servicios típicos</div>
+        <div class="tile-body">Revisión de tablero, instalación de toma, colocación de artefactos, arreglo de cortocircuito</div>
+      </div>
+      <div class="tile tile-orange">
+        <span class="tile-icon">💡</span>
+        <div class="tile-title">Recomendación</div>
+        <div class="tile-body">Elegí tu enfoque antes de arrancar (por ej. "urgencias a domicilio" o "instalaciones") y mantenelo en los 3 carteles.</div>
+      </div>
+    </div>
+
+    <!-- 8: Guía - Florería -->
+    <div class="screen" id="screen-8">
+      <span class="badge">Guía para tu proyecto</span>
+      <h2 class="section-title">💐 Florería</h2>
+      <div class="tile">
+        <span class="tile-icon">💬</span>
+        <div class="tile-title">Frases</div>
+        <div class="tile-body">"Flores frescas todos los días" · "Armamos tu ramo a pedido" · "Envíos el mismo día"</div>
+      </div>
+      <div class="tile">
+        <span class="tile-icon">🛠️</span>
+        <div class="tile-title">Servicios / productos típicos</div>
+        <div class="tile-body">Ramo chico, ramo grande, arreglo para eventos, plantas</div>
+      </div>
+      <div class="tile tile-orange">
+        <span class="tile-icon">💡</span>
+        <div class="tile-title">Recomendación</div>
+        <div class="tile-body">Usá colores y tipografía más suaves — algo que transmita lo floral, no el estilo técnico de Taller El Profe.</div>
+      </div>
+    </div>
+
+    <!-- 9: Guía - Costura -->
+    <div class="screen" id="screen-9">
+      <span class="badge">Guía para tu proyecto</span>
+      <h2 class="section-title">🧵 Costura / arreglos de ropa</h2>
+      <div class="tile">
+        <span class="tile-icon">💬</span>
+        <div class="tile-title">Frases</div>
+        <div class="tile-body">"Tu ropa como nueva" · "Ajustes a medida en el día" · "Arreglos y dobladillos"</div>
+      </div>
+      <div class="tile">
+        <span class="tile-icon">🛠️</span>
+        <div class="tile-title">Servicios típicos</div>
+        <div class="tile-body">Dobladillo, cambio de cierre, arreglo a medida, achique/agrande de prenda</div>
+      </div>
+      <div class="tile tile-orange">
+        <span class="tile-icon">💡</span>
+        <div class="tile-title">Recomendación</div>
+        <div class="tile-body">Cobrá por tipo de arreglo, no por tiempo — es más fácil de entender para el cliente.</div>
+      </div>
+    </div>
+
+    <!-- 10: Cierre -->
+    <div class="screen" id="screen-10">
+      <span class="badge">Antes de entregar</span>
+      <h2 class="section-title">Repasá tu trabajo</h2>
+      <div class="checklist-tile"><span class="check">✓</span> ¿Se lee bien el precio de cada servicio?</div>
+      <div class="checklist-tile"><span class="check">✓</span> ¿La promoción se nota a simple vista?</div>
+      <div class="checklist-tile"><span class="check">✓</span> ¿El horario se entiende de un vistazo?</div>
+      <div class="checklist-tile"><span class="check">✓</span> ¿Usaste el mismo nombre y logo en los 3 carteles?</div>
+    </div>
+
+  </main>
+
+  <footer class="nav-footer">
+    <button class="btn btn-secondary" id="btn-prev">Anterior</button>
+    <button class="btn" id="btn-next">Siguiente</button>
+  </footer>
+
+</div>
+
+<script src="assets/module.js"></script>
+<script>
+  initStepModule(10);
+  const _counter = document.getElementById("step-counter");
+  const _fill = document.getElementById("progress-fill");
+  const _observer = new MutationObserver(() => {
+    const match = _counter.innerText.match(/(\d+)\s*\/\s*(\d+)/);
+    if (match) {
+      const pct = (parseInt(match[1]) / parseInt(match[2])) * 100;
+      _fill.style.width = pct + "%";
+    }
+  });
+  _observer.observe(_counter, { childList: true, characterData: true, subtree: true });
+</script>
+
+</body>
+</html>
