@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clase 26 — Currículum Vitae</title>
+    <title>Clase 26 — Día del Empleado de Comercio</title>
     <style>
         /* === VARIABLES DE COLOR === */
         :root {
@@ -15,12 +15,6 @@
             --accent-blue: #1d4ed8;
             --accent-blue-light: #eff6ff;
             --accent-hover: #1e40af;
-
-            --accent-green: #059669;
-            --accent-green-light: #ecfdf5;
-
-            --accent-red: #dc2626;
-            --accent-red-light: #fef2f2;
 
             --accent-orange: #d97706;
             --accent-orange-light: #fffbeb;
@@ -46,7 +40,7 @@
         /* === CONTENEDOR PRINCIPAL === */
         .app-container {
             width: 100%;
-            max-width: 760px;
+            max-width: 700px;
             margin: 0 auto;
             display: flex;
             flex-direction: column;
@@ -85,59 +79,16 @@
             font-weight: 500;
         }
 
-        .text-body {
-            font-size: clamp(1.05rem, 2.3vw, 1.25rem);
-            color: var(--text-main);
-            line-height: 1.6;
-            margin-bottom: 16px;
-        }
-
-        /* === LISTAS DE CONCEPTOS === */
-        .concept-list {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .concept-list li {
-            font-size: clamp(1.05rem, 2.2vw, 1.25rem);
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            color: var(--text-main);
-            line-height: 1.4;
-            background: #f8fafc;
-            padding: 13px 18px;
-            border-radius: 14px;
-            border: 1px solid #f1f5f9;
-        }
-
-        .icon-box {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 38px;
-            height: 38px;
-            border-radius: 10px;
-            background-color: var(--accent-blue-light);
-            color: var(--accent-blue);
-            flex-shrink: 0;
-        }
-
-        .list-good li .icon-box { background-color: var(--accent-green-light); color: var(--accent-green); }
-        .list-bad li .icon-box { background-color: var(--accent-red-light); color: var(--accent-red); }
-
         /* === BLOQUES DESTACADOS === */
         .highlight-box {
             background-color: var(--accent-blue-light);
             border-left: 6px solid var(--accent-blue);
             padding: 22px 26px;
             border-radius: 0 16px 16px 0;
-            font-size: clamp(1.1rem, 2.3vw, 1.3rem);
+            font-size: clamp(1.05rem, 2.1vw, 1.2rem);
             color: #1e3a8a;
             font-weight: 700;
-            margin-top: 20px;
+            margin-top: 16px;
             line-height: 1.4;
         }
 
@@ -145,32 +96,24 @@
             background-color: var(--accent-orange-light);
             border-left-color: var(--accent-orange);
             color: #92400e;
-            font-size: clamp(1rem, 2vw, 1.15rem);
+            font-weight: 600;
         }
 
-        /* === GRID DE PARTES === */
-        .parts-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 16px;
-            margin-top: 6px;
-        }
-
-        .part-card {
-            background: #f8fafc;
-            border: 2px solid #e2e8f0;
-            border-radius: 16px;
-            padding: 20px;
+        /* === IMAGEN MODELO === */
+        .image-frame {
             display: flex;
-            align-items: flex-start;
-            gap: 16px;
+            justify-content: center;
+            margin-bottom: 6px;
         }
 
-        .part-card .icon-box { background: var(--dark-bg); color: white; }
-        .part-card h3 { font-size: 1.15rem; color: var(--dark-bg); margin-bottom: 4px; }
-        .part-card p { font-size: .95rem; color: var(--text-light); }
+        .model-image {
+            width: 100%;
+            max-width: 340px;
+            border-radius: 14px;
+            box-shadow: 0 20px 40px -15px rgba(15,23,42,.35), 0 4px 10px rgba(15,23,42,.08);
+        }
 
-        /* === CENTRADO ABSOLUTO === */
+        /* === CENTRADO ABSOLUTO (portada y cierre) === */
         .center-screen { text-align: center; align-items: center; justify-content: center; }
         .center-screen .title { text-align: center; margin-bottom: 16px; }
 
@@ -178,7 +121,7 @@
         .nav-bar {
             position: fixed;
             left: 0; right: 0; bottom: 0;
-            max-width: 760px;
+            max-width: 700px;
             margin: 0 auto;
             background-color: #ffffff;
             border-top: 1px solid #f1f5f9;
@@ -232,8 +175,6 @@
 
         @media (max-width: 768px) {
             .screen { padding: 20px 4px; }
-            .icon-box { width: 34px; height: 34px; }
-            .parts-grid { grid-template-columns: 1fr; }
             .nav-bar { padding: 15px 20px; }
             .btn { padding: 12px 20px; font-size: 1.05rem; }
         }
@@ -254,130 +195,10 @@
             text-decoration: none;
         }
         .btn-close:hover {
-            background-color: var(--accent-red-light);
-            color: var(--accent-red);
+            background-color: #fef2f2;
+            color: #dc2626;
             border-color: #fca5a5;
             transform: rotate(90deg);
-        }
-
-        /* === FRAGMENTO MALO / BUENO === */
-        .cv-frag-pair {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 14px;
-            margin-top: 6px;
-            text-align: left;
-        }
-
-        .cv-frag {
-            border-radius: 12px;
-            padding: 16px;
-            border: 2px solid #e2e8f0;
-            background: #fff;
-        }
-
-        .cv-frag.bad { font-family: Georgia, "Times New Roman", serif; }
-
-        .frag-tag {
-            display: inline-block;
-            font-size: .65rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: .04em;
-            padding: 3px 10px;
-            border-radius: 6px;
-            margin-bottom: 8px;
-        }
-
-        .frag-tag.bad { background: var(--accent-red-light); color: var(--accent-red); }
-        .frag-tag.good { background: var(--accent-green-light); color: var(--accent-green); }
-
-        .cv-frag p { font-size: .78rem; line-height: 1.5; color: var(--text-main); }
-
-        @media (max-width: 600px) {
-            .cv-frag-pair { grid-template-columns: 1fr; }
-        }
-
-        /* === MODELO COMPLETO DE CV === */
-        .cv-page-wrap {
-            display: flex;
-            justify-content: center;
-            margin: 6px 0 20px;
-        }
-
-        .cv-page {
-            background: #fff;
-            width: 100%;
-            max-width: 420px;
-            border-radius: 14px;
-            box-shadow: 0 20px 40px -15px rgba(15,23,42,.35), 0 4px 10px rgba(15,23,42,.08);
-            overflow: hidden;
-            text-align: left;
-        }
-
-        .cv-head {
-            background: var(--dark-bg);
-            color: #fff;
-            padding: 22px 24px;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-
-        .cv-avatar {
-            width: 50px; height: 50px;
-            border-radius: 50%;
-            background: var(--accent-blue);
-            color: #fff;
-            display: flex; align-items: center; justify-content: center;
-            font-weight: 800;
-            font-size: 1.05rem;
-            flex-shrink: 0;
-        }
-
-        .cv-name-lg { font-size: 1.1rem; font-weight: 800; }
-        .cv-role-lg { font-size: .76rem; color: #cbd5e1; font-weight: 600; margin-top: 2px; }
-
-        .cv-body { padding: 22px 24px; }
-
-        .cv-contact-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px 16px;
-            font-size: .72rem;
-            color: var(--text-light);
-            margin-bottom: 16px;
-            padding-bottom: 14px;
-            border-bottom: 1px solid #f1f5f9;
-        }
-
-        .cv-section { margin-bottom: 16px; }
-        .cv-section:last-child { margin-bottom: 0; }
-        .cv-section h4 {
-            font-size: .68rem;
-            text-transform: uppercase;
-            letter-spacing: .05em;
-            color: var(--accent-blue);
-            font-weight: 800;
-            margin-bottom: 6px;
-        }
-        .cv-section p { font-size: .8rem; color: var(--text-main); line-height: 1.5; }
-
-        .cv-job { margin-bottom: 10px; }
-        .cv-job:last-child { margin-bottom: 0; }
-        .cv-job-title { font-weight: 800; font-size: .8rem; color: var(--dark-bg); }
-        .cv-job-meta { font-size: .66rem; color: var(--text-light); margin-bottom: 3px; }
-        .cv-job ul { padding-left: 16px; font-size: .74rem; color: var(--text-main); }
-        .cv-job ul li { margin-bottom: 2px; }
-
-        .cv-skills-row { display: flex; flex-wrap: wrap; gap: 6px; }
-        .cv-skill-chip {
-            background: var(--accent-blue-light);
-            color: var(--accent-blue);
-            font-size: .68rem;
-            font-weight: 700;
-            padding: 4px 10px;
-            border-radius: 20px;
         }
     </style>
 </head>
@@ -392,282 +213,48 @@
 
         <!-- PANTALLA 1: PORTADA -->
         <div class="screen active center-screen" id="screen-1">
-            <h1 class="title">Tu currículum,<br><span style="color: var(--accent-blue);">bien armado</span></h1>
-            <p class="subtitle">El objetivo: que se entienda en 5 segundos quién sos y qué sabés hacer.</p>
+            <h1 class="title">26 de septiembre<br><span style="color: var(--accent-blue);">Día del Empleado de Comercio</span></h1>
+            <p class="subtitle">Dos versiones de un mismo cartel conmemorativo, para que elijas y lo hagas tuyo.</p>
         </div>
 
-        <!-- PANTALLA 2: MALO VS BUENO -->
+        <!-- PANTALLA 2: MODELO CARTEL HISTORIA -->
         <div class="screen" id="screen-2">
-            <h1 class="title" style="font-size: 2.1rem;">Mismo trabajo, dos resultados</h1>
+            <h1 class="title" style="font-size: 2rem;">Modelo de cartel (con historia)</h1>
 
-            <div class="cv-frag-pair">
-                <div class="cv-frag bad">
-                    <span class="frag-tag bad">Malo</span>
-                    <p>Trabajé bastante tiempo en un local atendiendo a la gente y también hacía la caja, fue lindo porque aprendí un montón de cosas. Tengo 42 años.</p>
-                </div>
-                <div class="cv-frag good">
-                    <span class="frag-tag good">Bueno</span>
-                    <div class="cv-job-title">Encargada de local — Comercio "Todo Hogar"</div>
-                    <div class="cv-job-meta">2018 - actualidad</div>
-                    <ul>
-                        <li>Atención y asesoramiento a clientes</li>
-                        <li>Manejo de caja y equipo de 3 personas</li>
-                    </ul>
-                </div>
+            <div class="image-frame">
+                <img class="model-image" src="cartelhistoria.png" alt="Cartel conmemorativo del Día del Empleado de Comercio con reseña histórica">
             </div>
 
             <div class="highlight-box highlight-tip">
-                💡 No cambió el trabajo. Cambió cómo está escrito — y eso es lo que hace que se entienda.
+                💡 Este modelo suma el porqué de la fecha: la Ley 11.729 de 1934, que estableció derechos laborales para los empleados de comercio.
+            </div>
+
+            <div class="highlight-box">
+                📌 Consigna: copiá este diseño (o basate en él) para tu propio cartel.
             </div>
         </div>
 
-        <!-- PANTALLA 3: LAS 4 PARTES -->
+        <!-- PANTALLA 3: MODELO CARTEL DATO CRUDO -->
         <div class="screen" id="screen-3">
-            <h1 class="title" style="font-size: 2.2rem;">Las 4 partes que no pueden faltar</h1>
+            <h1 class="title" style="font-size: 2rem;">Modelo de cartel (directo)</h1>
 
-            <div class="parts-grid">
-                <div class="part-card">
-                    <div class="icon-box"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></div>
-                    <div>
-                        <h3>Datos y perfil</h3>
-                        <p>Contacto y 2 o 3 líneas de qué podés aportar.</p>
-                    </div>
-                </div>
-                <div class="part-card">
-                    <div class="icon-box"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg></div>
-                    <div>
-                        <h3>Experiencia</h3>
-                        <p>Trabajos, pasantías o proyectos con responsabilidades.</p>
-                    </div>
-                </div>
-                <div class="part-card">
-                    <div class="icon-box"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg></div>
-                    <div>
-                        <h3>Educación</h3>
-                        <p>Dónde estudiaste o qué cursos hiciste.</p>
-                    </div>
-                </div>
-                <div class="part-card">
-                    <div class="icon-box"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg></div>
-                    <div>
-                        <h3>Habilidades</h3>
-                        <p>Herramientas y aptitudes reales que sabés usar.</p>
-                    </div>
-                </div>
+            <div class="image-frame">
+                <img class="model-image" src="cartedato.png" alt="Cartel conmemorativo del Día del Empleado de Comercio, versión minimalista">
+            </div>
+
+            <div class="highlight-box highlight-tip">
+                💡 Esta versión es más directa: solo la fecha, el nombre del día y un ícono representativo, sin texto adicional.
+            </div>
+
+            <div class="highlight-box">
+                📌 Consigna: elegí este modelo o el anterior — el que más te cierre — y armá el tuyo.
             </div>
         </div>
 
-        <!-- PANTALLA 4: FOTO, DIRECCIÓN Y EDAD -->
-        <div class="screen" id="screen-4">
-            <h1 class="title" style="font-size: 2.2rem;">Esto no va en tu CV</h1>
-
-            <ul class="concept-list list-bad">
-                <li>
-                    <div class="icon-box"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></div>
-                    <span>Foto — salvo que el aviso del puesto la pida explícitamente</span>
-                </li>
-                <li>
-                    <div class="icon-box"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></div>
-                    <span>Dirección completa — alcanza con la localidad o zona</span>
-                </li>
-                <li>
-                    <div class="icon-box"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></div>
-                    <span>Edad y estado civil — no aportan al puesto</span>
-                </li>
-            </ul>
-        </div>
-
-        <!-- PANTALLA 5: LO QUE SUMA / LO QUE RESTA -->
-        <div class="screen" id="screen-5">
-            <h1 class="title" style="font-size: 2.2rem;">Lo que suma, lo que resta</h1>
-
-            <ul class="concept-list list-good">
-                <li>
-                    <div class="icon-box"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
-                    <span>Una sola página, directo al grano</span>
-                </li>
-                <li>
-                    <div class="icon-box"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
-                    <span>Lo más reciente primero</span>
-                </li>
-                <li>
-                    <div class="icon-box"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
-                    <span>Palabras clave del aviso de trabajo</span>
-                </li>
-            </ul>
-
-            <ul class="concept-list list-bad" style="margin-top: 14px;">
-                <li>
-                    <div class="icon-box"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></div>
-                    <span>Párrafos larguísimos sin separar</span>
-                </li>
-                <li>
-                    <div class="icon-box"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></div>
-                    <span>Plantillas muy cargadas de colores</span>
-                </li>
-                <li>
-                    <div class="icon-box"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></div>
-                    <span>Errores de ortografía</span>
-                </li>
-            </ul>
-        </div>
-
-        <!-- PANTALLA 6: MODELO — PRIMER EMPLEO -->
-        <div class="screen" id="screen-6">
-            <h1 class="title" style="font-size: 2rem; text-align: center;">Modelo: primer empleo</h1>
-
-            <div class="cv-page-wrap">
-                <div class="cv-page">
-                    <div class="cv-head">
-                        <div class="cv-avatar">LM</div>
-                        <div>
-                            <div class="cv-name-lg">Lucas Martín</div>
-                            <div class="cv-role-lg">Atención al cliente · Primer empleo</div>
-                        </div>
-                    </div>
-                    <div class="cv-body">
-                        <div class="cv-contact-row">
-                            <span>📞 11 4321-8765</span>
-                            <span>✉️ lucas.martin@email.com</span>
-                            <span>📍 CABA</span>
-                        </div>
-                        <div class="cv-section">
-                            <h4>Perfil</h4>
-                            <p>Estudiante de último año, organizado y con facilidad para la tecnología. Busco mi primer empleo para sumar experiencia en atención al público y ventas.</p>
-                        </div>
-                        <div class="cv-section">
-                            <h4>Experiencia</h4>
-                            <div class="cv-job">
-                                <div class="cv-job-title">Asistente general — Comercio "El Sol"</div>
-                                <div class="cv-job-meta">2024 - actualidad</div>
-                                <ul>
-                                    <li>Atención y asesoramiento a clientes</li>
-                                    <li>Manejo de caja y control de stock</li>
-                                </ul>
-                            </div>
-                            <div class="cv-job">
-                                <div class="cv-job-title">Voluntario en logística — Feria de Ciencias</div>
-                                <div class="cv-job-meta">Octubre 2023</div>
-                                <ul>
-                                    <li>Organización de stands</li>
-                                    <li>Diseño de folletos en Canva</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="cv-section">
-                            <h4>Educación</h4>
-                            <div class="cv-job-title" style="font-size:.8rem;">Bachiller con orientación en Informática</div>
-                            <div class="cv-job-meta">Escuela de Educación Secundaria N.° 4 — en curso</div>
-                        </div>
-                        <div class="cv-section">
-                            <h4>Habilidades</h4>
-                            <div class="cv-skills-row">
-                                <span class="cv-skill-chip">Atención al cliente</span>
-                                <span class="cv-skill-chip">Manejo de caja</span>
-                                <span class="cv-skill-chip">Google Workspace</span>
-                                <span class="cv-skill-chip">Trabajo en equipo</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="highlight-box" style="text-align: left; max-width: 420px; margin: 0 auto;">
-                📌 Consigna: si es tu primera experiencia laboral, basate en este modelo para armar el tuyo.
-            </div>
-        </div>
-
-        <!-- PANTALLA 7: MODELO — CON TRAYECTORIA -->
-        <div class="screen" id="screen-7">
-            <h1 class="title" style="font-size: 2rem; text-align: center;">Modelo: con trayectoria</h1>
-
-            <div class="cv-page-wrap">
-                <div class="cv-page">
-                    <div class="cv-head">
-                        <div class="cv-avatar">MI</div>
-                        <div>
-                            <div class="cv-name-lg">Marcela Ibáñez</div>
-                            <div class="cv-role-lg">Atención al cliente y administración</div>
-                        </div>
-                    </div>
-                    <div class="cv-body">
-                        <div class="cv-contact-row">
-                            <span>📞 11 2233-4455</span>
-                            <span>✉️ marcela.ibanez@mail.com</span>
-                            <span>📍 CABA</span>
-                        </div>
-                        <div class="cv-section">
-                            <h4>Perfil</h4>
-                            <p>Más de 15 años de experiencia en atención al público, administración y liderazgo de equipos. Organizada, resolutiva y con manejo de herramientas de oficina.</p>
-                        </div>
-                        <div class="cv-section">
-                            <h4>Experiencia</h4>
-                            <div class="cv-job">
-                                <div class="cv-job-title">Encargada de local — Comercio "Todo Hogar"</div>
-                                <div class="cv-job-meta">2018 - actualidad</div>
-                                <ul>
-                                    <li>Coordinación de un equipo de 3 personas</li>
-                                    <li>Manejo de caja y control de stock</li>
-                                </ul>
-                            </div>
-                            <div class="cv-job">
-                                <div class="cv-job-title">Atención al cliente — Comercio "Todo Hogar"</div>
-                                <div class="cv-job-meta">2014 - 2018</div>
-                                <ul>
-                                    <li>Atención y asesoramiento a clientes</li>
-                                    <li>Cierre de caja diario</li>
-                                </ul>
-                            </div>
-                            <div class="cv-job">
-                                <div class="cv-job-title">Tareas administrativas — Estudio Contable Pérez</div>
-                                <div class="cv-job-meta">2008 - 2014</div>
-                                <ul>
-                                    <li>Carga de datos y archivo de documentación</li>
-                                    <li>Atención telefónica</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="cv-section">
-                            <h4>Educación</h4>
-                            <div class="cv-job-title" style="font-size:.8rem;">Secundario completo</div>
-                            <div class="cv-job-meta">Escuela Técnica N.° 12</div>
-                        </div>
-                        <div class="cv-section">
-                            <h4>Habilidades</h4>
-                            <div class="cv-skills-row">
-                                <span class="cv-skill-chip">Atención al cliente</span>
-                                <span class="cv-skill-chip">Manejo de caja</span>
-                                <span class="cv-skill-chip">Excel</span>
-                                <span class="cv-skill-chip">Liderazgo de equipos</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="highlight-box" style="text-align: left; max-width: 420px; margin: 0 auto;">
-                📌 Consigna: si tenés más trayectoria, basate en este modelo para armar el tuyo.
-            </div>
-        </div>
-
-        <!-- PANTALLA 8: CIERRE -->
-        <div class="screen" id="screen-8">
-            <h1 class="title">Antes de exportar, revisá esto</h1>
-
-            <ul class="concept-list list-good">
-                <li>
-                    <div class="icon-box"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
-                    <span>¿Elegiste el modelo que más se parece a tu situación?</span>
-                </li>
-                <li>
-                    <div class="icon-box"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
-                    <span>¿Sacaste foto, dirección completa y edad?</span>
-                </li>
-                <li>
-                    <div class="icon-box"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
-                    <span>¿Revisaste la ortografía?</span>
-                </li>
-            </ul>
+        <!-- PANTALLA 4: CIERRE -->
+        <div class="screen center-screen" id="screen-4">
+            <h1 class="title" style="font-size: 2.2rem;">Listo</h1>
+            <p class="subtitle" style="max-width: 480px;">Ya tenés tu cartel del Día del Empleado de Comercio, con o sin el dato histórico.</p>
         </div>
 
         <!-- === BARRA DE NAVEGACIÓN INFERIOR === -->
@@ -677,7 +264,7 @@
                 Anterior
             </button>
 
-            <div class="step-counter" id="step-counter">1 / 8</div>
+            <div class="step-counter" id="step-counter">1 / 4</div>
 
             <button class="btn btn-next" id="btn-next" onclick="changeStep(1)">
                 Siguiente
@@ -690,7 +277,7 @@
     <!-- === LÓGICA DE NAVEGACIÓN === -->
     <script>
         let currentStep = 1;
-        const totalSteps = 8;
+        const totalSteps = 4;
 
         function updateUI() {
             document.querySelectorAll('.screen').forEach(screen => {
