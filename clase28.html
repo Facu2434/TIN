@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase 28 — Evaluación de cierre: Día de la Tradición</title>
+    <style>
+        /* === VARIABLES DE COLOR === */
+        :root {
+            --bg-body: #e2e8f0;
+            --card-bg: #ffffff;
+            --dark-bg: #1e293b;
+            --text-main: #334155;
+            --text-light: #64748b;
+            --accent-blue: #1d4ed8;
+            --accent-blue-light: #eff6ff;
+            --accent-hover: #1e40af;
+
+            --accent-orange: #d97706;
+            --accent-orange-light: #fffbeb;
+
+            --accent-green: #16a34a;
+
+            --font-main: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+        }
+
+        /* === RESET === */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.5;
+            padding: 40px 20px 120px;
+        }
+
+        /* === CONTENEDOR PRINCIPAL === */
+        .app-container {
+            width: 100%;
+            max-width: 700px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* === PANTALLAS (STEPS) === */
+        .screen {
+            display: none;
+            flex-direction: column;
+            padding: 10px 4px;
+            animation: slideUpFade 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .screen.active { display: flex; }
+
+        @keyframes slideUpFade {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* === TIPOGRAFÍA === */
+        .title {
+            font-size: clamp(2.3rem, 5vw, 3.2rem);
+            font-weight: 800;
+            margin-bottom: 16px;
+            color: var(--dark-bg);
+            line-height: 1.15;
+            letter-spacing: -1px;
+        }
+
+        .title-ex {
+            font-size: clamp(1.9rem, 4.2vw, 2.4rem);
+        }
+
+        .title .tag {
+            display: block;
+            font-size: 0.55em;
+            color: var(--accent-blue);
+            letter-spacing: 0;
+            margin-bottom: 4px;
+        }
+
+        .subtitle {
+            font-size: clamp(1.2rem, 2.6vw, 1.5rem);
+            color: var(--text-light);
+            margin-bottom: 24px;
+            font-weight: 500;
+        }
+
+        /* === CHECKLIST === */
+        .check-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+
+        .check-list li {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 14px 18px 14px 50px;
+            position: relative;
+            font-size: clamp(1.05rem, 2.1vw, 1.2rem);
+            font-weight: 500;
+            box-shadow: 0 1px 3px rgba(15,23,42,.06);
+        }
+
+        .check-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 18px;
+            top: 13px;
+            font-weight: 800;
+            color: var(--accent-green);
+        }
+
+        /* === IMAGEN MODELO === */
+        .image-frame {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 18px;
+        }
+
+        .model-image {
+            width: 100%;
+            max-width: 340px;
+            border-radius: 14px;
+            box-shadow: 0 20px 40px -15px rgba(15,23,42,.35), 0 4px 10px rgba(15,23,42,.08);
+        }
+
+        .model-image.wide { max-width: 100%; }
+
+        /* === BLOQUES DESTACADOS === */
+        .highlight-box {
+            background-color: var(--accent-blue-light);
+            border-left: 6px solid var(--accent-blue);
+            padding: 22px 26px;
+            border-radius: 0 16px 16px 0;
+            font-size: clamp(1.05rem, 2.1vw, 1.2rem);
+            color: #1e3a8a;
+            font-weight: 700;
+            margin-top: 16px;
+            line-height: 1.4;
+        }
+
+        .highlight-tip {
+            background-color: var(--accent-orange-light);
+            border-left-color: var(--accent-orange);
+            color: #92400e;
+            font-weight: 600;
+        }
+
+        /* === CENTRADO ABSOLUTO (portada y cierre) === */
+        .center-screen { text-align: center; align-items: center; justify-content: center; }
+        .center-screen .title { text-align: center; margin-bottom: 16px; }
+
+        /* === NAV BAR === */
+        .nav-bar {
+            position: fixed;
+            left: 0; right: 0; bottom: 0;
+            max-width: 700px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-top: 1px solid #f1f5f9;
+            box-shadow: 0 -10px 25px -8px rgba(30,41,59,0.10);
+            padding: 18px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 50;
+        }
+
+        .step-counter {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #94a3b8;
+            background: #f1f5f9;
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+
+        .btn {
+            background-color: var(--dark-bg);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-size: 1.15rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-prev {
+            background-color: transparent;
+            color: var(--text-light);
+            border: 2px solid #e2e8f0;
+        }
+
+        .btn-prev:hover { background-color: #f8fafc; color: var(--text-main); border-color: #cbd5e1; }
+
+        .btn-next { background-color: var(--accent-blue); }
+
+        .btn-next:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(29, 78, 216, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .screen { padding: 20px 4px; }
+            .nav-bar { padding: 15px 20px; }
+            .btn { padding: 12px 20px; font-size: 1.05rem; }
+        }
+
+        /* === BOTÓN CERRAR === */
+        .btn-close {
+            position: fixed;
+            top: 20px; right: 20px;
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            color: var(--text-light);
+            cursor: pointer;
+            width: 44px; height: 44px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 100;
+            text-decoration: none;
+        }
+        .btn-close:hover {
+            background-color: #fef2f2;
+            color: #dc2626;
+            border-color: #fca5a5;
+            transform: rotate(90deg);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+
+        <!-- BOTÓN CERRAR MÓDULO -->
+        <a class="btn-close" href="index.html" title="Cerrar módulo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </a>
+
+        <!-- PANTALLA 1: PORTADA -->
+        <div class="screen active center-screen" id="screen-1">
+            <h1 class="title">Evaluación de cierre<br><span style="color: var(--accent-blue);">Día de la Tradición</span></h1>
+            <p class="subtitle">4 ejercicios en Canva para cerrar el bimestre.</p>
+
+            <div class="highlight-box highlight-tip" style="text-align: left;">
+                💡 El 10 de noviembre se recuerda el nacimiento de José Hernández (1834), autor del Martín Fierro.
+            </div>
+        </div>
+
+        <!-- PANTALLA 2: EJERCICIO 1 -->
+        <div class="screen" id="screen-2">
+            <h1 class="title title-ex"><span class="tag">Ejercicio 1</span>Afiche conmemorativo</h1>
+
+            <div class="image-frame">
+                <img class="model-image" src="trad1.png" alt="Modelo de afiche conmemorativo del Día de la Tradición">
+            </div>
+
+            <ul class="check-list">
+                <li>Formato vertical (tipo póster o A4).</li>
+                <li>Fecha, nombre del día y el dato sobre José Hernández.</li>
+                <li>Un ícono representativo.</li>
+            </ul>
+
+            <div class="highlight-box">
+                📌 Consigna: copiá este diseño (o basate en él) para tu afiche.
+            </div>
+        </div>
+
+        <!-- PANTALLA 3: EJERCICIO 2 -->
+        <div class="screen" id="screen-3">
+            <h1 class="title title-ex"><span class="tag">Ejercicio 2</span>Invitación al acto</h1>
+
+            <div class="image-frame">
+                <img class="model-image wide" src="trad2.png" alt="Modelo de invitación al acto por el Día de la Tradición">
+            </div>
+
+            <ul class="check-list">
+                <li>Qué, cuándo y dónde.</li>
+                <li>Mismos colores y tipografías que el afiche.</li>
+            </ul>
+
+            <div class="highlight-box">
+                📌 Consigna: copiá este diseño (o basate en él) para tu invitación.
+            </div>
+        </div>
+
+        <!-- PANTALLA 4: EJERCICIO 3 -->
+        <div class="screen" id="screen-4">
+            <h1 class="title title-ex"><span class="tag">Ejercicio 3</span>Un diseño, dos formatos</h1>
+
+            <div class="image-frame">
+                <img class="model-image wide" src="trad3.png" alt="Modelo del mismo diseño en formato post cuadrado y en formato historia vertical">
+            </div>
+
+            <ul class="check-list">
+                <li>Una versión cuadrada (post) y una vertical alargada (historia).</li>
+                <li>Nada cortado, estirado ni amontonado.</li>
+            </ul>
+
+            <div class="highlight-box highlight-tip">
+                💡 No es achicar todo: en cada formato cambia dónde entra mejor cada cosa.
+            </div>
+
+            <div class="highlight-box">
+                📌 Consigna: hacé lo mismo con tu afiche del ejercicio 1.
+            </div>
+        </div>
+
+        <!-- PANTALLA 5: EJERCICIO 4 -->
+        <div class="screen" id="screen-5">
+            <h1 class="title title-ex"><span class="tag">Ejercicio 4</span>Cronograma del acto</h1>
+
+            <div class="image-frame">
+                <img class="model-image" src="trad4.png" alt="Modelo de cronograma del acto por el Día de la Tradición">
+            </div>
+
+            <ul class="check-list">
+                <li>Los 5 horarios con su actividad.</li>
+                <li>Los horarios tienen que destacarse.</li>
+                <li>Mismos colores y tipografías que las piezas anteriores.</li>
+            </ul>
+
+            <div class="highlight-box">
+                📌 Consigna: copiá este diseño (o basate en él) para tu cronograma.
+            </div>
+        </div>
+
+        <!-- PANTALLA 6: ENTREGA -->
+        <div class="screen" id="screen-6">
+            <h1 class="title title-ex" style="text-align: center;">Entrega</h1>
+
+            <ul class="check-list">
+                <li>5 piezas: afiche, invitación, post, historia y cronograma.</li>
+                <li>Descargadas como imagen (PNG) o PDF.</li>
+                <li>Subidas a la tarea de Classroom.</li>
+            </ul>
+
+            <div class="highlight-box">
+                📌 Qué se evalúa: que se lea bien, que lo importante se vea primero, que las 5 piezas combinen entre sí y que esté toda la información.
+            </div>
+        </div>
+
+        <!-- === BARRA DE NAVEGACIÓN INFERIOR === -->
+        <div class="nav-bar">
+            <button class="btn btn-prev" id="btn-prev" onclick="changeStep(-1)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                Anterior
+            </button>
+
+            <div class="step-counter" id="step-counter">1 / 6</div>
+
+            <button class="btn btn-next" id="btn-next" onclick="changeStep(1)">
+                Siguiente
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </button>
+        </div>
+
+    </div>
+
+    <!-- === LÓGICA DE NAVEGACIÓN === -->
+    <script>
+        let currentStep = 1;
+        const totalSteps = 6;
+
+        function updateUI() {
+            document.querySelectorAll('.screen').forEach(screen => {
+                screen.classList.remove('active');
+            });
+
+            const activeScreen = document.getElementById(`screen-${currentStep}`);
+            activeScreen.classList.remove('active');
+            void activeScreen.offsetWidth;
+            activeScreen.classList.add('active');
+
+            document.getElementById('step-counter').innerText = `${currentStep} / ${totalSteps}`;
+
+            const btnPrev = document.getElementById('btn-prev');
+            btnPrev.style.visibility = (currentStep === 1) ? 'hidden' : 'visible';
+
+            const btnNext = document.getElementById('btn-next');
+            btnNext.style.visibility = (currentStep === totalSteps) ? 'hidden' : 'visible';
+        }
+
+        function changeStep(direction) {
+            currentStep += direction;
+            if (currentStep < 1) currentStep = 1;
+            if (currentStep > totalSteps) currentStep = totalSteps;
+            updateUI();
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowRight') changeStep(1);
+            else if (event.key === 'ArrowLeft') changeStep(-1);
+        });
+
+        updateUI();
+    </script>
+</body>
+</html>
